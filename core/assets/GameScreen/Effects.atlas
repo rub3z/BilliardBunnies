@@ -1,0 +1,20 @@
+
+Effects.png
+size: 1024,512
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+CandyCorn
+  rotate: false
+  xy: 424, 262
+  size: 128, 160
+  orig: 128, 160
+  offset: 0, 0
+  index: -1
+Circle
+  rotate: false
+  xy: 2, 2
+  size: 420, 420
+  orig: 420, 420
+  offset: 0, 0
+  index: -1
