@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
-import com.mygdx.game.SpookyShooter;
+import com.mygdx.game.BilliardBunnies;
 import com.mygdx.game.ui.Gameover;
 
 /**
@@ -64,7 +64,7 @@ public class GameOverScreen extends ScreenAdapter {
       if (Gdx.input.isKeyJustPressed(Input.Keys.X) ) {
          System.out.println("Press captured.");
          System.out.println("Restarting.");
-         ((SpookyShooter) myGame).changeScreen(3, numberOfPlayers);
+         ((BilliardBunnies) myGame).changeScreen(3, numberOfPlayers);
       }
 
       if (Gdx.input.isKeyJustPressed(Input.Keys.B)) {
@@ -75,7 +75,7 @@ public class GameOverScreen extends ScreenAdapter {
       if (p1 != null) {
          if (p1.getButton(2)) {
             System.out.println("Press captured");
-            ((SpookyShooter) myGame).changeScreen(3, numberOfPlayers);
+            ((BilliardBunnies) myGame).changeScreen(3, numberOfPlayers);
          }
       }
       if (p1 != null) {

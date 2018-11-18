@@ -8,12 +8,10 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.utils.Array;
-import com.mygdx.game.SpookyShooter;
-import com.mygdx.game.components.BodyComponent;
+import com.mygdx.game.BilliardBunnies;
 import com.mygdx.game.entities.Factory;
 import com.mygdx.game.ui.IngameOverlay;
 import com.mygdx.game.utilities.Utilities;
@@ -107,7 +105,7 @@ public class GameScreen extends ScreenAdapter {
     * Call this method to end game.
     */
    public void endGame(){
-      ((SpookyShooter) myGame).changeScreen(4, numPlayers);
+      ((BilliardBunnies) myGame).changeScreen(4, numPlayers);
       GameOverScreen.getScreen(myGame).addScore("Player 0",score0);
       this.dispose();
    }

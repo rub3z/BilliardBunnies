@@ -9,7 +9,7 @@ import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mygdx.game.SpookyShooter;
+import com.mygdx.game.BilliardBunnies;
 
 /**
  * This is the main menu. It will show all options available to players.
@@ -51,25 +51,25 @@ public class MainMenuScreen extends ScreenAdapter {
       batch.end();
       if (Gdx.input.isKeyJustPressed(Input.Keys.A)) {
          System.out.println("Press captured");
-         ((SpookyShooter) myGame).changeScreen(3, 1);
+         ((BilliardBunnies) myGame).changeScreen(3, 1);
       }
       if (p1 != null) {
          if (p1.getButton(0)) {
             System.out.println("Press captured");
-            ((SpookyShooter) myGame).changeScreen(3, 1);
+            ((BilliardBunnies) myGame).changeScreen(3, 1);
          }
       }
       if (Controllers.getControllers().size >= 2 && p1.getButton(2)) {
          System.out.println("Press captured");
-         ((SpookyShooter) myGame).changeScreen(3, 2);
+         ((BilliardBunnies) myGame).changeScreen(3, 2);
       }
       if (Controllers.getControllers().size >= 3 && p1.getButton(1)) {
          System.out.println("Press captured");
-         ((SpookyShooter) myGame).changeScreen(3, 3);
+         ((BilliardBunnies) myGame).changeScreen(3, 3);
       }
       if (Controllers.getControllers().size >= 4 && p1.getButton(3)) {
          System.out.println("Press captured");
-         ((SpookyShooter) myGame).changeScreen(3, 4);
+         ((BilliardBunnies) myGame).changeScreen(3, 4);
       }
 
    }

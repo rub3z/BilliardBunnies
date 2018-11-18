@@ -5,13 +5,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.controllers.*;
-import com.badlogic.gdx.controllers.mappings.Xbox;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector3;
-import com.mygdx.game.SpookyShooter;
-import com.mygdx.game.utilities.Utilities;
+import com.mygdx.game.BilliardBunnies;
 
 /**
  * This is a title screen. It will be the first screen that will be display on the start of the application
@@ -59,14 +56,14 @@ public class TitleScreen extends ScreenAdapter {
          System.out.println("Press captured");
          long start = System.currentTimeMillis();
          while (System.currentTimeMillis() < start + 1000) {}
-         ((SpookyShooter) myGame).changeScreen(2, 0);
+         ((BilliardBunnies) myGame).changeScreen(2, 0);
       }
       if (p1 != null) {
          if (p1.getButton(0)) {
             System.out.println("Press captured");
             long start = System.currentTimeMillis();
             while (System.currentTimeMillis() < start + 1000) {}
-            ((SpookyShooter) myGame).changeScreen(2, 0);
+            ((BilliardBunnies) myGame).changeScreen(2, 0);
          }
       }
    }
