@@ -201,6 +201,7 @@ public class Factory {
       entity.getComponent(BodyComponent.class).body.setUserData(entity);
       applyCollisionFilter(entity.getComponent(BodyComponent.class).body, Utilities.CATEGORY_PLAYER, Utilities.MASK_PLAYER,false);
       entity.getComponent(SteeringComponent.class).body=entity.getComponent(BodyComponent.class).body;
+      entity.getComponent(IsPlayerComponent.class).health = 1000;
       return entity;
    }
 
