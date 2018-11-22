@@ -277,7 +277,7 @@ public class Factory {
     *
     * @return an enemy.
     */
-   public Entity spawnEnemy1(float x, float y, String behavior) {
+   public Entity spawnEnemy(float x, float y, int type) {
       Entity entity = engine.createEntity();
       entity.add(engine.createComponent(EnemyStatsComponent.class));
       entity.add(engine.createComponent(TransformComponent.class));
@@ -297,12 +297,12 @@ public class Factory {
       entity.getComponent(BodyComponent.class).body.setUserData(entity);
       applyCollisionFilter(entity.getComponent(BodyComponent.class).body,
        Utilities.CATEGORY_ENEMY, Utilities.MASK_ENEMY,true);
-
+      entity.getComponent(EnemyStatsComponent.class).aimedAtTarget=true;
+      entity.getComponent(EnemyStatsComponent.class).target=players.get(0);
       entity.add(engine.createComponent(SteeringComponent.class));
       entity.getComponent(SteeringComponent.class).body=entity.getComponent(BodyComponent.class).body;
       entity.getComponent(EnemyStatsComponent.class).health = 1000;
       entity.add(engine.createComponent(BehaviorComponent.class));
-      entity.getComponent(BehaviorComponent.class).behaviors= BehaviorBuilder.getInstance().load(behavior);
       entity.getComponent(SteeringComponent.class).setMaxLinearSpeed(50f);
       entity.getComponent(EnemyStatsComponent.class).rof=MathUtils.random(0.5f,2f);
       entity.getComponent(SteeringComponent.class).scale=4f;
@@ -345,13 +345,14 @@ public class Factory {
       engine.addSystem(new EntityRemovingSystem(world,engine));
       engine.addSystem(new BulletVelocitySystem());
       engine.addSystem(new SteeringSystem());
-      engine.addSystem(new EnemiesSpawnSystem());
+      //engine.addSystem(new EnemiesSpawnSystem());
       engine.addSystem(new BehaviorSystem());
       engine.addSystem(new LaserSystem());
       new CollisionCallbackSystem(world);
       engine.addSystem(new DetectEndGameSystem());
       engine.addSystem(new EnemyFireSystem());
       engine.addSystem(new ParticleEffectSystem(spriteBatch,camera));
+      engine.addSystem(new AISystem());
    }
 
    /**
@@ -407,7 +408,7 @@ public class Factory {
 
       //Enemy boundary
       createInvisibleWall(-25,-25,Utilities.FRUSTUM_WIDTH+50,Utilities.FRUSTUM_HEIGHT+50,1,2);
-
+      spawnEnemy(Utilities.FRUSTUM_WIDTH/2, Utilities.FRUSTUM_HEIGHT/2, 1);
    }
 
    /**

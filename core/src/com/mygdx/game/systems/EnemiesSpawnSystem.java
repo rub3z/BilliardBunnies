@@ -20,8 +20,8 @@ public class EnemiesSpawnSystem extends IteratingSystem {
       enemySpawnData.add(new EnemySpawnData(1f/1f) { // 1 enemy per 1second
          @Override
          public void spawn() {
-            Factory.getFactory().spawnEnemy1(Utilities.FRUSTUM_WIDTH/2,Utilities.FRUSTUM_HEIGHT+10, "GameScreen/Behaviors/Behavior1.txt");
-            Factory.getFactory().spawnEnemy1(Utilities.FRUSTUM_WIDTH/2,Utilities.FRUSTUM_HEIGHT+10, "GameScreen/Behaviors/Behavior2.txt");
+            Factory.getFactory().spawnEnemy(Utilities.FRUSTUM_WIDTH/2,Utilities.FRUSTUM_HEIGHT+10, 1);
+            Factory.getFactory().spawnEnemy(Utilities.FRUSTUM_WIDTH/2,Utilities.FRUSTUM_HEIGHT+10, 1);
          }
 
          @Override
