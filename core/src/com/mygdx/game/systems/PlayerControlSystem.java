@@ -35,7 +35,6 @@ public class PlayerControlSystem extends IntervalSystem {
          p3 = Controllers.getControllers().get(2);
       if (Controllers.getControllers().size >= 4)
          p4 = Controllers.getControllers().get(3);
-
    }
 
    @Override
@@ -49,14 +48,6 @@ public class PlayerControlSystem extends IntervalSystem {
          MovementComponent mc = mm.get(entity);
          IsPlayerComponent ic = im.get(entity);
          if(ic.playerNum == 0) {
-            mc.moveUp =    Gdx.input.isKeyPressed(Input.Keys.W) ||
-                           Gdx.input.isKeyPressed(Input.Keys.COMMA);
-            mc.moveLeft =  Gdx.input.isKeyPressed(Input.Keys.A);
-            mc.moveDown =  Gdx.input.isKeyPressed(Input.Keys.S) ||
-                           Gdx.input.isKeyPressed(Input.Keys.O);
-            mc.moveRight = Gdx.input.isKeyPressed(Input.Keys.D) ||
-                           Gdx.input.isKeyPressed(Input.Keys.E);
-
             mc.moveX = Gdx.input.isKeyPressed(Input.Keys.A) ? -1
                         : Gdx.input.isKeyPressed(Input.Keys.D) ||
                           Gdx.input.isKeyPressed(Input.Keys.E) ? 1 : 0;
@@ -71,29 +62,23 @@ public class PlayerControlSystem extends IntervalSystem {
                         Gdx.input.isKeyPressed(Input.Keys.COMMA)) &&
                        (Gdx.input.isKeyPressed(Input.Keys.S) ||
                         Gdx.input.isKeyPressed(Input.Keys.O)) ? 0 : mc.moveY;
-            mc.shot =      Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT);
-            mc.secondary = Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT);
          }
          if (p1 != null) {
             mc.moveX = p1.getAxis(1);
             mc.moveY = -p1.getAxis(0);
             mc.shot =      p1.getAxis(4) < -0.1;
-            mc.secondary = p1.getAxis(4) > 0.1;
          }
          if(ic.playerNum == 1) {
             mc.moveX = p2.getAxis(1);
             mc.moveY = -p2.getAxis(0);
             mc.shot = Gdx.input.isKeyPressed(Input.Keys.M) ||
                            p2.getAxis(4) < -0.1;
-            mc.secondary = Gdx.input.isKeyPressed(Input.Keys.N) ||
-                           p2.getAxis(4) > 0.1;
          }
          if(ic.playerNum == 2) {
             if (p3 != null) {
                mc.moveX = p3.getAxis(1);
                mc.moveY = -p3.getAxis(0);
                mc.shot = p3.getAxis(4) < -0.1;
-               mc.secondary = p3.getAxis(4) > 0.1;
             }
          }
 
@@ -102,7 +87,6 @@ public class PlayerControlSystem extends IntervalSystem {
                mc.moveX = p4.getAxis(1);
                mc.moveY = -p4.getAxis(0);
                mc.shot = p4.getAxis(4) < -0.1;
-               mc.secondary = p4.getAxis(4) > 0.1;
             }
          }
       }
