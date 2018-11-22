@@ -45,22 +45,6 @@ public class EnemyCollisionCallback  implements CollisionCallback, Pool.Poolable
              otherObject.add(Factory.getFactory().getEngine().createComponent(NeedToRemoveComponent.class));
           }
        }
-
-      if(otherObject.getComponent(IsLaserComponent.class)!=null){
-         if(thisObject.getComponent(EnemyStatsComponent.class).health >= 0) {
-            thisObject.getComponent(EnemyStatsComponent.class).health -= 200*scale;
-         }
-         else {
-            updateScore(otherObject.getComponent(IsLaserComponent.class).playerNum);
-         Factory.getFactory().createParticleEffect(ParticleEffectManager.CANDYCORNEXPLOSION,
-                 thisObject.getComponent(BodyComponent.class).body.getPosition().x,
-                 thisObject.getComponent(BodyComponent.class).body.getPosition().y
-         );
-
-            thisObject.add(Factory.getFactory().getEngine().createComponent(NeedToRemoveComponent.class));
-         }
-      }
-
    }
 
    private void updateScore(int playerNum) {

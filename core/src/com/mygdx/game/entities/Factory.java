@@ -190,7 +190,6 @@ public class Factory {
       entity.add(engine.createComponent(SteeringComponent.class));
       entity.add(engine.createComponent(CollisionCallbackComponent.class));
       entity.getComponent(CollisionCallbackComponent.class).beginContactCallback=Pools.get(PlayerCollisionCallback.class).obtain();
-      entity.add(engine.createComponent(IsLaserComponent.class));
       entity.getComponent(IsPlayerComponent.class).playerNum = playerNum;
       entity.add(engine.createComponent(BulletVelocityStatComponent.class));
       entity.getComponent(TextureComponent.class).textureRegionAnimation = createTexture("GameScreen/Player.atlas", player, 5f);
@@ -238,39 +237,6 @@ public class Factory {
 
 
        return entity;
-   }
-
-   /**
-    * Create a laser that damages enemies
-    * @param x x-coordinate
-    * @param y y-coordinate
-    * @param playerNum player's id
-    * @return a laser
-    */
-   public Entity laser(float x, float y, int playerNum) {
-      Entity entity = engine.createEntity();
-      entity.add(engine.createComponent(MovementComponent.class));
-      entity.add(engine.createComponent(BulletVelocityStatComponent.class));
-      entity.add(engine.createComponent(TransformComponent.class));
-      entity.add(engine.createComponent(BodyComponent.class));
-      entity.add(engine.createComponent(TextureComponent.class));
-      entity.add(engine.createComponent(IsLaserComponent.class));
-
-
-      entity.getComponent(IsLaserComponent.class).playerNum=playerNum;
-      entity.getComponent(TextureComponent.class).textureRegionAnimation = createTexture("GameScreen/Laser.atlas", "Laser_0", 15);
-      entity.getComponent(TextureComponent.class).name="Laser_0";
-      entity.getComponent(BodyComponent.class).body = createBody("Laser_0", x, y, 70);
-      entity.getComponent(TransformComponent.class).scale.x = 0.2f;
-      entity.getComponent(TransformComponent.class).scale.y = 105f;
-      entity.getComponent(TransformComponent.class).position.z=-1;
-      entity.add(engine.createComponent(CollisionCallbackComponent.class));
-
-      entity.getComponent(BodyComponent.class).body.setUserData(entity);
-      applyCollisionFilter(entity.getComponent(BodyComponent.class).body, Utilities.CATEGORY_PLAYER_SPECIAL_PROJECTILE,
-       Utilities.MASK_PLAYER_SPECIAL_PROJECTILE,true);
-      engine.addEntity(entity);
-      return entity;
    }
 
    /**
@@ -348,7 +314,6 @@ public class Factory {
       engine.addSystem(new SteeringSystem());
       //engine.addSystem(new EnemiesSpawnSystem());
       engine.addSystem(new BehaviorSystem());
-      engine.addSystem(new LaserSystem());
       new CollisionCallbackSystem(world);
       engine.addSystem(new DetectEndGameSystem());
       engine.addSystem(new EnemyFireSystem());

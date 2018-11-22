@@ -48,7 +48,7 @@ public class GameScreen extends ScreenAdapter {
       Factory.getFactory().createEntities(playerCount);
       numPlayers = playerCount;
       gameScreen = this;
-      background = new Texture("GameScreen/sexyBackground.png");
+      //background = new Texture("GameScreen/sexyBackground.png");
       batch = Factory.getFactory().getSpriteBatch();
       counter++;
 //GameScreen/Gfx/fourthScreen.jpg
@@ -74,7 +74,7 @@ public class GameScreen extends ScreenAdapter {
       Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
       engine.update(delta);
       batch.begin();
-      batch.draw(background,0, counter,Utilities.FRUSTUM_WIDTH, Utilities.FRUSTUM_HEIGHT+10);
+      //batch.draw(background,0, counter,Utilities.FRUSTUM_WIDTH, Utilities.FRUSTUM_HEIGHT+10);
       batch.end();
       timer += (delta * MathUtils.random(100));
       ui.draw();
