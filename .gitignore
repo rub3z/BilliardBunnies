@@ -129,3 +129,5 @@ gradle.properties
 *.bat
 gradlew
 *.jar
+
+core/assets/GameOverScreen/PlayerScores.json
