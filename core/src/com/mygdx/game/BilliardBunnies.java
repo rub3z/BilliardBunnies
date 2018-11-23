@@ -25,8 +25,7 @@ public class BilliardBunnies extends Game {
 	@Override
 	public void create() {
 		setScreen(new TitleScreen(this));
-      MazeGenerator mazeGenerator=new MazeGenerator();
-      mazeGenerator.generateMaze(3,3);
+
 	}
 
 	/**
