@@ -10,6 +10,7 @@ import com.mygdx.game.screens.MainMenuScreen;
 import com.mygdx.game.screens.TitleScreen;
 import com.mygdx.game.ui.Gameover;
 import com.mygdx.game.utilities.BehaviorBuilder;
+import com.mygdx.game.utilities.maze.MazeGenerator;
 
 /**
  * This is the entry point to the game.
@@ -24,6 +25,7 @@ public class BilliardBunnies extends Game {
 	@Override
 	public void create() {
 		setScreen(new TitleScreen(this));
+
 	}
 
 	/**

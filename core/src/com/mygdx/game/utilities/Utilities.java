@@ -9,8 +9,8 @@ import com.badlogic.gdx.math.Vector2;
 public class Utilities {
     //Use in RendeingSystem
     public static final float PPM=16f;
-    public static final float FRUSTUM_WIDTH= Gdx.graphics.getWidth()/PPM;
-    public static final float FRUSTUM_HEIGHT = Gdx.graphics.getHeight()/PPM;
+    public static final float FRUSTUM_WIDTH= 1920/PPM;
+    public static final float FRUSTUM_HEIGHT = 1080/PPM;
 
     public static final float PIXELS_TO_METRES = 1.0f / PPM;
 
