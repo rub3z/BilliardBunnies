@@ -23,10 +23,7 @@ import com.mygdx.game.systems.CollisionCallbackSystem;
 import com.mygdx.game.systems.PhysicsDebugSystem;
 import com.mygdx.game.systems.PhysicsSystem;
 import com.mygdx.game.systems.RenderingSystem;
-import com.mygdx.game.utilities.AnimationManager;
-import com.mygdx.game.utilities.BehaviorBuilder;
-import com.mygdx.game.utilities.ParticleEffectManager;
-import com.mygdx.game.utilities.Utilities;
+import com.mygdx.game.utilities.*;
 
 /***
  * A factory that handles all the creation of entity, system, and assets loading.
@@ -679,5 +676,26 @@ public class Factory {
 
    public AnimationManager getAnimationManager() {
       return animationManager;
+   }
+
+   public void spawnWalls(){
+      int desiredCellWidth=6;
+      int desiredCellHeight=5;
+      int tileScale=1;
+
+      int resultedColumnNumber =16;
+      int resultedRowNumber = 9;
+      LevelManager.getManager().generateLevel(resultedColumnNumber,resultedRowNumber,desiredCellWidth,desiredCellHeight,tileScale,true);
+      ImmutableArray<Tile> wallTiles = LevelManager.getManager().getWallTitles();
+      for(Tile t: wallTiles){
+         Entity entity = engine.createEntity();
+         entity.add(engine.createComponent(BodyComponent.class));
+         entity.getComponent(BodyComponent.class).body = createBody("Wall_0",
+                 t.getX(),
+                 t.getY(),
+                 tileScale);
+         entity.getComponent(BodyComponent.class).body.setUserData(entity);
+         entity.getComponent(BodyComponent.class).body.setType(BodyDef.BodyType.StaticBody);
+      }
    }
 }

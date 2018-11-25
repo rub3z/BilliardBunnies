@@ -10,23 +10,12 @@ import com.mygdx.game.utilities.maze.MazeGenerator;
  * Manage level information.
  */
 public class LevelManager {
+   private static LevelManager single_instance; //Instance of this class.
    private int[][] mazeData; //Data generated from the maze generator.
    private MazeGenerator mazeGenerator; //Maze generator.
-   private float tileSize; //How big is the tile size is.
+   private float tileScale; //How big is the tile size is.
    private Array<Tile> tiles; //Tiles container.
-   private static LevelManager single_instance; //Instance of this class.
-
-   /**
-    * Get a single instance of this class.
-    *
-    * @return LevelManager.
-    */
-   public LevelManager getManager() {
-      if (single_instance == null) {
-         single_instance = new LevelManager();
-      }
-      return single_instance;
-   }
+   private boolean isCenter;
 
    /**
     * Private constructor.
@@ -37,34 +26,47 @@ public class LevelManager {
    }
 
    /**
+    * Get a single instance of this class.
+    *
+    * @return LevelManager.
+    */
+   public static LevelManager getManager() {
+      if (single_instance == null) {
+         single_instance = new LevelManager();
+      }
+      return single_instance;
+   }
+
+   /**
     * Generate a new level.
     *
     * @param columnNumber number of column of cells
     * @param rowNumber    number of row of cells
-    * @param scale        size of the cell. A minimum size of cell is 3x3 tiles.
-    * @param width        width of the level.
-    * @param height       height of the level.
+    * @param cellWidth    the number of tile equals to the width the cell. A minimum width of cell is 3 tiles.
+    * @param cellHeight   the number of tile equals to the height of the cell. A minimum height of cell is 3 tiles.
+    * @param tileScale    equivalence of 1 integer index to float value
+    * @param isCenter     should the maze be center on the screen.
     */
-   public void generateLevel(int columnNumber, int rowNumber, int scale, float width, float height) {
-      mazeData = mazeGenerator.generateMaze(rowNumber, columnNumber, scale);
-      tileSize = ((width / mazeData[0].length) < (height / mazeData.length)) ? (width / mazeData[0].length) : (height / mazeData.length);
+   public void generateLevel(int columnNumber, int rowNumber, int cellWidth, int cellHeight, float tileScale, boolean isCenter) {
+      mazeData = mazeGenerator.generateMaze(rowNumber, columnNumber, cellWidth, cellHeight);
+      this.tileScale = tileScale;
+      this.isCenter = isCenter;
       for (int y = 0; y < mazeData.length; y++) {
          for (int x = 0; x < mazeData[0].length; x++) {
-            tiles.add(new Tile(x * tileSize, y * tileSize, (mazeData[y][x] == 0) ? Type.EMPTY_SPACE : Type.WALL));
+            tiles.add(new Tile((x * tileScale) + getHorizontalShift(), (y * tileScale) + getVerticalShift(), (mazeData[y][x] == 0) ? Type.EMPTY_SPACE : Type.WALL));
          }
       }
    }
 
    /**
-    * Generate a new level with a cell size of 5x5 tiles.
+    * Generate a new level with a cell size of 5x5 tiles and try to center around the screen.
     *
     * @param columnNumber number of column of cells
     * @param rowNumber    number of row of cells
-    * @param width        width of the level.
-    * @param height       height of the level.
+    * @param tileScale    equivalence of 1 integer index to float value
     */
-   public void generateLevel(int columnNumber, int rowNumber, float width, float height) {
-      generateLevel(columnNumber, rowNumber, 5, width, height);
+   public void generateLevel(int columnNumber, int rowNumber, float tileScale) {
+      generateLevel(columnNumber, rowNumber, 7, 7, tileScale, true);
    }
 
    /**
@@ -77,7 +79,7 @@ public class LevelManager {
    }
 
    /**
-    * Return a specific tiles.
+    * Return a specific tiles by indexes.
     *
     * @param x int index.
     * @param y int index.
@@ -88,14 +90,16 @@ public class LevelManager {
    }
 
    /**
-    * Return a specific tiles.
+    * Return a specific tiles by floating point coordinate.
     *
     * @param x float x-coordinate.
     * @param y float y-coordinate.
     * @return a tile located at the above location.
     */
    public Tile getTile(float x, float y) {
-      return tiles.get(((int) (y / tileSize) * mazeData.length) + (int) (x / tileSize));
+      x=x-getHorizontalShift();
+      y=y-getVerticalShift();
+      return tiles.get(((int) (y / tileScale) * mazeData.length) + (int) (x / tileScale));
    }
 
    /**
@@ -106,7 +110,7 @@ public class LevelManager {
     * @return Vector2 contains float coordinates.
     */
    public Vector2 intToFloat(int x, int y) {
-      return new Vector2(x * tileSize, y * tileSize);
+      return new Vector2((x * tileScale), (y * tileScale));
    }
 
    /**
@@ -172,6 +176,16 @@ public class LevelManager {
     */
    public enum Type {
       WALL, EMPTY_SPACE
+   }
+
+   public float getHorizontalShift() {
+
+      System.out.println( Utilities.FRUSTUM_WIDTH );
+      return isCenter ? (Utilities.FRUSTUM_WIDTH - ((mazeData[0].length) * tileScale)) / 2f: 0f;
+   }
+
+   public float getVerticalShift() {
+      return isCenter ? (Utilities.FRUSTUM_HEIGHT - ((mazeData.length) * tileScale)) / 2f : 0;
    }
 
 }

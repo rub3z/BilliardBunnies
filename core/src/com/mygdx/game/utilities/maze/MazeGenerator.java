@@ -30,15 +30,15 @@ public class MazeGenerator {
     *
     * @param row    number of row.
     * @param column number of column.
-    * @param scale  how big should each cell be. A minimum of 3x3.
+    * @param cellWidth  the number of tile equals to the width the cell. A minimum width of cell is 3 tiles.
+    * @param cellHeight the number of tile equals to the height of the cell. A minimum height of cell is 3 tiles.
     * @return a complete maze data with 0 represents a empty space and 1 represents a wall.
     */
-   public int[][] generateMaze(int row, int column, int scale) {
+   public int[][] generateMaze(int row, int column, int cellWidth, int cellHeight) {
       this.row = row;
       this.column = column;
-      if (scale < 3) {
-         scale = 3;
-      }
+      cellWidth= cellWidth<3?3:cellWidth;
+      cellHeight= cellHeight<3?3:cellHeight;
 
 
       unvisitedNode.clear();
@@ -85,16 +85,16 @@ public class MazeGenerator {
          }
       }
 
-      int[][] temp = new int[this.row * scale][this.column * scale];
+      int[][] temp = new int[this.row * cellHeight][this.column * cellWidth];
 
       for (int i = 0; i < this.row; i++) {
          for (int j = 0; j < this.column; j++) {
 
-            int[][] t = nodeToArray(getNode(i, j), scale);
+            int[][] t = nodeToArray(getNode(i, j),cellWidth,cellHeight);
 
             for (int y = 0; y < t.length; y++) {
-               for (int x = 0; x < t.length; x++) {
-                  temp[i * scale + y][j * scale + x] = t[y][x];
+               for (int x = 0; x < t[0].length; x++) {
+                  temp[i * cellHeight + y][j * cellWidth + x] = t[y][x];
                }
             }
 
@@ -181,12 +181,13 @@ public class MazeGenerator {
     * Take a maze data and print it out.
     *
     * @param mazeData 2D array contains maze information
-    * @param scale    what was the scale used to build the maze data
+    * @param cellWidth  the number of tile equals to the width the cell. A minimum width of cell is 3 tiles.
+    * @param cellHeight the number of tile equals to the height of the cell. A minimum height of cell is 3 tiles.
     */
-   public void printMaze(int[][] mazeData, int scale) {
+   public void printMaze(int[][] mazeData, int cellWidth, int cellHeight) {
       System.out.println("---------------------");
-      for (int a = 0; a < this.row * scale; a++) {
-         for (int b = 0; b < this.column * scale; b++) {
+      for (int a = 0; a < this.row * cellHeight; a++) {
+         for (int b = 0; b < this.column * cellWidth; b++) {
             if (mazeData[a][b] == 1) {
                System.out.print('o');
             } else {
@@ -204,19 +205,20 @@ public class MazeGenerator {
     * Convert a node to maze data.
     *
     * @param node  a representation of a single cell inside a maze.
-    * @param scale what was the scale used to build the mazeData
+    * @param cellWidth  the number of tile equals to the width the cell. A minimum width of cell is 3 tiles.
+    * @param cellHeight the number of tile equals to the height of the cell. A minimum height of cell is 3 tiles.
     * @return maze data represents a single node.
     */
-   private int[][] nodeToArray(Node node, int scale) {
-      int[][] temp = new int[scale][scale];
-      for (int y = 0; y < scale; y++) {
-         for (int x = 0; x < scale; x++) {
+   private int[][] nodeToArray(Node node, int cellWidth, int cellHeight) {
+      int[][] temp = new int[cellHeight][cellWidth];
+      for (int y = 0; y < cellHeight; y++) {
+         for (int x = 0; x < cellWidth; x++) {
             temp[y][x] = 0;
             if (node.walls.get(Node.UP, -1) == 1 && y == 0) {
                temp[y][x] = 1;
             }
 
-            if (node.walls.get(Node.DOWN, -1) == 1 && y == scale - 1) {
+            if (node.walls.get(Node.DOWN, -1) == 1 && y == cellHeight - 1) {
                temp[y][x] = 1;
             }
 
@@ -224,11 +226,12 @@ public class MazeGenerator {
                temp[y][x] = 1;
             }
 
-            if (node.walls.get(Node.RIGHT, -1) == 1 && x == scale - 1) {
+            if (node.walls.get(Node.RIGHT, -1) == 1 && x == cellWidth - 1) {
                temp[y][x] = 1;
             }
          }
       }
+
 
       return temp;
    }
