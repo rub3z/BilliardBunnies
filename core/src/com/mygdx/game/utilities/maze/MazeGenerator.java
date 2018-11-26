@@ -85,6 +85,8 @@ public class MazeGenerator {
          }
       }
 
+      removeDeadEnd();
+
       int[][] temp = new int[this.row * cellHeight][this.column * cellWidth];
 
       for (int i = 0; i < this.row; i++) {
@@ -234,6 +236,42 @@ public class MazeGenerator {
 
 
       return temp;
+   }
+   public void removeDeadEnd(){
+      for(Node node:maze){
+         if(node.columnIndex>0 && node.columnIndex<column-1 &&node.rowIndex>0 && node.rowIndex<row-1){
+            int count=0;
+            for(int i =1; i<=4 ;i++){
+               if(node.walls.get(i,-1)==0){
+                  count++;
+               }
+            }
+            if(count<2){
+               boolean done=false;
+               do{
+                  int choice =MathUtils.random(1,4);
+                  if(node.walls.get(choice,0)==1){
+                     done=true;
+                     node.walls.put(choice,0);
+                     switch (choice){
+                        case 1:
+                           getNode(node.rowIndex,node.columnIndex-1).walls.put(2,0);
+                           break;
+                        case 2:
+                           getNode(node.rowIndex,node.columnIndex+1).walls.put(1,0);
+                           break;
+                        case 3:
+                           getNode(node.rowIndex-1,node.columnIndex).walls.put(4,0);
+                           break;
+                        default:
+                           getNode(node.rowIndex+1,node.columnIndex).walls.put(3,0);
+                           break;
+                     }
+                  }
+               }while (!done);
+            }
+         }
+      }
    }
 
 
