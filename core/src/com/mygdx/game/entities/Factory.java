@@ -18,6 +18,7 @@ import com.mygdx.game.components.*;
 import com.mygdx.game.components.Scripts.EnemyCollisionCallback;
 import com.mygdx.game.components.Scripts.InvisibleWallCollisionCallback;
 import com.mygdx.game.components.Scripts.PlayerCollisionCallback;
+import com.mygdx.game.components.Scripts.WallCollisionCallback;
 import com.mygdx.game.systems.*;
 import com.mygdx.game.systems.CollisionCallbackSystem;
 import com.mygdx.game.systems.PhysicsDebugSystem;
@@ -215,18 +216,19 @@ public class Factory {
       entity.getComponent(IsBulletComponent.class).playerNum = playerNum;
       entity.getComponent(TextureComponent.class).textureRegionAnimation = createTexture("Player_1", 1);
       entity.getComponent(TextureComponent.class).name="Player_1";
-      entity.getComponent(BodyComponent.class).body = createBody("Player_1", x, y, 0.35f);
+      entity.getComponent(BodyComponent.class).body = createBody("Circle", x, y, 1f);
+      entity.getComponent(BodyComponent.class).body.setBullet(true);
       entity.getComponent(TransformComponent.class).scale.x = 0.5f;
       entity.getComponent(TransformComponent.class).scale.y = 0.5f;
       entity.getComponent(BodyComponent.class).body.setUserData(entity);
-       applyCollisionFilter(entity.getComponent(BodyComponent.class).body, Utilities.CATEGORY_PLAYER_PROJECTILE, Utilities.MASK_PLAYER_PROJECTILE,true);
+       applyCollisionFilter(entity.getComponent(BodyComponent.class).body, Utilities.CATEGORY_PLAYER_PROJECTILE, Utilities.MASK_PLAYER_PROJECTILE,false);
        engine.addEntity(entity);
 
        //Add particle to bullet
-      entity.add(engine.createComponent(ParticleEffectComponent.class));
-      Entity particle=createParticleEffect(ParticleEffectManager.SMOKETRIAL,entity.getComponent(BodyComponent.class));
-      particle.getComponent(ParticleEffectDataComponent.class).isLooped=true;
-      entity.getComponent(ParticleEffectComponent.class).effect= particle;
+//      entity.add(engine.createComponent(ParticleEffectComponent.class));
+//      Entity particle=createParticleEffect(ParticleEffectManager.SMOKETRIAL,entity.getComponent(BodyComponent.class));
+//      particle.getComponent(ParticleEffectDataComponent.class).isLooped=true;
+//      entity.getComponent(ParticleEffectComponent.class).effect= particle;
 
 
 
@@ -343,7 +345,16 @@ public class Factory {
       FixtureDef fixtureDef = new FixtureDef();
       fixtureDef.density = 1;
       fixtureDef.isSensor=true;
-      bodyEditorLoader.attachFixture(body, nameOfBody, fixtureDef, scale);
+      if(nameOfBody.compareTo("Circle")==0){
+         CircleShape circle = new CircleShape();
+         circle.setRadius(scale/2);
+         fixtureDef.shape = circle;
+         fixtureDef.restitution=1f;
+         body.createFixture(fixtureDef);
+         body.setAngularVelocity(2f);
+      }else{
+         bodyEditorLoader.attachFixture(body, nameOfBody, fixtureDef, scale);
+      }
       body.setFixedRotation(true);
       Pools.get(BodyDef.class).free(bodyDef);
       return body;
@@ -660,6 +671,11 @@ public class Factory {
                  tileScale);
          entity.getComponent(BodyComponent.class).body.setUserData(entity);
          entity.getComponent(BodyComponent.class).body.setType(BodyDef.BodyType.StaticBody);
+         applyCollisionFilter(entity.getComponent(BodyComponent.class).body,
+          Utilities.CATEGORY_BULLET_BOUNDARY, Utilities.MASK_BULLET_BOUNDARY,false);
+         entity.add(engine.createComponent(CollisionCallbackComponent.class));
+         entity.getComponent(CollisionCallbackComponent.class).beginContactCallback=Pools.get(WallCollisionCallback.class).obtain();
+         engine.addEntity(entity);
       }
    }
 }
