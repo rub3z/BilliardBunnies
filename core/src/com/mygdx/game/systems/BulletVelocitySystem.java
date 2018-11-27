@@ -44,16 +44,13 @@ public class BulletVelocitySystem extends IntervalSystem {
          MovementComponent mC = mm.get(entity);
          BodyComponent bC = bm.get(entity);
          bvc.timer += Utilities.MAX_STEP_TIME;
-         if (mC.shot && bvc.timer > bvc.rof) {
+         if (mC.shot && (Math.abs(mC.shootX) > 0.2 || Math.abs(mC.shootY) > 0.2) && bvc.timer > bvc.rof) {
             Entity bullet1 = Factory.getFactory().shoot(bC.body.getPosition().x, bC.body.getPosition().y, entity.getComponent(IsPlayerComponent.class).playerNum);
-            Entity bullet2 = Factory.getFactory().shoot(bC.body.getPosition().x - 0.5f, bC.body.getPosition().y, entity.getComponent(IsPlayerComponent.class).playerNum);
-            Entity bullet3 = Factory.getFactory().shoot(bC.body.getPosition().x + 0.5f, bC.body.getPosition().y, entity.getComponent(IsPlayerComponent.class).playerNum);
-            bullet1.getComponent(BodyComponent.class).body.setLinearVelocity(0,bvc.movingSpeed);
-            bullet2.getComponent(BodyComponent.class).body.setLinearVelocity(-1.5f,bvc.movingSpeed);
-            bullet3.getComponent(BodyComponent.class).body.setLinearVelocity(1.5f,bvc.movingSpeed);
+            bullet1.getComponent(BodyComponent.class).body.setLinearVelocity(
+             (mC.shootX / (float) Math.sqrt(mC.shootX * mC.shootX + mC.shootY * mC.shootY)) * bvc.movingSpeed,
+             (mC.shootY / (float) Math.sqrt(mC.shootX * mC.shootX + mC.shootY * mC.shootY)) * bvc.movingSpeed);
             bvc.timer = 0;
          }
-
       }
    }
 }
