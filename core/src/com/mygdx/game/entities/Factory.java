@@ -300,7 +300,7 @@ public class Factory {
       engine.addEntityListener(new RenderingSystem(spriteBatch, camera));
       engine.addSystem(new PhysicsSystem(world));
       engine.addSystem(new RenderingSystem(spriteBatch, camera));
-      //engine.addSystem(new PhysicsDebugSystem(world, camera));
+      engine.addSystem(new PhysicsDebugSystem(world, camera));
       engine.addSystem(new PlayerControlSystem());
       engine.addSystem(new PlayerVelocitySystem());
       engine.addSystem(new EntityRemovingSystem(world,engine));
@@ -358,15 +358,16 @@ public class Factory {
          String s ="Player_"+num;
          engine.addEntity(createPlayer(s, 10 + (i * 10), 10, i));
       }
+      spawnWalls();
 
       //Player boundary
-      createInvisibleWall(0+2.5f,0-0.5f,Utilities.FRUSTUM_WIDTH-5f,Utilities.FRUSTUM_HEIGHT+1f,1,0);
+      //createInvisibleWall(0+2.5f,0-0.5f,Utilities.FRUSTUM_WIDTH-5f,Utilities.FRUSTUM_HEIGHT+1f,1,0);
 
       //Projectile boundary
-      createInvisibleWall(-10,-20,Utilities.FRUSTUM_WIDTH+20,Utilities.FRUSTUM_HEIGHT+25,1,1);
+      //createInvisibleWall(-10,-20,Utilities.FRUSTUM_WIDTH+20,Utilities.FRUSTUM_HEIGHT+25,1,1);
 
       //Enemy boundary
-      createInvisibleWall(-25,-25,Utilities.FRUSTUM_WIDTH+50,Utilities.FRUSTUM_HEIGHT+50,1,2);
+      //createInvisibleWall(-25,-25,Utilities.FRUSTUM_WIDTH+50,Utilities.FRUSTUM_HEIGHT+50,1,2);
       spawnEnemy(Utilities.FRUSTUM_WIDTH/2, Utilities.FRUSTUM_HEIGHT/2, 1);
    }
 
@@ -642,13 +643,13 @@ public class Factory {
    }
 
    public void spawnWalls(){
-      int desiredCellWidth=6;
-      int desiredCellHeight=5;
-      int tileScale=1;
+      int desiredCellWidth=8;
+      int desiredCellHeight=8;
+      float tileScale=0.945f;
 
       int resultedColumnNumber =16;
       int resultedRowNumber = 9;
-      LevelManager.getManager().generateLevel(resultedColumnNumber,resultedRowNumber,desiredCellWidth,desiredCellHeight,tileScale,true);
+      LevelManager.getManager().generateLevel(resultedColumnNumber,resultedRowNumber,desiredCellWidth,desiredCellHeight,tileScale,false);
       ImmutableArray<Tile> wallTiles = LevelManager.getManager().getWallTitles();
       for(Tile t: wallTiles){
          Entity entity = engine.createEntity();
