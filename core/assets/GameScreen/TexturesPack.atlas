@@ -1,0 +1,244 @@
+
+TexturesPack.png
+size: 2048,2048
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Bullet_0
+  rotate: false
+  xy: 2, 31
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 0
+Bullet_0
+  rotate: false
+  xy: 52, 97
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 1
+Bullet_0
+  rotate: false
+  xy: 52, 97
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 3
+Bullet_0
+  rotate: false
+  xy: 1021, 967
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 2
+Bullet_1
+  rotate: false
+  xy: 1712, 1248
+  size: 197, 512
+  orig: 197, 512
+  offset: 0, 0
+  index: 1
+Bullet_1
+  rotate: false
+  xy: 2, 131
+  size: 197, 512
+  orig: 197, 512
+  offset: 0, 0
+  index: 4
+Bullet_1
+  rotate: false
+  xy: 201, 131
+  size: 197, 512
+  orig: 197, 512
+  offset: 0, 0
+  index: 5
+Bullet_1
+  rotate: false
+  xy: 424, 553
+  size: 197, 512
+  orig: 197, 512
+  offset: 0, 0
+  index: 0
+Bullet_1
+  rotate: false
+  xy: 623, 553
+  size: 197, 512
+  orig: 197, 512
+  offset: 0, 0
+  index: 3
+Bullet_1
+  rotate: false
+  xy: 822, 553
+  size: 197, 512
+  orig: 197, 512
+  offset: 0, 0
+  index: 2
+CandyCorn
+  rotate: false
+  xy: 1712, 1086
+  size: 128, 160
+  orig: 128, 160
+  offset: 0, 0
+  index: -1
+Circle
+  rotate: false
+  xy: 2, 645
+  size: 420, 420
+  orig: 420, 420
+  offset: 0, 0
+  index: -1
+Enemies_0
+  rotate: false
+  xy: 1842, 1182
+  size: 32, 64
+  orig: 32, 64
+  offset: 0, 0
+  index: 1
+Enemies_0
+  rotate: false
+  xy: 1911, 1630
+  size: 32, 64
+  orig: 32, 64
+  offset: 0, 0
+  index: 2
+Enemies_0
+  rotate: false
+  xy: 1961, 1696
+  size: 32, 64
+  orig: 32, 64
+  offset: 0, 0
+  index: 3
+Enemies_1
+  rotate: false
+  xy: 1911, 1696
+  size: 48, 64
+  orig: 48, 64
+  offset: 0, 0
+  index: 1
+Enemies_1
+  rotate: false
+  xy: 2, 65
+  size: 48, 64
+  orig: 48, 64
+  offset: 0, 0
+  index: 0
+Enemies_1
+  rotate: false
+  xy: 1021, 1001
+  size: 48, 64
+  orig: 48, 64
+  offset: 0, 0
+  index: 2
+Enemies_2
+  rotate: false
+  xy: 2, 1067
+  size: 1708, 693
+  orig: 1708, 693
+  offset: 0, 0
+  index: 0
+Laser_0
+  rotate: false
+  xy: 36, 53
+  size: 10, 10
+  orig: 10, 10
+  offset: 0, 0
+  index: 0
+Player_1
+  rotate: false
+  xy: 1712, 1074
+  size: 10, 10
+  orig: 10, 10
+  offset: 0, 0
+  index: 0
+EnemyBullet_0
+  rotate: false
+  xy: 1712, 1074
+  size: 10, 10
+  orig: 10, 10
+  offset: 0, 0
+  index: 0
+Player_2
+  rotate: false
+  xy: 1842, 1160
+  size: 32, 20
+  orig: 32, 20
+  offset: 0, 0
+  index: 2
+Player_2
+  rotate: false
+  xy: 1945, 1667
+  size: 20, 27
+  orig: 20, 27
+  offset: 0, 0
+  index: 0
+Player_2
+  rotate: false
+  xy: 86, 108
+  size: 16, 21
+  orig: 16, 21
+  offset: 0, 0
+  index: 3
+Player_3
+  rotate: false
+  xy: 1911, 1608
+  size: 31, 20
+  orig: 31, 20
+  offset: 0, 0
+  index: 1
+Player_3
+  rotate: false
+  xy: 1995, 1733
+  size: 20, 27
+  orig: 20, 27
+  offset: 0, 0
+  index: 0
+Player_3
+  rotate: false
+  xy: 1071, 1022
+  size: 16, 21
+  orig: 16, 21
+  offset: 0, 0
+  index: 2
+Player_4
+  rotate: false
+  xy: 1071, 1045
+  size: 32, 20
+  orig: 32, 20
+  offset: 0, 0
+  index: 1
+Player_4
+  rotate: false
+  xy: 2, 2
+  size: 20, 27
+  orig: 20, 27
+  offset: 0, 0
+  index: 0
+Player_4
+  rotate: false
+  xy: 1021, 944
+  size: 16, 21
+  orig: 16, 21
+  offset: 0, 0
+  index: 2
+Player_5
+  rotate: false
+  xy: 1876, 1226
+  size: 31, 20
+  orig: 31, 20
+  offset: 0, 0
+  index: 1
+Player_5
+  rotate: false
+  xy: 400, 616
+  size: 20, 27
+  orig: 20, 27
+  offset: 0, 0
+  index: 0
+Player_5
+  rotate: false
+  xy: 52, 74
+  size: 16, 21
+  orig: 16, 21
+  offset: 0, 0
+  index: 2
