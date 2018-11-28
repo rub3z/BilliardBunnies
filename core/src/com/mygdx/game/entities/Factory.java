@@ -643,13 +643,13 @@ public class Factory {
    }
 
    public void spawnWalls(){
-      int desiredCellWidth=16;
-      int desiredCellHeight=9;
-      float tileScale=0.94f;
+      int desiredCellWidth=5;
+      int desiredCellHeight=5;
+      float tileScale=2;
 
-      int resultedColumnNumber =8;
-      int resultedRowNumber = 8;
-      LevelManager.getManager().generateLevel(resultedColumnNumber,resultedRowNumber,desiredCellWidth,desiredCellHeight,tileScale,true);
+      int resultedColumnNumber =12;
+      int resultedRowNumber = 7;
+      LevelManager.getManager().generateLevel(resultedColumnNumber,resultedRowNumber,desiredCellWidth,desiredCellHeight,tileScale,true,true);
       ImmutableArray<Tile> wallTiles = LevelManager.getManager().getWallTitles();
       for(Tile t: wallTiles){
          Entity entity = engine.createEntity();
