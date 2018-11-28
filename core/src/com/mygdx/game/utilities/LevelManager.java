@@ -179,13 +179,11 @@ public class LevelManager {
    }
 
    public float getHorizontalShift() {
-
-      System.out.println( Utilities.FRUSTUM_WIDTH );
-      return isCenter ? (Utilities.FRUSTUM_WIDTH - ((mazeData[0].length) * tileScale)) / 2f: 0f;
+      return isCenter ? ((Utilities.FRUSTUM_WIDTH/2) -((mazeData[0].length*tileScale)/2))+0.5f: 0f;
    }
 
    public float getVerticalShift() {
-      return isCenter ? (Utilities.FRUSTUM_HEIGHT - ((mazeData.length) * tileScale)) / 2f : 0;
+      return isCenter ? ((Utilities.FRUSTUM_HEIGHT/2) -((mazeData.length*tileScale)/2))+0.5f: 0f;
    }
 
 }
