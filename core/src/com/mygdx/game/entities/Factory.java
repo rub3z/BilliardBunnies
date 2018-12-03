@@ -15,10 +15,7 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pools;
 import com.mygdx.game.components.*;
-import com.mygdx.game.components.Scripts.EnemyCollisionCallback;
-import com.mygdx.game.components.Scripts.InvisibleWallCollisionCallback;
-import com.mygdx.game.components.Scripts.PlayerCollisionCallback;
-import com.mygdx.game.components.Scripts.WallCollisionCallback;
+import com.mygdx.game.components.Scripts.*;
 import com.mygdx.game.systems.*;
 import com.mygdx.game.systems.CollisionCallbackSystem;
 import com.mygdx.game.systems.PhysicsDebugSystem;
@@ -225,11 +222,11 @@ public class Factory {
        engine.addEntity(entity);
 
        //Add particle to bullet
-//      entity.add(engine.createComponent(ParticleEffectComponent.class));
-//      Entity particle=createParticleEffect(ParticleEffectManager.SMOKETRIAL,entity.getComponent(BodyComponent.class));
-//      particle.getComponent(ParticleEffectDataComponent.class).isLooped=true;
-//      entity.getComponent(ParticleEffectComponent.class).effect= particle;
-
+      entity.add(engine.createComponent(ParticleEffectComponent.class));
+      Entity particle=createParticleEffect(ParticleEffectManager.SMOKETRIAL,entity.getComponent(BodyComponent.class));
+      particle.getComponent(ParticleEffectDataComponent.class).isLooped=true;
+      entity.getComponent(ParticleEffectComponent.class).effect= particle;
+       particle.getComponent(ParticleEffectDataComponent.class).angleOffset=(float)Math.PI;
 
 
        return entity;
@@ -674,7 +671,8 @@ public class Factory {
          applyCollisionFilter(entity.getComponent(BodyComponent.class).body,
           Utilities.CATEGORY_BULLET_BOUNDARY, Utilities.MASK_BULLET_BOUNDARY,false);
          entity.add(engine.createComponent(CollisionCallbackComponent.class));
-         entity.getComponent(CollisionCallbackComponent.class).beginContactCallback=Pools.get(WallCollisionCallback.class).obtain();
+         entity.getComponent(CollisionCallbackComponent.class).beginContactCallback=Pools.get(WallBeginCollisionCallback.class).obtain();
+          entity.getComponent(CollisionCallbackComponent.class).endContactCallback=Pools.get(WallEndCollisionCallBack.class).obtain();
          engine.addEntity(entity);
       }
    }

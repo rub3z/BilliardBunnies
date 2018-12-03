@@ -8,7 +8,7 @@ import com.mygdx.game.components.*;
 import com.mygdx.game.entities.Factory;
 import com.mygdx.game.utilities.Utilities;
 
-public class WallCollisionCallback implements CollisionCallback {
+public class WallBeginCollisionCallback implements CollisionCallback {
     private ComponentMapper<IsBulletComponent> isBulletComponentComponentMapper= ComponentMapper.getFor(IsBulletComponent.class);
     @Override
     public void run(Entity thisObject, Entity otherObject) {
@@ -22,6 +22,9 @@ public class WallCollisionCallback implements CollisionCallback {
             Vector2 normalizeVector = Vector2.Zero;
             Utilities.angleToVector(normalizeVector, angle);
             otherObject.getComponent(BodyComponent.class).body.setLinearVelocity(30 * normalizeVector.x, 30 * normalizeVector.y);
+            if(otherObject.getComponent(ParticleEffectComponent.class)!=null){
+                otherObject.getComponent(ParticleEffectComponent.class).effect.getComponent(ParticleEffectDataComponent.class).isHidden=true;
+            }
         }
     }
 }

@@ -66,11 +66,9 @@ public class LevelManager {
                         type = Type.EMPTY_SPACE;
                         break;
                 }
-                System.out.println(mazeData[y][x]);
                 tiles.add(new Tile((x * tileScale) + getHorizontalShift(), (y * tileScale) + getVerticalShift(), type));
             }
         }
-        mazeGenerator.printMaze(mazeData, cellWidth, cellHeight);
     }
 
     /**

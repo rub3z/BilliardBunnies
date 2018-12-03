@@ -8,15 +8,17 @@ lowMax: 5000.0
 min: 0
 max: 200
 - Emission - 
-lowMin: 0.0
-lowMax: 0.0
-highMin: 250.0
-highMax: 250.0
+lowMin: 10.0
+lowMax: 10.0
+highMin: 100.0
+highMax: 100.0
 relative: false
-scalingCount: 1
-scaling0: 1.0
-timelineCount: 1
+scalingCount: 2
+scaling0: 0.0
+scaling1: 1.0
+timelineCount: 2
 timeline0: 0.0
+timeline1: 0.19178082
 - Life - 
 lowMin: 0.0
 lowMax: 0.0
@@ -62,8 +64,8 @@ timeline0: 0.0
 - X Scale - 
 lowMin: 0.0
 lowMax: 0.0
-highMin: 2.0
-highMax: 2.0
+highMin: 10.0
+highMax: 10.0
 relative: false
 scalingCount: 1
 scaling0: 1.0
@@ -73,21 +75,23 @@ timeline0: 0.0
 active: false
 - Velocity - 
 active: true
-lowMin: 1.0
-lowMax: 1.0
-highMin: 5.0
+lowMin: 10.0
+lowMax: 10.0
+highMin: 25.0
 highMax: 25.0
 relative: false
-scalingCount: 1
-scaling0: 1.0
-timelineCount: 1
+scalingCount: 2
+scaling0: 0.0
+scaling1: 1.0
+timelineCount: 2
 timeline0: 0.0
+timeline1: 0.15753424
 - Angle - 
 active: true
 lowMin: 0.0
 lowMax: 0.0
-highMin: 250.0
-highMax: 300.0
+highMin: 270.0
+highMax: 270.0
 relative: true
 scalingCount: 3
 scaling0: 1.0
@@ -135,5 +139,5 @@ behind: false
 premultipliedAlpha: false
 spriteMode: single
 - Image Paths -
-GameScreen/Gfx/Circle.png
+/D:/Workspace/BilliardBunnies/core/assets/GameScreen/Gfx/Circle.png
 
