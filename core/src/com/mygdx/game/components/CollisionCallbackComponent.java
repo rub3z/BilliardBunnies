@@ -29,6 +29,9 @@ public class CollisionCallbackComponent implements Component , Pool.Poolable {
         if(beginContactCallback!=null &&beginContactCallback instanceof WallBeginCollisionCallback){
             Pools.get(WallBeginCollisionCallback.class).free((WallBeginCollisionCallback)beginContactCallback);
         }
+        if(beginContactCallback!=null &&beginContactCallback instanceof WallEndCollisionCallBack){
+            Pools.get(WallEndCollisionCallBack.class).free((WallEndCollisionCallBack)beginContactCallback);
+        }
 
        if(endContactCallback!=null &&endContactCallback instanceof EnemyCollisionCallback){
           Pools.get(EnemyCollisionCallback.class).free((EnemyCollisionCallback)endContactCallback);
@@ -41,6 +44,9 @@ public class CollisionCallbackComponent implements Component , Pool.Poolable {
        }
         if(endContactCallback!=null &&endContactCallback instanceof WallBeginCollisionCallback){
             Pools.get(WallBeginCollisionCallback.class).free((WallBeginCollisionCallback)endContactCallback);
+        }
+        if(endContactCallback!=null &&endContactCallback instanceof WallEndCollisionCallBack){
+            Pools.get(WallEndCollisionCallBack.class).free((WallEndCollisionCallBack)endContactCallback);
         }
         beginContactCallback=null;
         endContactCallback=null;
