@@ -19,6 +19,8 @@ public class ParticleEffectDataComponent implements Component,Pool.Poolable {
    public float timeTillDeath=0.01f;
    public boolean isDead=false;
    public Body attachedBody;
+   public float angleOffset=0;
+   public boolean isHidden=false;
 
    /**
     * Resets the object for reuse. Object references should be nulled and fields may be set to default values.
@@ -34,5 +36,7 @@ public class ParticleEffectDataComponent implements Component,Pool.Poolable {
       attachedBody=null;
       timeTillDeath=0.01f;
       isLooped=false;
+      angleOffset=0;
+      isHidden=false;
    }
 }
