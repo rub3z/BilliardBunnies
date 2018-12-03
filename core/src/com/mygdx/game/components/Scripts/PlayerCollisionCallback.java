@@ -24,9 +24,11 @@ public class PlayerCollisionCallback implements CollisionCallback, Pool.Poolable
        
       }
 
-      if(otherObject.getComponent(IsEnemyBulletComponent.class)!=null){
-
-         if(thisObject.getComponent(IsPlayerComponent.class).health > 0){
+      if(otherObject.getComponent(IsBulletComponent.class)!=null){
+         if(thisObject.getComponent(IsPlayerComponent.class).isEnemy) {
+            thisObject.getComponent(IsPlayerComponent.class).isFrenzied = 10f;
+         }
+         else if(thisObject.getComponent(IsPlayerComponent.class).health > 0){
             thisObject.getComponent(IsPlayerComponent.class).health -= 100;
             System.out.println("health:" + thisObject.getComponent(IsPlayerComponent.class).health);
          }else{

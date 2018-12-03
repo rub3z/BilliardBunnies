@@ -44,6 +44,8 @@ public class EnemyFireSystem extends IntervalSystem {
          EnemyStatsComponent es=escm.get(entity);
          BodyComponent bc=bcm.get(entity);
          es.timer+=Utilities.MAX_STEP_TIME;
+         if(es.isBuffed) {
+         }
          if(es.shoot==true && es.timer>=es.rof){
             Entity bullet =Factory.getFactory().createEnemyBullet(bc.body.getPosition().x, bc.body.getPosition().y,es.bulletType);
             ComponentMapper<IsPlayerComponent> isPlayerComponentComponentMapper=ComponentMapper.getFor(IsPlayerComponent.class);
