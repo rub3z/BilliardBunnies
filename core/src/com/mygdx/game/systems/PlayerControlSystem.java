@@ -62,6 +62,9 @@ public class PlayerControlSystem extends IntervalSystem {
                         Gdx.input.isKeyPressed(Input.Keys.COMMA)) &&
                        (Gdx.input.isKeyPressed(Input.Keys.S) ||
                         Gdx.input.isKeyPressed(Input.Keys.O)) ? 0 : mc.moveY;
+            mc.shootY = Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) ?
+                        1 : 0;
+            mc.shot = Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT);
          }
          if (p1 != null) {
             mc.moveX = p1.getAxis(1);

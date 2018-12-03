@@ -14,17 +14,7 @@ public class Utilities {
 
     public static final float PIXELS_TO_METRES = 1.0f / PPM;
 
-    public static Vector2 getScreenSizeInMeters(){
-        Vector2 meterDimension= new Vector2(Gdx.graphics.getWidth()*PIXELS_TO_METRES,
-                Gdx.graphics.getHeight()*PIXELS_TO_METRES);
-        return meterDimension;
-    }
 
-    public static Vector2 getScreenSizeInPixel(){
-        Vector2 pixelDimension= new Vector2(Gdx.graphics.getWidth(),
-                Gdx.graphics.getHeight());
-        return pixelDimension;
-    }
     public static float PixelsToMeters(float pixelValue){
         return pixelValue*PIXELS_TO_METRES;
     }

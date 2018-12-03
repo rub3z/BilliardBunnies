@@ -3,10 +3,7 @@ package com.mygdx.game.components;
 import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
-import com.mygdx.game.components.Scripts.CollisionCallback;
-import com.mygdx.game.components.Scripts.EnemyCollisionCallback;
-import com.mygdx.game.components.Scripts.InvisibleWallCollisionCallback;
-import com.mygdx.game.components.Scripts.PlayerCollisionCallback;
+import com.mygdx.game.components.Scripts.*;
 
 /**
  * This component stores the callback that show occur when collision happen
@@ -29,16 +26,22 @@ public class CollisionCallbackComponent implements Component , Pool.Poolable {
        if(beginContactCallback!=null &&beginContactCallback instanceof InvisibleWallCollisionCallback){
           Pools.get(InvisibleWallCollisionCallback.class).free((InvisibleWallCollisionCallback)beginContactCallback);
        }
+        if(beginContactCallback!=null &&beginContactCallback instanceof WallCollisionCallback){
+            Pools.get(WallCollisionCallback.class).free((WallCollisionCallback)beginContactCallback);
+        }
 
        if(endContactCallback!=null &&endContactCallback instanceof EnemyCollisionCallback){
-          Pools.get(EnemyCollisionCallback.class).free((EnemyCollisionCallback)beginContactCallback);
+          Pools.get(EnemyCollisionCallback.class).free((EnemyCollisionCallback)endContactCallback);
        }
        if(endContactCallback!=null &&endContactCallback instanceof PlayerCollisionCallback){
-          Pools.get(PlayerCollisionCallback.class).free((PlayerCollisionCallback)beginContactCallback);
+          Pools.get(PlayerCollisionCallback.class).free((PlayerCollisionCallback)endContactCallback);
        }
        if(endContactCallback!=null &&endContactCallback instanceof InvisibleWallCollisionCallback){
-          Pools.get(InvisibleWallCollisionCallback.class).free((InvisibleWallCollisionCallback)beginContactCallback);
+          Pools.get(InvisibleWallCollisionCallback.class).free((InvisibleWallCollisionCallback)endContactCallback);
        }
+        if(endContactCallback!=null &&endContactCallback instanceof WallCollisionCallback){
+            Pools.get(WallCollisionCallback.class).free((WallCollisionCallback)endContactCallback);
+        }
         beginContactCallback=null;
         endContactCallback=null;
     }
