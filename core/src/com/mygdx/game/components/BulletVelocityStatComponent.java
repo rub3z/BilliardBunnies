@@ -7,8 +7,9 @@ import com.badlogic.gdx.utils.Pool;
  */
 public class BulletVelocityStatComponent implements Component, Pool.Poolable {
    public float movingSpeed = 50f;
-   public float rof = 0.05f;
+   public float rof = 0.5f;
    public float timer = 0;
+   public int numBounces = 10;
 
     /**
      * Resets the object for reuse. Object references should be nulled and fields may be set to default values.
@@ -16,7 +17,8 @@ public class BulletVelocityStatComponent implements Component, Pool.Poolable {
     @Override
     public void reset() {
         movingSpeed = 50f;
-        rof = 0.05f;
+        rof = 0.5f;
         timer = 0;
+        numBounces = 10;
     }
 }

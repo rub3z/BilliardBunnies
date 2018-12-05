@@ -11,8 +11,8 @@ public class DesktopLauncher {
 		new LwjglApplication(new BilliardBunnies(), config);
 		config.title = "Don't Get Too Spooked!!!";
 		config.useGL30 = true;
-		config.width = Gdx.graphics.getWidth();
-		config.height = Gdx.graphics.getHeight();
+		config.width = 1920;
+		config.height = 1080;
 		config.allowSoftwareMode = true;
 		config.x = -1;
 		config.y = -1;

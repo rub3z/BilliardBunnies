@@ -14,17 +14,20 @@ public class WallBeginCollisionCallback implements CollisionCallback {
     public void run(Entity thisObject, Entity otherObject) {
         if(isBulletComponentComponentMapper.get(otherObject)!=null) {
             float angle = Utilities.vectorToAngle(otherObject.getComponent(BodyComponent.class).body.getLinearVelocity());
-            if (MathUtils.random(1) == 1) {
-                angle += MathUtils.random(0, 0.523599f);
-            } else {
-                angle -= MathUtils.random(0, 0.523599f);
-            }
+            angle += MathUtils.random(0, 0.523599f)-0.523599f*3;
             Vector2 normalizeVector = Vector2.Zero;
             Utilities.angleToVector(normalizeVector, angle);
             otherObject.getComponent(BodyComponent.class).body.setLinearVelocity(30 * normalizeVector.x, 30 * normalizeVector.y);
+
             if(otherObject.getComponent(ParticleEffectComponent.class)!=null){
                 otherObject.getComponent(ParticleEffectComponent.class).effect.getComponent(ParticleEffectDataComponent.class).isHidden=true;
             }
+            if (otherObject.getComponent(BulletVelocityStatComponent.class).numBounces > 0) {
+               otherObject.getComponent(BulletVelocityStatComponent.class).numBounces--;
+            }
+           if (otherObject.getComponent(BulletVelocityStatComponent.class).numBounces == 0) {
+              otherObject.add(Factory.getFactory().getEngine().createComponent(NeedToRemoveComponent.class));
+           }
         }
     }
 }
