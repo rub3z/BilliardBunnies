@@ -12,6 +12,8 @@ public class EnemyStatsComponent implements Component, Pool.Poolable {
    public float rof = 1f;
    public boolean shoot=false;
    public float timer=0f;
+   public float buffTimer = 0f;
+   public boolean isBuffed = false;
    public float speed=10f;
    public int health;
    public Entity target;
@@ -28,6 +30,8 @@ public class EnemyStatsComponent implements Component, Pool.Poolable {
       speed=10f;
       target=null;
       aimedAtTarget=false;
+      buffTimer = 0f;
+      isBuffed = false;
       bulletType=0;
    }
 }

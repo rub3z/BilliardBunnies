@@ -44,6 +44,7 @@ public class BulletVelocitySystem extends IntervalSystem {
          MovementComponent mC = mm.get(entity);
          BodyComponent bC = bm.get(entity);
          bvc.timer += Utilities.MAX_STEP_TIME;
+
          if (mC.shot && (Math.abs(mC.shootX) > 0.2 || Math.abs(mC.shootY) > 0.2) && bvc.timer > bvc.rof) {
             Entity bullet1 = Factory.getFactory().shoot(bC.body.getPosition().x, bC.body.getPosition().y, entity.getComponent(IsPlayerComponent.class).playerNum);
             bullet1.getComponent(BodyComponent.class).body.setLinearVelocity(
@@ -51,6 +52,18 @@ public class BulletVelocitySystem extends IntervalSystem {
              (mC.shootY / (float) Math.sqrt(mC.shootX * mC.shootX + mC.shootY * mC.shootY)) * bvc.movingSpeed);
             bvc.timer = 0;
          }
+         if(bC.body.getPosition().x > Utilities.FRUSTUM_WIDTH)
+            bC.body.setTransform(bC.body.getPosition().x % Utilities.FRUSTUM_WIDTH,
+             bC.body.getPosition().y, 0);
+         if(bC.body.getPosition().y > Utilities.FRUSTUM_HEIGHT)
+            bC.body.setTransform(bC.body.getPosition().x,
+             bC.body.getPosition().y % Utilities.FRUSTUM_HEIGHT, 0);
+         if(bC.body.getPosition().x < 0)
+            bC.body.setTransform(bC.body.getPosition().x + Utilities.FRUSTUM_WIDTH,
+             bC.body.getPosition().y, 0);
+         if(bC.body.getPosition().y < 0)
+            bC.body.setTransform(bC.body.getPosition().x,
+             bC.body.getPosition().y + Utilities.FRUSTUM_HEIGHT, 0);
       }
    }
 }

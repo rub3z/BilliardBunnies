@@ -11,6 +11,7 @@ public class BulletVelocityStatComponent implements Component, Pool.Poolable {
    public float timer = 0;
    public int numBounces = 10;
 
+
     /**
      * Resets the object for reuse. Object references should be nulled and fields may be set to default values.
      */

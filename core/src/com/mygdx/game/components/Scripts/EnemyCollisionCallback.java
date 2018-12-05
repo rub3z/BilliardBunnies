@@ -5,45 +5,25 @@ import com.badlogic.gdx.utils.Pool;
 import com.mygdx.game.components.*;
 import com.mygdx.game.entities.Factory;
 import com.mygdx.game.screens.GameScreen;
+import java.util.Random;
 import com.mygdx.game.utilities.ParticleEffectManager;
 
 /**
  * Collision callback for an enemy
  */
 public class EnemyCollisionCallback  implements CollisionCallback, Pool.Poolable {
-
+   Random rand = new Random();
+   int randomNum = rand.nextInt(100);
    @Override
    public void run(Entity thisObject, Entity otherObject) {
       int numPlayer=Factory.getFactory().players.size();
       float scale=1;
-      switch (numPlayer){
-         case 1:
-            scale=1;
-            break;
-         case 2:
-            scale=0.61f;
-            break;
-         case 3:
-            scale=0.4333f;
-            break;
-         case 4:
-            scale=0.385f;
-            break;
-      }
        if(otherObject.getComponent(IsBulletComponent.class)!=null){
-          if(thisObject.getComponent(EnemyStatsComponent.class).health >= 0) {
-             thisObject.getComponent(EnemyStatsComponent.class).health -= 100*scale;
-             otherObject.add(Factory.getFactory().getEngine().createComponent(NeedToRemoveComponent.class));
-          }
-          else {
-             Factory.getFactory().createParticleEffect(ParticleEffectManager.CANDYCORNEXPLOSION,
-                  thisObject.getComponent(BodyComponent.class).body.getPosition().x,
-                  thisObject.getComponent(BodyComponent.class).body.getPosition().y
-          );
-             updateScore(otherObject.getComponent(IsBulletComponent.class).playerNum);
-             thisObject.add(Factory.getFactory().getEngine().createComponent(NeedToRemoveComponent.class));
-             otherObject.add(Factory.getFactory().getEngine().createComponent(NeedToRemoveComponent.class));
-          }
+         if (randomNum < 10) {
+            thisObject.getComponent(EnemyStatsComponent.class).buffTimer = 10f;
+            thisObject.getComponent(EnemyStatsComponent.class).isBuffed = true;
+         }
+         randomNum = rand.nextInt(100);
        }
    }
 

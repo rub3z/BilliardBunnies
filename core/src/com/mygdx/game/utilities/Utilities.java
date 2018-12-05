@@ -40,8 +40,8 @@ public class Utilities {
    public static final short CATEGORY_ENEMY_BOUNDARY=0x100;
 
    //MaskingBits of that entity
-   public static final short MASK_PLAYER=~CATEGORY_PLAYER & ~CATEGORY_PLAYER_PROJECTILE; //Player can collide with anything that isn't player or player's projectile.
-   public static final short MASK_PLAYER_PROJECTILE= CATEGORY_ENEMY|CATEGORY_BULLET_BOUNDARY; //Player's projectile only collide with enemy
+   public static final short MASK_PLAYER=CATEGORY_PLAYER & CATEGORY_PLAYER_PROJECTILE; //Player can collide with anything that isn't player or player's projectile.
+   public static final short MASK_PLAYER_PROJECTILE= CATEGORY_PLAYER|CATEGORY_BULLET_BOUNDARY; //Player's projectile only collide with enemy
    public static final short MASK_ENEMY= CATEGORY_PLAYER | CATEGORY_PLAYER_PROJECTILE|CATEGORY_PLAYER_SPECIAL_PROJECTILE|CATEGORY_ENEMY_BOUNDARY; // Enemy can collide with player and player's projectile
    public static final short MASK_ENEMY_PROJECTILE = CATEGORY_PLAYER |CATEGORY_BULLET_BOUNDARY; //Enemy's projectile can collide with player
    public static final short MASK_BULLET_BOUNDARY=CATEGORY_ENEMY_PROJECTILE|CATEGORY_PLAYER_PROJECTILE|CATEGORY_ENEMY; // Wall to delete stray bullet
