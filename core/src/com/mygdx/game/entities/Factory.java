@@ -196,6 +196,37 @@ public class Factory {
       return entity;
    }
 
+   public Entity createPlayerEnemy(String player, float posx, float posy, int playerNum) {
+      Entity entity = engine.createEntity();
+      entity.add(engine.createComponent(MovementComponent.class));
+      entity.add(engine.createComponent(PlayerVelocityStatComponent.class));
+      entity.add(engine.createComponent(TransformComponent.class));
+      entity.add(engine.createComponent(BodyComponent.class));
+      entity.add(engine.createComponent(TextureComponent.class));
+      entity.add(engine.createComponent(EnemyStatsComponent.class));
+
+      //entity.add(engine.createComponent(IsPlayerComponent.class));
+      entity.add(engine.createComponent(SteeringComponent.class));
+      entity.add(engine.createComponent(CollisionCallbackComponent.class));
+      entity.getComponent(CollisionCallbackComponent.class).beginContactCallback=Pools.get(PlayerCollisionCallback.class).obtain();
+      //entity.getComponent(IsPlayerComponent.class).playerNum = playerNum;
+      entity.add(engine.createComponent(BulletVelocityStatComponent.class));
+      entity.getComponent(TextureComponent.class).textureRegionAnimation = createTexture( player, 5f);
+      entity.getComponent(TextureComponent.class).name=player;
+      entity.getComponent(BodyComponent.class).body = createBody("Player_2", posx, posy, 0.3f);
+      entity.getComponent(TransformComponent.class).scale.x = 1f;
+      entity.getComponent(TransformComponent.class).scale.y = 1f;
+      entity.getComponent(BodyComponent.class).body.setUserData(entity);
+      applyCollisionFilter(entity.getComponent(BodyComponent.class).body, Utilities.CATEGORY_PLAYER, Utilities.MASK_PLAYER,false);
+      entity.getComponent(SteeringComponent.class).body=entity.getComponent(BodyComponent.class).body;
+      //entity.getComponent(IsPlayerComponent.class).health = 1000;
+      entity.getComponent(EnemyStatsComponent.class).aimedAtTarget=true;
+      entity.getComponent(EnemyStatsComponent.class).target=players.get(0);
+      entity.getComponent(EnemyStatsComponent.class).health = 1000;
+      entity.getComponent(EnemyStatsComponent.class).rof=MathUtils.random(0.5f,2f);
+
+      return entity;
+   }
 
    /**
     * Call this method to create Bullet entity
@@ -361,11 +392,16 @@ public class Factory {
     * Call this method to create entities for the start of the game.d
     */
    public void createEntities(int playerCount) {
-      for(int i = 0; i < playerCount; i++){
+      for(int i = 0; i < 4; i++){
          int num = 2+i;
          String s ="Player_"+num;
-         engine.addEntity(createPlayer(s, 10 + (i * 10), 10, i));
+         if(i < playerCount)
+            engine.addEntity(createPlayer(s, 10 + (i * 10), 10, i));
+         else
+            engine.addEntity(createPlayerEnemy(s, 10 + (i * 10), 10, i));
       }
+
+
       spawnWalls();
 
       //Player boundary
@@ -376,7 +412,7 @@ public class Factory {
 
       //Enemy boundary
       //createInvisibleWall(-25,-25,Utilities.FRUSTUM_WIDTH+50,Utilities.FRUSTUM_HEIGHT+50,1,2);
-      spawnEnemy(Utilities.FRUSTUM_WIDTH/2, Utilities.FRUSTUM_HEIGHT/2, 1);
+      //spawnEnemy(Utilities.FRUSTUM_WIDTH/2, Utilities.FRUSTUM_HEIGHT/2, 1);
    }
 
    /**
