@@ -44,10 +44,8 @@ public class PlayerVelocitySystem extends IntervalSystem {
          MovementComponent mC = mm.get(entity);
          PlayerVelocityStatComponent pVC = pvm.get(entity);
          bC.body.setLinearVelocity(
-          (Math.abs(mC.moveX) > Math.abs(mC.moveY) && Math.abs(mC.moveX) > 0.2) ?
-           mC.moveX * pVC.movingSpeed / Math.abs(mC.moveX) : 0,
-          (Math.abs(mC.moveY) > Math.abs(mC.moveX) && Math.abs(mC.moveY) > 0.2) ?
-           mC.moveY * pVC.movingSpeed / Math.abs(mC.moveY): 0);
+            Math.abs(mC.moveX) > 0.2 ? mC.moveX * pVC.movingSpeed / Math.abs(mC.moveX) : 0,
+            Math.abs(mC.moveY) > 0.2 ? mC.moveY * pVC.movingSpeed / Math.abs(mC.moveY): 0);
          if(bC.body.getPosition().x > Utilities.FRUSTUM_WIDTH)
             bC.body.setTransform(bC.body.getPosition().x % Utilities.FRUSTUM_WIDTH,
                                  bC.body.getPosition().y, 0);

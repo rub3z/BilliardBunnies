@@ -186,11 +186,28 @@ public class Factory {
       entity.add(engine.createComponent(BulletVelocityStatComponent.class));
       entity.getComponent(TextureComponent.class).textureRegionAnimation = createTexture( player, 5f);
       entity.getComponent(TextureComponent.class).name=player;
-      entity.getComponent(BodyComponent.class).body = createBody("Player_2", posx, posy, 0.3f);
+      entity.getComponent(BodyComponent.class).body = createBody("Circle", posx, posy, 1.5f,false);
       entity.getComponent(TransformComponent.class).scale.x = 1f;
       entity.getComponent(TransformComponent.class).scale.y = 1f;
       entity.getComponent(BodyComponent.class).body.setUserData(entity);
-      applyCollisionFilter(entity.getComponent(BodyComponent.class).body, Utilities.CATEGORY_PLAYER, Utilities.MASK_PLAYER,false);
+      switch (playerNum+1){
+         case 1:
+            applyCollisionFilter(entity.getComponent(BodyComponent.class).body, Utilities.CATEGORY_PLAYER_ONE, Utilities.MASK_PLAYER_ONE,false);
+
+            break;
+         case 2:
+            applyCollisionFilter(entity.getComponent(BodyComponent.class).body, Utilities.CATEGORY_PLAYER_TWO, Utilities.MASK_PLAYER_TWO,false);
+
+            break;
+         case 3:
+            applyCollisionFilter(entity.getComponent(BodyComponent.class).body, Utilities.CATEGORY_PLAYER_THREE, Utilities.MASK_PLAYER_THREE,false);
+
+            break;
+            default:
+               applyCollisionFilter(entity.getComponent(BodyComponent.class).body, Utilities.CATEGORY_PLAYER_FOUR, Utilities.MASK_PLAYER_FOUR,false);
+
+               break;
+      }
       entity.getComponent(SteeringComponent.class).body=entity.getComponent(BodyComponent.class).body;
       entity.getComponent(IsPlayerComponent.class).health = 1000;
       return entity;
@@ -213,11 +230,11 @@ public class Factory {
       entity.add(engine.createComponent(BulletVelocityStatComponent.class));
       entity.getComponent(TextureComponent.class).textureRegionAnimation = createTexture( player, 5f);
       entity.getComponent(TextureComponent.class).name=player;
-      entity.getComponent(BodyComponent.class).body = createBody("Player_2", posx, posy, 0.3f);
+      entity.getComponent(BodyComponent.class).body = createBody("Circle", posx, posy, 1.45f,false);
       entity.getComponent(TransformComponent.class).scale.x = 1f;
       entity.getComponent(TransformComponent.class).scale.y = 1f;
       entity.getComponent(BodyComponent.class).body.setUserData(entity);
-      applyCollisionFilter(entity.getComponent(BodyComponent.class).body, Utilities.CATEGORY_PLAYER, Utilities.MASK_PLAYER,false);
+      applyCollisionFilter(entity.getComponent(BodyComponent.class).body, Utilities.CATEGORY_PLAYER_FOUR, Utilities.MASK_PLAYER_FOUR,false);
       entity.getComponent(SteeringComponent.class).body=entity.getComponent(BodyComponent.class).body;
       //entity.getComponent(IsPlayerComponent.class).health = 1000;
       entity.getComponent(EnemyStatsComponent.class).aimedAtTarget=true;
@@ -244,12 +261,30 @@ public class Factory {
       entity.getComponent(IsBulletComponent.class).playerNum = playerNum;
       entity.getComponent(TextureComponent.class).textureRegionAnimation = createTexture("Player_1", 1);
       entity.getComponent(TextureComponent.class).name="Player_1";
-      entity.getComponent(BodyComponent.class).body = createBody("Circle", x, y, 1f);
+      entity.getComponent(BodyComponent.class).body = createBody("Circle", x, y, 1f,true);
       entity.getComponent(BodyComponent.class).body.setBullet(true);
       entity.getComponent(TransformComponent.class).scale.x = 0.5f;
       entity.getComponent(TransformComponent.class).scale.y = 0.5f;
       entity.getComponent(BodyComponent.class).body.setUserData(entity);
-       applyCollisionFilter(entity.getComponent(BodyComponent.class).body, Utilities.CATEGORY_PLAYER_PROJECTILE, Utilities.MASK_PLAYER_PROJECTILE,false);
+
+      switch (playerNum+1){
+         case 1:
+            applyCollisionFilter(entity.getComponent(BodyComponent.class).body, Utilities.CATEGORY_BULLET_ONE, Utilities.MASK_BULLET_ONE,false);
+
+            break;
+         case 2:
+            applyCollisionFilter(entity.getComponent(BodyComponent.class).body, Utilities.CATEGORY_BULLET_TWO, Utilities.MASK_BULLET_TWO,false);
+
+            break;
+         case 3:
+            applyCollisionFilter(entity.getComponent(BodyComponent.class).body, Utilities.CATEGORY_BULLET_THREE, Utilities.MASK_BULLET_THREE,false);
+
+            break;
+         default:
+            applyCollisionFilter(entity.getComponent(BodyComponent.class).body, Utilities.CATEGORY_BULLET_FOUR, Utilities.MASK_BULLET_FOUR,false);
+
+            break;
+      }
        engine.addEntity(entity);
 
        //Add particle to bullet
@@ -281,13 +316,13 @@ public class Factory {
        Pools.get(EnemyCollisionCallback.class).obtain();
       entity.getComponent(TextureComponent.class).textureRegionAnimation = createTexture("Enemies_0", 5);
       entity.getComponent(TextureComponent.class).name="Enemies_0";
-      entity.getComponent(BodyComponent.class).body = createBody("Enemies_0", x, y, 4);
+      entity.getComponent(BodyComponent.class).body = createBody("Enemies_0", x, y, 4,false);
       entity.getComponent(BodyComponent.class).body.setType(BodyDef.BodyType.DynamicBody);
       entity.getComponent(TransformComponent.class).scale.x = 2f;
       entity.getComponent(TransformComponent.class).scale.y = 2f;
       entity.getComponent(BodyComponent.class).body.setUserData(entity);
-      applyCollisionFilter(entity.getComponent(BodyComponent.class).body,
-       Utilities.CATEGORY_ENEMY, Utilities.MASK_ENEMY,true);
+//      applyCollisionFilter(entity.getComponent(BodyComponent.class).body,
+//       Utilities.CATEGORY_ENEMY, Utilities.MASK_ENEMY,true);
       entity.getComponent(EnemyStatsComponent.class).aimedAtTarget=true;
       entity.getComponent(EnemyStatsComponent.class).target=players.get(0);
       entity.add(engine.createComponent(SteeringComponent.class));
@@ -365,7 +400,7 @@ public class Factory {
     * @param nameOfBody of the body
     * @return Box2D body
     */
-   public Body createBody(String nameOfBody, float posX, float posY,  float scale) {
+   public Body createBody(String nameOfBody, float posX, float posY,  float scale, boolean isElastic) {
       BodyDef bodyDef = Pools.get(BodyDef.class).obtain();
       bodyDef.type = BodyDef.BodyType.DynamicBody;
       bodyDef.position.set(posX, posY);
@@ -373,11 +408,12 @@ public class Factory {
       FixtureDef fixtureDef = new FixtureDef();
       fixtureDef.density = 1;
       fixtureDef.isSensor=true;
+      fixtureDef.friction=0f;
+      fixtureDef.restitution=isElastic?1f:0f;
       if(nameOfBody.compareTo("Circle")==0){
          CircleShape circle = new CircleShape();
          circle.setRadius(scale/2);
          fixtureDef.shape = circle;
-         fixtureDef.restitution=1f;
          body.createFixture(fixtureDef);
          body.setAngularVelocity(2f);
       }else{
@@ -392,27 +428,25 @@ public class Factory {
     * Call this method to create entities for the start of the game.d
     */
    public void createEntities(int playerCount) {
+      spawnWalls();
+      spawnPlayerBoundary();
+
+
       for(int i = 0; i < 4; i++){
          int num = 2+i;
          String s ="Player_"+num;
          if(i < playerCount)
             engine.addEntity(createPlayer(s, 10 + (i * 10), 10, i));
-         else
-            engine.addEntity(createPlayerEnemy(s, 10 + (i * 10), 10, i));
+         else{
+            Tile tile=LevelManager.getManager().getARandomEmptySpaceTile();
+            engine.addEntity(createPlayerEnemy(s, tile.getX(), tile.getY(), i));
+         }
+
       }
 
 
-      spawnWalls();
 
-      //Player boundary
-      //createInvisibleWall(0+2.5f,0-0.5f,Utilities.FRUSTUM_WIDTH-5f,Utilities.FRUSTUM_HEIGHT+1f,1,0);
 
-      //Projectile boundary
-      //createInvisibleWall(-10,-20,Utilities.FRUSTUM_WIDTH+20,Utilities.FRUSTUM_HEIGHT+25,1,1);
-
-      //Enemy boundary
-      //createInvisibleWall(-25,-25,Utilities.FRUSTUM_WIDTH+50,Utilities.FRUSTUM_HEIGHT+50,1,2);
-      //spawnEnemy(Utilities.FRUSTUM_WIDTH/2, Utilities.FRUSTUM_HEIGHT/2, 1);
    }
 
    /**
@@ -444,18 +478,15 @@ public class Factory {
        entity.add(engine.createComponent(BodyComponent.class));
        entity.add(engine.createComponent(CollisionCallbackComponent.class));
        entity.getComponent(CollisionCallbackComponent.class).beginContactCallback=Pools.get(InvisibleWallCollisionCallback.class).obtain();
-       entity.getComponent(BodyComponent.class).body = createBody("Wall_0",x, y, scale);
+       entity.getComponent(BodyComponent.class).body = createBody("Wall_0",x, y, scale,false);
        entity.getComponent(BodyComponent.class).body.setUserData(entity);
        entity.getComponent(BodyComponent.class).body.setType(BodyDef.BodyType.StaticBody);
        if(type==1){
           applyCollisionFilter(entity.getComponent(BodyComponent.class).body,
+                  Utilities.CATEGORY_PLAYER_BOUNDARY, Utilities.MASK_PLAYER_BOUNDARY,false);
+       }else {
+          applyCollisionFilter(entity.getComponent(BodyComponent.class).body,
                   Utilities.CATEGORY_BULLET_BOUNDARY, Utilities.MASK_BULLET_BOUNDARY,false);
-       }else if(type==2){
-          applyCollisionFilter(entity.getComponent(BodyComponent.class).body,
-                  Utilities.CATEGORY_ENEMY_BOUNDARY, Utilities.MASK_ENEMY_BOUNDARY,false);
-       }else{
-          applyCollisionFilter(entity.getComponent(BodyComponent.class).body,
-                  Utilities.CATEGORY_ENVIRONMENT, Utilities.MASK_ENVIRONMENT,false);
        }
 
         return  entity;
@@ -498,26 +529,26 @@ public class Factory {
       if(type==0){
          entity.getComponent(TextureComponent.class).textureRegionAnimation = createTexture( "Bullet_0", 8);
          entity.getComponent(TextureComponent.class).name="Bullet_0";
-         entity.getComponent(BodyComponent.class).body = createBody("Bullet_0", x, y, 2f);
+         entity.getComponent(BodyComponent.class).body = createBody("Bullet_0", x, y, 2f,false);
          entity.getComponent(TransformComponent.class).scale.x = 1f;
          entity.getComponent(TransformComponent.class).scale.y = 1f;
       }else if(type==1){
          entity.getComponent(TextureComponent.class).textureRegionAnimation = createTexture( "Bullet_1", 8);
          entity.getComponent(TextureComponent.class).name="Bullet_1";
-         entity.getComponent(BodyComponent.class).body = createBody("Bullet_1", x, y, 2.4f);
+         entity.getComponent(BodyComponent.class).body = createBody("Bullet_1", x, y, 2.4f,false);
          entity.getComponent(TransformComponent.class).scale.x = 0.2f;
          entity.getComponent(TransformComponent.class).scale.y = 0.2f;
       }else if(type==2){
          entity.getComponent(TextureComponent.class).textureRegionAnimation = createTexture( "Bullet_1", 8);
          entity.getComponent(TextureComponent.class).name="Bullet_1";
-         entity.getComponent(BodyComponent.class).body = createBody("Bullet_1", x, y, 12f);
+         entity.getComponent(BodyComponent.class).body = createBody("Bullet_1", x, y, 12f,false);
          entity.getComponent(TransformComponent.class).scale.x = 1f;
          entity.getComponent(TransformComponent.class).scale.y = 1f;
       }
 
 
       entity.getComponent(BodyComponent.class).body.setUserData(entity);
-      applyCollisionFilter(entity.getComponent(BodyComponent.class).body, Utilities.CATEGORY_ENEMY_PROJECTILE, Utilities.MASK_ENEMY_PROJECTILE, true);
+      applyCollisionFilter(entity.getComponent(BodyComponent.class).body, Utilities.CATEGORY_BULLET_FOUR, Utilities.MASK_BULLET_FOUR, true);
       engine.addEntity(entity);
       entity.getComponent(TransformComponent.class).position.set( entity.getComponent(TransformComponent.class).position.x, entity.getComponent(TransformComponent.class).position.y,0);
       return entity;
@@ -608,13 +639,13 @@ public class Factory {
               Pools.get(EnemyCollisionCallback.class).obtain();
       entity.getComponent(TextureComponent.class).textureRegionAnimation = createTexture( "Enemies_1", 5);
       entity.getComponent(TextureComponent.class).name="Enemies_1";
-      entity.getComponent(BodyComponent.class).body = createBody("Enemies_1", x, y, 4);
+      entity.getComponent(BodyComponent.class).body = createBody("Enemies_1", x, y, 4,false);
       entity.getComponent(BodyComponent.class).body.setType(BodyDef.BodyType.DynamicBody);
       entity.getComponent(TransformComponent.class).scale.x = 1.2f;
       entity.getComponent(TransformComponent.class).scale.y = 1.2f;
       entity.getComponent(BodyComponent.class).body.setUserData(entity);
-      applyCollisionFilter(entity.getComponent(BodyComponent.class).body,
-              Utilities.CATEGORY_ENEMY, Utilities.MASK_ENEMY,true);
+//      applyCollisionFilter(entity.getComponent(BodyComponent.class).body,
+//              Utilities.CATEGORY_ENEMY, Utilities.MASK_ENEMY,true);
 
       entity.add(engine.createComponent(SteeringComponent.class));
       entity.getComponent(SteeringComponent.class).body=entity.getComponent(BodyComponent.class).body;
@@ -655,13 +686,13 @@ public class Factory {
               Pools.get(EnemyCollisionCallback.class).obtain();
       entity.getComponent(TextureComponent.class).textureRegionAnimation = createTexture( "Enemies_2", 5);
       entity.getComponent(TextureComponent.class).name="Enemies_2";
-      entity.getComponent(BodyComponent.class).body = createBody("Enemies_2", x, y, 105f);
+      entity.getComponent(BodyComponent.class).body = createBody("Enemies_2", x, y, 105f,false);
       entity.getComponent(BodyComponent.class).body.setType(BodyDef.BodyType.DynamicBody);
       entity.getComponent(TransformComponent.class).scale.x = 1f;
       entity.getComponent(TransformComponent.class).scale.y = 1f;
       entity.getComponent(BodyComponent.class).body.setUserData(entity);
-      applyCollisionFilter(entity.getComponent(BodyComponent.class).body,
-              Utilities.CATEGORY_ENEMY, Utilities.MASK_ENEMY,true);
+//      applyCollisionFilter(entity.getComponent(BodyComponent.class).body,
+//              Utilities.CATEGORY_ENEMY, Utilities.MASK_ENEMY,true);
 
       entity.add(engine.createComponent(SteeringComponent.class));
       entity.getComponent(SteeringComponent.class).body=entity.getComponent(BodyComponent.class).body;
@@ -689,10 +720,9 @@ public class Factory {
    public void spawnWalls(){
       int desiredCellWidth=5;
       int desiredCellHeight=5;
-      float tileScale=2;
-
+      float tileScale=1.5f;
       int resultedColumnNumber =12;
-      int resultedRowNumber = 7;
+      int resultedRowNumber = 9;
       LevelManager.getManager().generateLevel(resultedColumnNumber,resultedRowNumber,desiredCellWidth,desiredCellHeight,tileScale,true,true);
       ImmutableArray<Tile> wallTiles = LevelManager.getManager().getWallTitles();
       for(Tile t: wallTiles){
@@ -701,15 +731,21 @@ public class Factory {
          entity.getComponent(BodyComponent.class).body = createBody("Wall_0",
                  t.getX(),
                  t.getY(),
-                 tileScale);
+                 tileScale,false);
          entity.getComponent(BodyComponent.class).body.setUserData(entity);
          entity.getComponent(BodyComponent.class).body.setType(BodyDef.BodyType.StaticBody);
          applyCollisionFilter(entity.getComponent(BodyComponent.class).body,
-          Utilities.CATEGORY_BULLET_BOUNDARY, Utilities.MASK_BULLET_BOUNDARY,false);
+          Utilities.CATEGORY_WALL, Utilities.MASK_WALL,false);
          entity.add(engine.createComponent(CollisionCallbackComponent.class));
          entity.getComponent(CollisionCallbackComponent.class).beginContactCallback=Pools.get(WallBeginCollisionCallback.class).obtain();
           entity.getComponent(CollisionCallbackComponent.class).endContactCallback=Pools.get(WallEndCollisionCallBack.class).obtain();
          engine.addEntity(entity);
+      }
+   }
+   public void spawnPlayerBoundary(){
+      ImmutableArray<Tile> playerBoundaryTiles = LevelManager.getManager().getPlayerWallTiles();
+      for(Tile t: playerBoundaryTiles){
+         createAnInvisibleWall(t.getX(),t.getY(),1.5f,1);
       }
    }
 }

@@ -91,60 +91,91 @@ public class MazeGenerator {
             //removeDeadEnd();
             //mirrorMaze();
         } else {
-            removeWall(0, 0, Node.RIGHT);
-            removeWall(1, 0, Node.RIGHT);
-            removeWall(2, 0, Node.RIGHT);
-            removeWall(3, 0, Node.RIGHT);
-            removeWall(4, 0, Node.RIGHT);
-            removeWall(5, 0, Node.RIGHT);
-            removeWall(0, 3, Node.RIGHT);
-            removeWall(1, 3, Node.RIGHT);
-            removeWall(2, 3, Node.RIGHT);
-            removeWall(3, 3, Node.RIGHT);
-            removeWall(4, 3, Node.RIGHT);
-            removeWall(5, 3, Node.RIGHT);
-            removeWall(0, 6, Node.RIGHT);
-            removeWall(1, 6, Node.RIGHT);
-            removeWall(2, 6, Node.RIGHT);
-            removeWall(3, 6, Node.RIGHT);
-            removeWall(4, 6, Node.RIGHT);
-            removeWall(5, 6, Node.RIGHT);
-            removeWall(0, 0, Node.UP);
-            removeWall(0, 1, Node.UP);
-            removeWall(0, 2, Node.UP);
-            removeWall(0, 3, Node.UP);
-            removeWall(0, 4, Node.UP);
-            removeWall(0, 5, Node.UP);
-            removeWall(3, 0, Node.UP);
-            removeWall(3, 1, Node.UP);
-            removeWall(3, 2, Node.UP);
-            removeWall(3, 3, Node.UP);
-            removeWall(3, 4, Node.UP);
-            removeWall(3, 5, Node.UP);
-            removeWall(2, 2, Node.RIGHT);
-            removeWall(2, 2, Node.LEFT);
-            removeWall(1, 2, Node.DOWN);
-            removeWall(1, 1, Node.RIGHT);
-            removeWall(2, 1, Node.DOWN);
-            removeWall(2, 4, Node.RIGHT);
-            removeWall(2, 4, Node.LEFT);
-            removeWall(1, 4, Node.UP);
-            removeWall(1, 5, Node.RIGHT);
-            removeWall(2, 5, Node.UP);
-            removeWall(4, 2, Node.UP);
-            removeWall(4, 1, Node.UP);
-            removeWall(4, 1, Node.RIGHT);
-            removeWall(5, 2, Node.DOWN);
-            removeWall(5, 2, Node.RIGHT);
-            removeWall(4, 4, Node.DOWN);
-            removeWall(4, 5, Node.DOWN);
-            removeWall(4, 5, Node.RIGHT);
-            removeWall(5, 5, Node.DOWN);
-            removeWall(5, 4, Node.RIGHT);
+            removeWall(0,0,Node.RIGHT);
+           removeWall(1,0,Node.RIGHT);
+           removeWall(2,0,Node.RIGHT);
+           removeWall(3,0,Node.RIGHT);
+           removeWall(4,0,Node.RIGHT);
+           removeWall(5,0,Node.RIGHT);
 
-            removeWall(0, 3, Node.LEFT);
-            removeWall(3, 0, Node.DOWN);
-            removeWall(3, 6, Node.UP);
+           removeWall(0,0,Node.UP);
+           removeWall(0,1,Node.RIGHT);
+           removeWall(1,1,Node.UP);
+           removeWall(1,1,Node.RIGHT);
+           removeWall(2,1,Node.UP);
+           removeWall(4,1,Node.RIGHT);
+           removeWall(4,1,Node.UP);
+           removeWall(5,1,Node.DOWN);
+
+           removeWall(1,2,Node.LEFT);
+           removeWall(0,2,Node.UP);
+           removeWall(0,3,Node.RIGHT);
+           removeWall(1,3,Node.RIGHT);
+           removeWall(2,3,Node.RIGHT);
+           removeWall(3,3,Node.RIGHT);
+           removeWall(4,3,Node.RIGHT);
+           removeWall(5,3,Node.RIGHT);
+           removeWall(4,3,Node.DOWN);
+           removeWall(5,2,Node.LEFT);
+
+           removeWall(2,2,Node.UP);
+           removeWall(2,2,Node.RIGHT);
+           removeWall(3,2,Node.RIGHT);
+           removeWall(5,2,Node.RIGHT);
+
+
+           //------------------------
+
+           removeWall(0,8,Node.RIGHT);
+           removeWall(1,8,Node.RIGHT);
+           removeWall(2,8,Node.RIGHT);
+           removeWall(3,8,Node.RIGHT);
+           removeWall(4,8,Node.RIGHT);
+
+           removeWall(0,8, Node.DOWN);
+           removeWall(2,8, Node.DOWN);
+           removeWall(5,8, Node.DOWN);
+
+           removeWall(0,7,Node.RIGHT);
+           removeWall(1,7,Node.RIGHT);
+           removeWall(2,7,Node.RIGHT);
+           removeWall(3,7,Node.RIGHT);
+           removeWall(4,7,Node.RIGHT);
+           removeWall(5,7,Node.RIGHT);
+
+           removeWall(0,7, Node.DOWN);
+           removeWall(2,7, Node.DOWN);
+           removeWall(4,7, Node.DOWN);
+
+           removeWall(0,6,Node.RIGHT);
+           removeWall(1,6,Node.RIGHT);
+           removeWall(2,6,Node.RIGHT);
+           removeWall(3,6,Node.RIGHT);
+           removeWall(4,6,Node.RIGHT);
+
+           removeWall(2,6,Node.DOWN);
+           removeWall(5,6,Node.DOWN);
+           removeWall(5,5,Node.LEFT);
+           removeWall(4,5,Node.DOWN);
+           removeWall(4,4,Node.DOWN);
+           removeWall(2,4,Node.DOWN);
+           removeWall(2,4,Node.UP);
+           removeWall(5,5,Node.RIGHT);
+
+           removeWall(0,5,Node.UP);
+           removeWall(0,5,Node.RIGHT);
+           removeWall(1,5,Node.RIGHT);
+
+
+
+           //Middle
+           removeWall(0,4,Node.LEFT);
+           removeWall(0,4,Node.RIGHT);
+           removeWall(1,4,Node.RIGHT);
+           removeWall(2,4,Node.RIGHT);
+           removeWall(3,4,Node.RIGHT);
+           removeWall(4,4,Node.RIGHT);
+           removeWall(5,4,Node.RIGHT);
 
 
             mirrorMaze();
@@ -203,6 +234,48 @@ public class MazeGenerator {
                 }
             }
 
+        }
+        if(loadPrebuild){
+           temp[6][16]=1;
+           temp[6][17]=1;
+           temp[6][18]=1;
+           temp[7][16]=1;
+           temp[7][17]=1;
+           temp[7][18]=1;
+           temp[8][16]=1;
+           temp[8][17]=1;
+           temp[8][18]=1;
+
+
+           temp[temp.length-17][16]=1;
+           temp[temp.length-17][17]=1;
+           temp[temp.length-17][18]=1;
+           temp[temp.length-18][16]=1;
+           temp[temp.length-18][17]=1;
+           temp[temp.length-18][18]=1;
+           temp[temp.length-19][16]=1;
+           temp[temp.length-19][17]=1;
+           temp[temp.length-19][18]=1;
+
+
+           temp[6][16+25]=1;
+           temp[6][17+25]=1;
+           temp[6][18+25]=1;
+           temp[7][16+25]=1;
+           temp[7][17+25]=1;
+           temp[7][18+25]=1;
+           temp[8][16+25]=1;
+           temp[8][17+25]=1;
+           temp[8][18+25]=1;
+           temp[temp.length-17][16+25]=1;
+           temp[temp.length-17][17+25]=1;
+           temp[temp.length-17][18+25]=1;
+           temp[temp.length-18][16+25]=1;
+           temp[temp.length-18][17+25]=1;
+           temp[temp.length-18][18+25]=1;
+           temp[temp.length-19][16+25]=1;
+           temp[temp.length-19][17+25]=1;
+           temp[temp.length-19][18+25]=1;
         }
         return temp;
 

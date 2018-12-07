@@ -62,22 +62,17 @@ public class PlayerControlSystem extends IntervalSystem {
                         Gdx.input.isKeyPressed(Input.Keys.COMMA)) &&
                        (Gdx.input.isKeyPressed(Input.Keys.S) ||
                         Gdx.input.isKeyPressed(Input.Keys.O)) ? 0 : mc.moveY;
-            mc.shootY = Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) ? 1 : 0;
-            mc.shot = Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT);
          }
          if (p1 != null) {
             mc.moveX = p1.getAxis(1);
             mc.moveY = -p1.getAxis(0);
-            mc.shot =      p1.getAxis(4) < -0.1;
-            mc.shootX = p1.getAxis(3);
-            mc.shootY = -p1.getAxis(2);
          }
          if(ic.playerNum == 1) {
             mc.moveX = p2.getAxis(1);
             mc.moveY = -p2.getAxis(0);
             mc.shootX = p2.getAxis(3);
             mc.shootY = -p2.getAxis(2);
-            mc.shot = p2.getAxis(4) < -0.1;
+            mc.shot = (Math.abs(mc.shootX) > 0.2 || Math.abs(mc.shootY) > 0.2);
          }
          if(ic.playerNum == 2) {
             if (p3 != null) {
@@ -85,7 +80,7 @@ public class PlayerControlSystem extends IntervalSystem {
                mc.moveY = -p3.getAxis(0);
                mc.shootX = p3.getAxis(3);
                mc.shootY = -p3.getAxis(2);
-               mc.shot = p3.getAxis(4) < -0.1;
+               mc.shot = (Math.abs(mc.shootX) > 0.2 || Math.abs(mc.shootY) > 0.2);
             }
          }
 
@@ -95,7 +90,7 @@ public class PlayerControlSystem extends IntervalSystem {
                mc.moveY = -p4.getAxis(0);
                mc.shootX = p4.getAxis(3);
                mc.shootY = -p4.getAxis(2);
-               mc.shot = p4.getAxis(4) < -0.1;
+               mc.shot = (Math.abs(mc.shootX) > 0.2 || Math.abs(mc.shootY) > 0.2);
             }
          }
       }
