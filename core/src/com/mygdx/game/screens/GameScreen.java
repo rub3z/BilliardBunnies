@@ -106,7 +106,7 @@ public class GameScreen extends ScreenAdapter {
     */
    public void endGame(){
       ((BilliardBunnies) myGame).changeScreen(4, numPlayers);
-      GameOverScreen.getScreen(myGame).addScore("Player 0",score0);
+      //GameOverScreen.getScreen(myGame).addScore("Player 0",score0);
       this.dispose();
    }
 }

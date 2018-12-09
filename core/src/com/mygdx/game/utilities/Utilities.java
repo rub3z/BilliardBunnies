@@ -29,25 +29,35 @@ public class Utilities {
     public static final int POSITION_ITERATIONS = 2;
 
     //Collision Filter
-   //CategoryBits of entity
-   public static final short CATEGORY_PLAYER = 0x001; //1
-   public static final short CATEGORY_ENEMY = 0x002; //10
-   public static final short CATEGORY_PLAYER_PROJECTILE=0x004; //100
-   public static final short CATEGORY_ENEMY_PROJECTILE=0x010; //1000
-   public static final short CATEGORY_BULLET_BOUNDARY=0x020; //10000
-   public static final short CATEGORY_ENVIRONMENT= 0x040; //100000
-   public static final short CATEGORY_PLAYER_SPECIAL_PROJECTILE= 0x080; //1000000
-   public static final short CATEGORY_ENEMY_BOUNDARY=0x100;
+    //Collision Filter
+    //CategoryBits of entity
+    public static final short CATEGORY_PLAYER_ONE = 0x00001; //1
+   public static final short CATEGORY_PLAYER_TWO = 0x0002; //10
+   public static final short CATEGORY_PLAYER_THREE=0x0004; //100
+   public static final short CATEGORY_PLAYER_FOUR=0x008; //1000
+   public static final short CATEGORY_BULLET_ONE=0x0010; //10000
+   public static final short CATEGORY_BULLET_TWO= 0x0020; //100000
+   public static final short CATEGORY_BULLET_THREE= 0x0040; //1000000
+   public static final short CATEGORY_BULLET_FOUR=0x0080;
+   public static final short CATEGORY_WALL=0x0100;
+   public static final short CATEGORY_PLAYER_BOUNDARY=0x0200;
+   public static final short CATEGORY_BULLET_BOUNDARY=0x0400;
+   public static final short CATEGORY_SEED=0x0800;
 
    //MaskingBits of that entity
-   public static final short MASK_PLAYER=CATEGORY_PLAYER & CATEGORY_PLAYER_PROJECTILE; //Player can collide with anything that isn't player or player's projectile.
-   public static final short MASK_PLAYER_PROJECTILE= CATEGORY_PLAYER|CATEGORY_BULLET_BOUNDARY; //Player's projectile only collide with enemy
-   public static final short MASK_ENEMY= CATEGORY_PLAYER | CATEGORY_PLAYER_PROJECTILE|CATEGORY_PLAYER_SPECIAL_PROJECTILE|CATEGORY_ENEMY_BOUNDARY; // Enemy can collide with player and player's projectile
-   public static final short MASK_ENEMY_PROJECTILE = CATEGORY_PLAYER |CATEGORY_BULLET_BOUNDARY; //Enemy's projectile can collide with player
-   public static final short MASK_BULLET_BOUNDARY=CATEGORY_ENEMY_PROJECTILE|CATEGORY_PLAYER_PROJECTILE|CATEGORY_ENEMY; // Wall to delete stray bullet
-   public static final short MASK_ENVIRONMENT = -1; // ENVIRONMENT can collide with everything.
-   public static final short MASK_PLAYER_SPECIAL_PROJECTILE = CATEGORY_ENEMY;
-   public static final short MASK_ENEMY_BOUNDARY =CATEGORY_ENEMY;
+
+   public static final short MASK_PLAYER_ONE = CATEGORY_PLAYER_TWO | CATEGORY_BULLET_THREE |CATEGORY_BULLET_FOUR |CATEGORY_PLAYER_BOUNDARY |CATEGORY_WALL;
+   public static final short MASK_PLAYER_TWO = CATEGORY_BULLET_ONE  | CATEGORY_BULLET_THREE |CATEGORY_BULLET_FOUR |CATEGORY_PLAYER_BOUNDARY | CATEGORY_WALL;
+   public static final short MASK_PLAYER_THREE=CATEGORY_BULLET_ONE |CATEGORY_PLAYER_TWO | CATEGORY_BULLET_FOUR |CATEGORY_PLAYER_BOUNDARY |CATEGORY_WALL;
+   public static final short MASK_PLAYER_FOUR=CATEGORY_BULLET_ONE |CATEGORY_PLAYER_TWO | CATEGORY_BULLET_THREE |CATEGORY_PLAYER_BOUNDARY |CATEGORY_WALL;
+   public static final short MASK_BULLET_ONE= CATEGORY_PLAYER_TWO |CATEGORY_BULLET_THREE |CATEGORY_PLAYER_FOUR |CATEGORY_WALL |CATEGORY_BULLET_BOUNDARY;
+   public static final short MASK_BULLET_TWO= CATEGORY_PLAYER_ONE  |CATEGORY_BULLET_THREE |CATEGORY_PLAYER_FOUR |CATEGORY_WALL |CATEGORY_BULLET_BOUNDARY;
+   public static final short MASK_BULLET_THREE= CATEGORY_PLAYER_ONE | CATEGORY_PLAYER_TWO |CATEGORY_PLAYER_FOUR |CATEGORY_WALL |CATEGORY_BULLET_BOUNDARY;
+   public static final short MASK_BULLET_FOUR=CATEGORY_PLAYER_ONE | CATEGORY_PLAYER_TWO |CATEGORY_BULLET_THREE |CATEGORY_WALL |CATEGORY_BULLET_BOUNDARY;
+   public static final short MASK_WALL=CATEGORY_PLAYER_ONE |CATEGORY_PLAYER_TWO |CATEGORY_PLAYER_THREE |CATEGORY_PLAYER_FOUR | CATEGORY_BULLET_ONE |CATEGORY_BULLET_TWO |CATEGORY_BULLET_THREE |CATEGORY_PLAYER_FOUR;
+   public static final short MASK_PLAYER_BOUNDARY= CATEGORY_PLAYER_ONE |CATEGORY_PLAYER_TWO |CATEGORY_PLAYER_THREE |CATEGORY_PLAYER_FOUR ;
+   public static final short MASK_BULLET_BOUNDARY=CATEGORY_BULLET_ONE |CATEGORY_BULLET_TWO |CATEGORY_BULLET_THREE |CATEGORY_PLAYER_FOUR;
+   public static final short MASK_SEED = CATEGORY_PLAYER_ONE |CATEGORY_PLAYER_TWO |CATEGORY_PLAYER_THREE |CATEGORY_PLAYER_FOUR;
 
 
    public static float vectorToAngle (Vector2 vector) {

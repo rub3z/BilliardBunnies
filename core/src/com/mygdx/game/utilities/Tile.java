@@ -1,5 +1,7 @@
 package com.mygdx.game.utilities;
 
+import com.badlogic.gdx.utils.IntMap;
+
 /**
  * A generic representation of a tile
  */
@@ -7,6 +9,7 @@ public class Tile {
    private float x;
    private float y;
    private LevelManager.Type type;
+   public IntMap<Tile> neighbors;
 
    /**
     * Construct a new tile.
@@ -19,6 +22,7 @@ public class Tile {
       this.x = x;
       this.y = y;
       this.type = type;
+      neighbors=new IntMap<Tile>();
    }
 
    /**
@@ -74,4 +78,10 @@ public class Tile {
    public void setType(LevelManager.Type type) {
       this.type = type;
    }
+
+
+   public static final int LEFT = 1;
+   public static final int RIGHT = 2;
+   public static final int UP = 3;
+   public static final int DOWN = 4;
 }

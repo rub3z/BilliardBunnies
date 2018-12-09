@@ -14,7 +14,7 @@ public class LevelManager {
     private int[][] mazeData; //Data generated from the maze generator.
     private MazeGenerator mazeGenerator; //Maze generator.
     private float tileScale; //How big is the tile size is.
-    private Array<Tile> tiles; //Tiles container.
+    private Tile [][] tiles; //Tiles container.
     private boolean isCenter;
 
     /**
@@ -22,7 +22,6 @@ public class LevelManager {
      */
     private LevelManager() {
         mazeGenerator = new MazeGenerator();
-        tiles = new Array<Tile>();
     }
 
     /**
@@ -52,6 +51,7 @@ public class LevelManager {
         mazeData = mazeGenerator.generateMaze(rowNumber, columnNumber, cellWidth, cellHeight, loadPrebuild);
         this.tileScale = tileScale;
         this.isCenter = isCenter;
+        tiles=new Tile[mazeData.length][mazeData[0].length];
         for (int y = 0; y < mazeData.length; y++) {
             for (int x = 0; x < mazeData[0].length; x++) {
                 Type type;
@@ -66,9 +66,18 @@ public class LevelManager {
                         type = Type.EMPTY_SPACE;
                         break;
                 }
-                tiles.add(new Tile((x * tileScale) + getHorizontalShift(), (y * tileScale) + getVerticalShift(), type));
+                tiles[y][x]=new Tile((x * tileScale) + getHorizontalShift(), (y * tileScale) + getVerticalShift(), type);
             }
         }
+
+       for (int y = 0; y < tiles.length; y++) {
+          for (int x = 0; x < tiles[0].length; x++) {
+               tiles[y][x].neighbors.put(Tile.UP,getTile(x,y+1));
+               tiles[y][x].neighbors.put(Tile.DOWN,getTile(x,y-1));
+               tiles[y][x].neighbors.put(Tile.RIGHT,getTile(x+1,y));
+               tiles[y][x].neighbors.put(Tile.LEFT,getTile(x-1,y));
+          }
+       }
     }
 
     /**
@@ -88,7 +97,13 @@ public class LevelManager {
      * @return
      */
     public ImmutableArray<Tile> getTiles() {
-        return new ImmutableArray<Tile>(tiles);
+       Array<Tile> array= new Array<Tile>();
+       for (int y=0; y<tiles.length;y++){
+          for(int x =0; x<tiles[0].length;y++){
+             array.add(tiles[y][x]);
+          }
+       }
+       return new ImmutableArray<Tile>(array);
     }
 
     /**
@@ -99,7 +114,11 @@ public class LevelManager {
      * @return a tile located at the above index.
      */
     public Tile getTile(int x, int y) {
-        return tiles.get((y * mazeData.length) + x);
+       try {
+          return tiles[y][x];
+       }catch (ArrayIndexOutOfBoundsException e){
+          return  null;
+       }
     }
 
     /**
@@ -110,20 +129,35 @@ public class LevelManager {
      * @return a tile located at the above location.
      */
     public Tile getTile(float x, float y) {
-        x = x - getHorizontalShift();
-        y = y - getVerticalShift();
-        return tiles.get(((int) (y / tileScale) * mazeData.length) + (int) (x / tileScale));
-    }
+      try {
+         x = (x - getHorizontalShift())/tileScale+(tileScale/2f);
+         y = (y - getVerticalShift())/tileScale +(tileScale/2f);
+
+         if(x>=0 &&y>=0 ){
+            return tiles[(int)y][(int)x];
+         }
+         else
+            return null;
+      }catch (ArrayIndexOutOfBoundsException e){
+         return  null;
+      }
+
+   }
+
+
 
     /**
-     * Convert integer indexes to float coordinates.
+     * Convert float to index
      *
      * @param x int index.
      * @param y int index.
      * @return Vector2 contains float coordinates.
      */
-    public Vector2 intToFloat(int x, int y) {
-        return new Vector2((x * tileScale), (y * tileScale));
+    public Vector2 floatToIndex(float x, float y) {
+          x = (x - getHorizontalShift())/tileScale+(tileScale/2f);
+          y = (y - getVerticalShift())/tileScale +(tileScale/2f);
+
+          return new Vector2((int)x,(int)y);
     }
 
     /**
@@ -132,14 +166,15 @@ public class LevelManager {
      * @return all wall tiles.
      */
     public ImmutableArray<Tile> getWallTitles() {
-        Array<Tile> temp = new Array<Tile>();
-        for (Tile t : tiles) {
-            if (t.getType() == Type.WALL) {
-                temp.add(t);
-            }
-        }
+       Array<Tile> array= new Array<Tile>();
+       for (int y=0; y<tiles.length;y++){
+          for(int x =0; x<tiles[0].length;x++){
+             if(tiles[y][x].getType()==Type.WALL)
+             array.add(tiles[y][x]);
+          }
+       }
 
-        return new ImmutableArray<Tile>(temp);
+        return new ImmutableArray<Tile>(array);
     }
 
     /**
@@ -148,13 +183,14 @@ public class LevelManager {
      * @return all wall tiles.
      */
     public ImmutableArray<Tile> getPlayerWallTiles() {
-        Array<Tile> temp = new Array<Tile>();
-        for (Tile t : tiles) {
-            if (t.getType() == Type.PLAYER_WALL) {
-                temp.add(t);
-            }
-        }
-        return new ImmutableArray<Tile>(temp);
+       Array<Tile> array= new Array<Tile>();
+       for (int y=0; y<tiles.length;y++){
+          for(int x =0; x<tiles[0].length;x++){
+             if(tiles[y][x].getType()==Type.PLAYER_WALL)
+                array.add(tiles[y][x]);
+          }
+       }
+        return new ImmutableArray<Tile>(array);
     }
 
     /**
@@ -163,14 +199,15 @@ public class LevelManager {
      * @return all empty space tiles.
      */
     public ImmutableArray<Tile> getEmptyTiles() {
-        Array<Tile> temp = new Array<Tile>();
-        for (Tile t : tiles) {
-            if (t.getType() == Type.EMPTY_SPACE) {
-                temp.add(t);
-            }
-        }
+       Array<Tile> array= new Array<Tile>();
+       for (int y=0; y<tiles.length;y++){
+          for(int x =0; x<tiles[0].length;x++){
+             if(tiles[y][x].getType()==Type.EMPTY_SPACE)
+                array.add(tiles[y][x]);
+          }
+       }
 
-        return new ImmutableArray<Tile>(temp);
+        return new ImmutableArray<Tile>(array);
     }
 
     /**
@@ -181,7 +218,7 @@ public class LevelManager {
     public Tile getARandomWallTile() {
         Tile t;
         do {
-            t = getTile(MathUtils.random(mazeData[0].length), MathUtils.random(mazeData.length));
+            t = getTile(MathUtils.random(mazeData[0].length-1), MathUtils.random(mazeData.length-1));
         } while (t.getType() != Type.WALL);
         return t;
     }
@@ -194,7 +231,7 @@ public class LevelManager {
     public Tile getARandomEmptySpaceTile() {
         Tile t;
         do {
-            t = getTile(MathUtils.random(mazeData[0].length), MathUtils.random(mazeData.length));
+            t = getTile(MathUtils.random(mazeData[0].length-1), MathUtils.random(mazeData.length-1));
         } while (t.getType() != Type.EMPTY_SPACE);
         return t;
     }
