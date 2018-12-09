@@ -167,14 +167,14 @@ Player_2
   index: 2
 Player_2
   rotate: false
-  xy: 1945, 1667
+  xy: 1995, 1733
   size: 20, 27
   orig: 20, 27
   offset: 0, 0
   index: 0
 Player_2
   rotate: false
-  xy: 86, 108
+  xy: 1021, 944
   size: 16, 21
   orig: 16, 21
   offset: 0, 0
@@ -188,14 +188,14 @@ Player_3
   index: 1
 Player_3
   rotate: false
-  xy: 1995, 1733
+  xy: 2, 2
   size: 20, 27
   orig: 20, 27
   offset: 0, 0
   index: 0
 Player_3
   rotate: false
-  xy: 1071, 1022
+  xy: 1842, 1137
   size: 16, 21
   orig: 16, 21
   offset: 0, 0
@@ -209,14 +209,14 @@ Player_4
   index: 1
 Player_4
   rotate: false
-  xy: 2, 2
+  xy: 52, 68
   size: 20, 27
   orig: 20, 27
   offset: 0, 0
   index: 0
 Player_4
   rotate: false
-  xy: 1021, 944
+  xy: 1071, 1022
   size: 16, 21
   orig: 16, 21
   offset: 0, 0
@@ -237,8 +237,15 @@ Player_5
   index: 0
 Player_5
   rotate: false
-  xy: 52, 74
+  xy: 86, 108
   size: 16, 21
   orig: 16, 21
   offset: 0, 0
   index: 2
+Walls_0
+  rotate: false
+  xy: 1945, 1670
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: 0

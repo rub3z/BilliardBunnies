@@ -173,6 +173,7 @@ public class Factory {
     */
    public Entity createPlayer(String player, float posx, float posy, int playerNum) {
       Entity entity = engine.createEntity();
+      entity.add(engine.createComponent(IsHeroComponent.class));
       entity.add(engine.createComponent(MovementComponent.class));
       entity.add(engine.createComponent(PlayerVelocityStatComponent.class));
       entity.add(engine.createComponent(TransformComponent.class));
@@ -190,43 +191,52 @@ public class Factory {
       entity.getComponent(TransformComponent.class).scale.x = 1f;
       entity.getComponent(TransformComponent.class).scale.y = 1f;
       entity.getComponent(BodyComponent.class).body.setUserData(entity);
-      switch (playerNum+1){
-         case 1:
+      switch (playerNum){
+         case 0:
             applyCollisionFilter(entity.getComponent(BodyComponent.class).body, Utilities.CATEGORY_PLAYER_ONE, Utilities.MASK_PLAYER_ONE,false);
-
+            Utilities.MASK_SEED= (short) (Utilities.MASK_SEED|Utilities.CATEGORY_PLAYER_ONE);
+            entity.getComponent(IsPlayerComponent.class).isEnemy = false;
+            entity.getComponent(IsPlayerComponent.class).health = 1000;
+            break;
+         case 1:
+            applyCollisionFilter(entity.getComponent(BodyComponent.class).body, Utilities.CATEGORY_PLAYER_TWO, Utilities.MASK_PLAYER_TWO,false);
+            Utilities.MASK_SEED= (short) (Utilities.MASK_SEED|Utilities.CATEGORY_BULLET_TWO);
+            entity.getComponent(IsPlayerComponent.class).isEnemy = true;
+            entity.getComponent(IsPlayerComponent.class).health = 100000;
             break;
          case 2:
-            applyCollisionFilter(entity.getComponent(BodyComponent.class).body, Utilities.CATEGORY_PLAYER_TWO, Utilities.MASK_PLAYER_TWO,false);
-
-            break;
-         case 3:
             applyCollisionFilter(entity.getComponent(BodyComponent.class).body, Utilities.CATEGORY_PLAYER_THREE, Utilities.MASK_PLAYER_THREE,false);
+            Utilities.MASK_SEED= (short) (Utilities.MASK_SEED|Utilities.CATEGORY_PLAYER_THREE);
+            entity.getComponent(IsPlayerComponent.class).isEnemy = true;
+            entity.getComponent(IsPlayerComponent.class).health = 100000;
 
             break;
             default:
                applyCollisionFilter(entity.getComponent(BodyComponent.class).body, Utilities.CATEGORY_PLAYER_FOUR, Utilities.MASK_PLAYER_FOUR,false);
+               Utilities.MASK_SEED= (short) (Utilities.MASK_SEED|Utilities.CATEGORY_PLAYER_FOUR);
+               entity.getComponent(IsPlayerComponent.class).isEnemy = true;
+               entity.getComponent(IsPlayerComponent.class).health = 100000;
 
                break;
       }
       entity.getComponent(SteeringComponent.class).body=entity.getComponent(BodyComponent.class).body;
-      entity.getComponent(IsPlayerComponent.class).health = 1000;
       return entity;
    }
 
    public Entity createPlayerEnemy(String player, float posx, float posy, int playerNum) {
       Entity entity = engine.createEntity();
-      entity.add(engine.createComponent(MovementComponent.class));
+      //entity.add(engine.createComponent(MovementComponent.class));
       entity.add(engine.createComponent(PlayerVelocityStatComponent.class));
       entity.add(engine.createComponent(TransformComponent.class));
       entity.add(engine.createComponent(BodyComponent.class));
       entity.add(engine.createComponent(TextureComponent.class));
       entity.add(engine.createComponent(EnemyStatsComponent.class));
 
-      //entity.add(engine.createComponent(IsPlayerComponent.class));
+      entity.add(engine.createComponent(IsPlayerComponent.class));
       entity.add(engine.createComponent(SteeringComponent.class));
       entity.add(engine.createComponent(CollisionCallbackComponent.class));
       entity.getComponent(CollisionCallbackComponent.class).beginContactCallback=Pools.get(PlayerCollisionCallback.class).obtain();
-      //entity.getComponent(IsPlayerComponent.class).playerNum = playerNum;
+      entity.getComponent(IsPlayerComponent.class).playerNum = playerNum;
       entity.add(engine.createComponent(BulletVelocityStatComponent.class));
       entity.getComponent(TextureComponent.class).textureRegionAnimation = createTexture( player, 5f);
       entity.getComponent(TextureComponent.class).name=player;
@@ -236,11 +246,12 @@ public class Factory {
       entity.getComponent(BodyComponent.class).body.setUserData(entity);
       applyCollisionFilter(entity.getComponent(BodyComponent.class).body, Utilities.CATEGORY_PLAYER_FOUR, Utilities.MASK_PLAYER_FOUR,false);
       entity.getComponent(SteeringComponent.class).body=entity.getComponent(BodyComponent.class).body;
-      //entity.getComponent(IsPlayerComponent.class).health = 1000;
+      entity.getComponent(IsPlayerComponent.class).health = 100000;
       entity.getComponent(EnemyStatsComponent.class).aimedAtTarget=true;
       entity.getComponent(EnemyStatsComponent.class).target=players.get(0);
-      entity.getComponent(EnemyStatsComponent.class).health = 1000;
+      entity.getComponent(EnemyStatsComponent.class).health = 10000;
       entity.getComponent(EnemyStatsComponent.class).rof=MathUtils.random(0.5f,2f);
+      entity.getComponent(IsPlayerComponent.class).isEnemy = true;
 
       return entity;
    }
@@ -378,6 +389,7 @@ public class Factory {
       engine.addSystem(new EnemyFireSystem());
       engine.addSystem(new ParticleEffectSystem(spriteBatch,camera));
       engine.addSystem(new AISystem());
+      engine.addSystem(new AimingReticleRenderingSystem(camera));
    }
 
    /**
@@ -739,13 +751,19 @@ public class Factory {
          entity.add(engine.createComponent(CollisionCallbackComponent.class));
          entity.getComponent(CollisionCallbackComponent.class).beginContactCallback=Pools.get(WallBeginCollisionCallback.class).obtain();
           entity.getComponent(CollisionCallbackComponent.class).endContactCallback=Pools.get(WallEndCollisionCallBack.class).obtain();
-         engine.addEntity(entity);
+         entity.add(engine.createComponent(TransformComponent.class));
+         entity.add(engine.createComponent(TextureComponent.class));
+         entity.getComponent(TextureComponent.class).textureRegionAnimation=createTexture("Walls_0",0.1f);
+         entity.getComponent(TextureComponent.class).name="Walls_0";
+
+          engine.addEntity(entity);
       }
    }
    public void spawnPlayerBoundary(){
       ImmutableArray<Tile> playerBoundaryTiles = LevelManager.getManager().getPlayerWallTiles();
       for(Tile t: playerBoundaryTiles){
-         createAnInvisibleWall(t.getX(),t.getY(),1.5f,1);
+         Entity entity=createAnInvisibleWall(t.getX(),t.getY(),1.5f,1);
+         engine.addEntity(entity);
       }
    }
 }
