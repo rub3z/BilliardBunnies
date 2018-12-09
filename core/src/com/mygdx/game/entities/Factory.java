@@ -226,6 +226,7 @@ public class Factory {
       return entity;
    }
 
+
    public Entity createPlayerEnemy(String player, float posx, float posy, int playerNum) {
       Entity entity = engine.createEntity();
       //entity.add(engine.createComponent(MovementComponent.class));
@@ -447,19 +448,50 @@ public class Factory {
 
 
       for(int i = 0; i < 4; i++){
+         Tile t=LevelManager.getManager().getCenter();
+         float x =0;
+         float y =0;
+         switch (i){
+            case 0:
+               t=LevelManager.getManager().getCenter();
+               break;
+            case 1:
+               t=LevelManager.getManager().getTile(2,2);
+               break;
+            case 2:
+               t=LevelManager.getManager().getTile(57,2);
+               break;
+            case 3:
+               t=LevelManager.getManager().getTile(57,42);
+               break;
+            case 4:
+               t=LevelManager.getManager().getTile(2,42);
+         }
+         x=t.getX();
+         y=t.getY();
          int num = 2+i;
          String s ="Player_"+num;
          if(i < playerCount)
-            engine.addEntity(createPlayer(s, 10 + (i * 10), 10, i));
+            engine.addEntity(createPlayer(s, x, y, i));
          else{
-            Tile tile=LevelManager.getManager().getARandomEmptySpaceTile();
-            engine.addEntity(createPlayerEnemy(s, tile.getX(), tile.getY(), i));
+            engine.addEntity(createPlayerEnemy(s, x, y, i));
          }
 
       }
 
 
+      //Spawning seeds in four quadrants
+      Tile t =  LevelManager.getManager().getARandomEmptyTileInQuadrantOne();
+      spawnSeed(t.getX(), t.getY());
 
+      Tile t2 = LevelManager.getManager().getARandomEmptyTileInQuadrantTwo();
+      spawnSeed(t2.getX(), t2.getY());
+
+      Tile t3 = LevelManager.getManager().getARandomEmptyTileInQuadrantThree();
+      spawnSeed(t3.getX(), t3.getY());
+
+      Tile t4 = LevelManager.getManager().getARandomEmptyTileInQuadrantFour();
+      spawnSeed(t4.getX(), t4.getY());
 
    }
 
@@ -765,5 +797,22 @@ public class Factory {
          Entity entity=createAnInvisibleWall(t.getX(),t.getY(),1.5f,1);
          engine.addEntity(entity);
       }
+   }
+
+
+   public Entity spawnSeed(float x, float y){
+      Entity entity = engine.createEntity();
+      entity.add(engine.createComponent(TransformComponent.class));
+      entity.add(engine.createComponent(BodyComponent.class));
+      entity.add(engine.createComponent(TextureComponent.class));
+      entity.getComponent(TextureComponent.class).textureRegionAnimation = createTexture("Player_1", 1);
+      entity.getComponent(TextureComponent.class).name="Player_1";
+      entity.getComponent(BodyComponent.class).body = createBody("Circle", x, y, 1f,true);
+      entity.getComponent(BodyComponent.class).body.setBullet(true);
+      entity.getComponent(TransformComponent.class).scale.x = 0.5f;
+      entity.getComponent(TransformComponent.class).scale.y = 0.5f;
+      entity.getComponent(BodyComponent.class).body.setUserData(entity);
+
+      return entity;
    }
 }
