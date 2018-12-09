@@ -11,14 +11,12 @@ public class EnemyStatsComponent implements Component, Pool.Poolable {
 
    public float rof = 1f;
    public boolean shoot=false;
-   public float timer=0f;
-   public float buffTimer = 0f;
-   public boolean isBuffed = false;
-   public float speed=10f;
+   public float speed=20f;
    public int health;
    public Entity target;
    public boolean aimedAtTarget=false;
    public int bulletType=0;
+   public int currentDirection;
    /**
     * Resets the object for reuse. Object references should be nulled and fields may be set to default values.
     */
@@ -26,12 +24,9 @@ public class EnemyStatsComponent implements Component, Pool.Poolable {
    public void reset() {
       rof=1f;
       shoot=false;
-      timer=0;
       speed=10f;
       target=null;
       aimedAtTarget=false;
-      buffTimer = 0f;
-      isBuffed = false;
       bulletType=0;
    }
 }

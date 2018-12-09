@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.components.BodyComponent;
 import com.mygdx.game.components.EnemyStatsComponent;
 import com.mygdx.game.components.IsEnemyComponent;
+import com.mygdx.game.utilities.LevelManager;
 import com.mygdx.game.utilities.Utilities;
 
 public class AISystem extends IntervalSystem{
@@ -34,42 +35,50 @@ public class AISystem extends IntervalSystem{
       for(Entity entity: entities) {
          EnemyStatsComponent es = escm.get(entity);
          BodyComponent bc = bcm.get(entity);
-         es.timer += Utilities.MAX_STEP_TIME;
          float xDist;
          float yDist;
-         if (es.timer >= 3f) {
-            xDist = Math.abs(playerPosition(es).x - bc.body.getPosition().x);
-            yDist = Math.abs(playerPosition(es).y - bc.body.getPosition().y);
-            if (playerPosition(es).x < bc.body.getPosition().x) {
-               if (playerPosition(es).y > bc.body.getPosition().y) {
-                  if (xDist > yDist)
-                     bc.body.setLinearVelocity(-3, 0);
-                  else
-                     bc.body.setLinearVelocity(0, 3);
-               }
-               else {
-                  if (xDist > yDist)
-                     bc.body.setLinearVelocity(-3,0);
-                  else
-                     bc.body.setLinearVelocity(0,-3);
-               }
-            }
-            else {
-               if (playerPosition(es).y > bc.body.getPosition().y) {
-                  if (xDist > yDist)
-                     bc.body.setLinearVelocity(3, 0);
-                  else
-                     bc.body.setLinearVelocity(0, 3);
-               }
-               else {
-                  if (xDist > yDist)
-                     bc.body.setLinearVelocity(3,0);
-                  else
-                     bc.body.setLinearVelocity(0,-3);
-               }
-            }
-            es.timer = 0;
+         LevelManager.getManager().getTile(bc.body.getPosition().x, bc.body.getPosition().y).neighbors.get(1);
+         xDist = playerPosition(es).x - bc.body.getPosition().x;
+         yDist = playerPosition(es).y - bc.body.getPosition().y;
+         if (Math.abs(xDist) > Math.abs(yDist)) {
+
          }
+         else {
+
+         }
+//         if (es.timer >= 3f) {
+//            xDist = playerPosition(es).x - bc.body.getPosition().x;
+//            yDist = playerPosition(es).y - bc.body.getPosition().y;
+//            if (playerPosition(es).x < bc.body.getPosition().x) {
+//               if (playerPosition(es).y > bc.body.getPosition().y) {
+//                  if (xDist > yDist)
+//                     bc.body.setLinearVelocity(-es.speed, 0);
+//                  else
+//                     bc.body.setLinearVelocity(0, -es.speed);
+//               }
+//               else {
+//                  if (xDist > yDist)
+//                     bc.body.setLinearVelocity(-es.speed,0);
+//                  else
+//                     bc.body.setLinearVelocity(0,-es.speed);
+//               }
+//            }
+//            else {
+//               if (playerPosition(es).y > bc.body.getPosition().y) {
+//                  if (xDist > yDist)
+//                     bc.body.setLinearVelocity(es.speed, 0);
+//                  else
+//                     bc.body.setLinearVelocity(0, es.speed);
+//               }
+//               else {
+//                  if (xDist > yDist)
+//                     bc.body.setLinearVelocity(es.speed,0);
+//                  else
+//                     bc.body.setLinearVelocity(0,es.speed);
+//               }
+//            }
+//            es.timer = 0;
+//         }
       }
    }
 

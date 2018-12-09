@@ -10,6 +10,7 @@ public class Tile {
    private float y;
    private LevelManager.Type type;
    public IntMap<Tile> neighbors;
+   public int nCount;
 
    /**
     * Construct a new tile.
@@ -22,7 +23,15 @@ public class Tile {
       this.x = x;
       this.y = y;
       this.type = type;
+      this.nCount = 0;
       neighbors=new IntMap<Tile>();
+   }
+
+   public void addNeighbor(int direction, Tile tile) {
+      neighbors.put(direction, tile);
+      if(tile != null && tile.type == LevelManager.Type.EMPTY_SPACE) {
+         nCount++;
+      }
    }
 
    /**
