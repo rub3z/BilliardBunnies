@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IntervalSystem;
 import com.badlogic.ashley.utils.ImmutableArray;
+import com.mygdx.game.components.IsHeroComponent;
 import com.mygdx.game.components.IsPlayerComponent;
 import com.mygdx.game.screens.GameScreen;
 import com.mygdx.game.utilities.Utilities;
@@ -22,7 +23,7 @@ public class DetectEndGameSystem extends IntervalSystem {
    @Override
    public void addedToEngine(Engine engine) {
       super.addedToEngine(engine);
-      entities=engine.getEntitiesFor(Family.all(IsPlayerComponent.class).get());
+      entities=engine.getEntitiesFor(Family.all(IsHeroComponent.class).get());
    }
 
    /**
@@ -30,7 +31,7 @@ public class DetectEndGameSystem extends IntervalSystem {
     */
    @Override
    protected void updateInterval() {
-      if(entities.size()==0){
+      if(entities.get(0).getComponent(IsPlayerComponent.class).health <= 0 ){
          GameScreen.getGameScreen().endGame();
       }
    }

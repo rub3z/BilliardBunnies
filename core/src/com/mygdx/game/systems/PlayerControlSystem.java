@@ -39,7 +39,7 @@ public class PlayerControlSystem extends IntervalSystem {
 
    @Override
    public void addedToEngine(Engine engine) {
-      entities = engine.getEntitiesFor(Family.all(IsPlayerComponent.class).get());
+      entities = engine.getEntitiesFor(Family.all(IsPlayerComponent.class,MovementComponent.class).get());
    }
 
    @Override
