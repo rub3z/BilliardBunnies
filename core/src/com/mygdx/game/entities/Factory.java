@@ -670,7 +670,7 @@ public class Factory {
          entity.getComponent(EnemyStatsComponent.class).target=players.get((MathUtils.random(0,players.size()-1)));
       }
       entity.getComponent(EnemyStatsComponent.class).bulletType=1;
-      entity.getComponent(EnemyStatsComponent.class).speed=10f;
+      entity.getComponent(EnemyStatsComponent.class).speed=20f;
       entity.getComponent(EnemyStatsComponent.class).rof=4f;
       engine.addEntity(entity);
       entity.getComponent(SteeringComponent.class).scale=2f;

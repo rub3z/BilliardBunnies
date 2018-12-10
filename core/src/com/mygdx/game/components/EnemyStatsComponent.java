@@ -28,7 +28,7 @@ public class EnemyStatsComponent implements Component, Pool.Poolable {
    public void reset() {
       rof=1f;
       shoot=false;
-      speed=10f;
+      speed=20f;
       target=null;
       aimedAtTarget=false;
       bulletType=0;

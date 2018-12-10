@@ -38,67 +38,70 @@ public class AISystem extends IntervalSystem{
       for(Entity entity: entities) {
          EnemyStatsComponent es = escm.get(entity);
          BodyComponent bc = bcm.get(entity);
-         es.currentTile =
-          LevelManager.getManager().getTile(bc.body.getPosition().x, bc.body.getPosition().y);
-         if(es.previousTile == null || (es.currentTile != es.previousTile)) {
-            //System.out.println("trying to move");
-            xDist = playerPosition(es).x - bc.body.getPosition().x;
-            yDist = playerPosition(es).y - bc.body.getPosition().y;
-            if (Math.abs(xDist) > Math.abs(yDist)) {
-               //prefer left
-               if(xDist < 0) {
-                  setVelocity(es, bc, 1);
-               }
-               //prefer right
-               else {
-                  setVelocity(es, bc, 2);
-               }
-            }
-            else {
-               //prefer up
-               if (yDist > 0) {
-                  setVelocity(es, bc, 3);
-               }
-               //prefer down
-               else {
-                  setVelocity(es, bc, 4);
-               }
-
-            }
-         }
-//         if (es.timer >= 3f) {
+         es.timer += Utilities.MAX_STEP_TIME;
+//         es.currentTile =
+//          LevelManager.getManager().getTile(bc.body.getPosition().x, bc.body.getPosition().y);
+//         es.timer += 0.1f;
+//         if(es.previousTile == null || (es.currentTile != es.previousTile) && es.timer > 1) {
+//            //System.out.println("trying to move");
 //            xDist = playerPosition(es).x - bc.body.getPosition().x;
 //            yDist = playerPosition(es).y - bc.body.getPosition().y;
-//            if (playerPosition(es).x < bc.body.getPosition().x) {
-//               if (playerPosition(es).y > bc.body.getPosition().y) {
-//                  if (xDist > yDist)
-//                     bc.body.setLinearVelocity(-es.speed, 0);
-//                  else
-//                     bc.body.setLinearVelocity(0, -es.speed);
+//            if (Math.abs(xDist) > Math.abs(yDist)) {
+//               //prefer left
+//               if(xDist < 0) {
+//                  setVelocity(es, bc, 1);
 //               }
+//               //prefer right
 //               else {
-//                  if (xDist > yDist)
-//                     bc.body.setLinearVelocity(-es.speed,0);
-//                  else
-//                     bc.body.setLinearVelocity(0,-es.speed);
+//                  setVelocity(es, bc, 2);
 //               }
 //            }
 //            else {
-//               if (playerPosition(es).y > bc.body.getPosition().y) {
-//                  if (xDist > yDist)
-//                     bc.body.setLinearVelocity(es.speed, 0);
-//                  else
-//                     bc.body.setLinearVelocity(0, es.speed);
+//               //prefer up
+//               if (yDist < 0) {
+//                  setVelocity(es, bc, 3);
 //               }
+//               //prefer down
 //               else {
-//                  if (xDist > yDist)
-//                     bc.body.setLinearVelocity(es.speed,0);
-//                  else
-//                     bc.body.setLinearVelocity(0,es.speed);
+//                  setVelocity(es, bc, 4);
 //               }
 //            }
+//
 //            es.timer = 0;
 //         }
+         if (es.timer >= 3f) {
+            xDist = playerPosition(es).x - bc.body.getPosition().x;
+            yDist = playerPosition(es).y - bc.body.getPosition().y;
+            if (playerPosition(es).x < bc.body.getPosition().x) {
+               if (playerPosition(es).y > bc.body.getPosition().y) {
+                  if (xDist > yDist)
+                     bc.body.setLinearVelocity(-es.speed, 0);
+                  else
+                     bc.body.setLinearVelocity(0, -es.speed);
+               }
+               else {
+                  if (xDist > yDist)
+                     bc.body.setLinearVelocity(-es.speed,0);
+                  else
+                     bc.body.setLinearVelocity(0,-es.speed);
+               }
+            }
+            else {
+               if (playerPosition(es).y > bc.body.getPosition().y) {
+                  if (xDist > yDist)
+                     bc.body.setLinearVelocity(es.speed, 0);
+                  else
+                     bc.body.setLinearVelocity(0, es.speed);
+               }
+               else {
+                  if (xDist > yDist)
+                     bc.body.setLinearVelocity(es.speed,0);
+                  else
+                     bc.body.setLinearVelocity(0,es.speed);
+               }
+            }
+            es.timer = 0;
+         }
       }
    }
 
@@ -112,22 +115,22 @@ public class AISystem extends IntervalSystem{
          switch(prefer) {
             case 1:
                System.out.println("attempt left");
-               bc.body.setLinearVelocity(-es.speed, 0);
+               bc.body.setLinearVelocity(-es.speed, 10);
                es.otherDirection = 2;
                break;
             case 2:
                System.out.println("attempt right");
-               bc.body.setLinearVelocity(es.speed, 0);
+               bc.body.setLinearVelocity(es.speed, -10);
                es.otherDirection = 1;
                break;
             case 3:
                System.out.println("attempt up");
-               bc.body.setLinearVelocity(0, es.speed);
+               bc.body.setLinearVelocity(10, es.speed);
                es.otherDirection = 4;
                break;
             case 4:
                System.out.println("attempt down");
-               bc.body.setLinearVelocity(0, -es.speed);
+               bc.body.setLinearVelocity(-10, -es.speed);
                es.otherDirection = 3;
                break;
             default:
