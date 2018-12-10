@@ -203,12 +203,14 @@ public class Factory {
             Utilities.MASK_SEED= (short) (Utilities.MASK_SEED|Utilities.CATEGORY_BULLET_TWO);
             entity.getComponent(IsPlayerComponent.class).isEnemy = true;
             entity.getComponent(IsPlayerComponent.class).health = 100;
+            entity.add(engine.createComponent(EnemyStatsComponent.class));
             break;
          case 2:
             applyCollisionFilter(entity.getComponent(BodyComponent.class).body, Utilities.CATEGORY_PLAYER_THREE, Utilities.MASK_PLAYER_THREE,false);
             Utilities.MASK_SEED= (short) (Utilities.MASK_SEED|Utilities.CATEGORY_PLAYER_THREE);
             entity.getComponent(IsPlayerComponent.class).isEnemy = true;
             entity.getComponent(IsPlayerComponent.class).health = 100;
+            entity.add(engine.createComponent(EnemyStatsComponent.class));
 
             break;
             default:
@@ -216,6 +218,7 @@ public class Factory {
                Utilities.MASK_SEED= (short) (Utilities.MASK_SEED|Utilities.CATEGORY_PLAYER_FOUR);
                entity.getComponent(IsPlayerComponent.class).isEnemy = true;
                entity.getComponent(IsPlayerComponent.class).health = 100;
+               entity.add(engine.createComponent(EnemyStatsComponent.class));
 
                break;
       }
@@ -249,7 +252,6 @@ public class Factory {
       entity.getComponent(IsPlayerComponent.class).health = 100000;
       entity.getComponent(EnemyStatsComponent.class).aimedAtTarget=true;
       entity.getComponent(EnemyStatsComponent.class).target=players.get(0);
-      entity.getComponent(EnemyStatsComponent.class).health = 10000;
       entity.getComponent(EnemyStatsComponent.class).rof=MathUtils.random(0.5f,2f);
       entity.getComponent(IsPlayerComponent.class).isEnemy = true;
 
@@ -338,7 +340,6 @@ public class Factory {
       entity.getComponent(EnemyStatsComponent.class).target=players.get(0);
       entity.add(engine.createComponent(SteeringComponent.class));
       entity.getComponent(SteeringComponent.class).body=entity.getComponent(BodyComponent.class).body;
-      entity.getComponent(EnemyStatsComponent.class).health = 1000;
       entity.add(engine.createComponent(BehaviorComponent.class));
       entity.getComponent(SteeringComponent.class).setMaxLinearSpeed(50f);
       entity.getComponent(EnemyStatsComponent.class).rof=MathUtils.random(0.5f,2f);
@@ -383,12 +384,13 @@ public class Factory {
       engine.addSystem(new BulletVelocitySystem());
       engine.addSystem(new SteeringSystem());
       //engine.addSystem(new EnemiesSpawnSystem());
+      engine.addSystem(new BuffSystem());
       engine.addSystem(new BehaviorSystem());
       new CollisionCallbackSystem(world);
       engine.addSystem(new DetectEndGameSystem());
       engine.addSystem(new EnemyFireSystem());
       engine.addSystem(new ParticleEffectSystem(spriteBatch,camera));
-      engine.addSystem(new AISystem());
+      //engine.addSystem(new AISystem());
       engine.addSystem(new AimingReticleRenderingSystem(camera));
    }
 
@@ -662,7 +664,6 @@ public class Factory {
       entity.add(engine.createComponent(SteeringComponent.class));
       entity.getComponent(SteeringComponent.class).body=entity.getComponent(BodyComponent.class).body;
       entity.getComponent(SteeringComponent.class).setMaxLinearSpeed(10f);
-      entity.getComponent(EnemyStatsComponent.class).health = 1000;
       entity.add(engine.createComponent(BehaviorComponent.class));
       entity.getComponent(BehaviorComponent.class).behaviors= BehaviorBuilder.getInstance().load(behavior);
       if(players.size()>0){
@@ -709,7 +710,6 @@ public class Factory {
       entity.add(engine.createComponent(SteeringComponent.class));
       entity.getComponent(SteeringComponent.class).body=entity.getComponent(BodyComponent.class).body;
       entity.getComponent(SteeringComponent.class).setMaxLinearSpeed(50f);
-      entity.getComponent(EnemyStatsComponent.class).health = 300000;
       entity.add(engine.createComponent(BehaviorComponent.class));
       entity.getComponent(BehaviorComponent.class).behaviors= BehaviorBuilder.getInstance().load(behavior);
       entity.getComponent(EnemyStatsComponent.class).aimedAtTarget=true;
