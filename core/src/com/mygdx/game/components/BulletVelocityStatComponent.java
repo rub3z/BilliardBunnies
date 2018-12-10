@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.Pool;
 public class BulletVelocityStatComponent implements Component, Pool.Poolable {
    public float movingSpeed = 50f;
    public float rof = 0.5f;
+   public final float rofDefault = 0.5f;
    public float timer = 0;
    public int numBounces = 10;
 
