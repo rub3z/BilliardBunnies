@@ -81,7 +81,13 @@ public class RenderingSystem extends SortedIteratingSystem {
       TextureComponent textureComponent = textureMapper.get(entity);
       TransformComponent transformComponent = transformMapper.get(entity);
       if (textureComponent != null && !transformComponent.isHidden) {
-         TextureRegion textureRegion= textureComponent.textureRegionAnimation.getKeyFrame(stateTime,true);
+         TextureRegion textureRegion;
+         if(textureComponent.isPlay){
+            textureRegion= textureComponent.textureRegionAnimation.getKeyFrame(stateTime,true);
+         }else {
+            textureRegion= textureComponent.textureRegionAnimation.getKeyFrame(textureComponent.textureRegionAnimation.getAnimationDuration());
+         }
+
          float width = textureRegion.getRegionWidth();
          float height = textureRegion.getRegionHeight();
          float originX = width / 2f;

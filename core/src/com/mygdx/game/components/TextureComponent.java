@@ -12,6 +12,7 @@ import com.mygdx.game.entities.Factory;
 public class TextureComponent implements Component, Pool.Poolable{
    public Animation<TextureRegion> textureRegionAnimation = null;
    public String name=null;
+   public boolean isPlay=true;
 
     /**
      * Resets the object for reuse. Object references should be nulled and fields may be set to default values.
@@ -22,5 +23,6 @@ public class TextureComponent implements Component, Pool.Poolable{
           Factory.getFactory().getAnimationManager().getAnimationPool(name).free(textureRegionAnimation);
        }
        textureRegionAnimation=null;
+       isPlay=true;
     }
 }

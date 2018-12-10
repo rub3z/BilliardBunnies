@@ -191,6 +191,7 @@ public class Factory {
       entity.getComponent(TransformComponent.class).scale.x = 1f;
       entity.getComponent(TransformComponent.class).scale.y = 1f;
       entity.getComponent(BodyComponent.class).body.setUserData(entity);
+      entity.add(engine.createComponent(IsRabbitComponent.class));
       switch (playerNum){
          case 0:
             applyCollisionFilter(entity.getComponent(BodyComponent.class).body, Utilities.CATEGORY_PLAYER_ONE, Utilities.MASK_PLAYER_ONE,false);
@@ -204,6 +205,9 @@ public class Factory {
             entity.getComponent(IsPlayerComponent.class).isEnemy = true;
             entity.getComponent(IsPlayerComponent.class).health = 100;
             entity.add(engine.createComponent(EnemyStatsComponent.class));
+            entity.add(engine.createComponent(IsRabbitComponent.class));
+            entity.add(engine.createComponent(IsRabbitComponent.class));
+            entity.getComponent(TextureComponent.class).textureRegionAnimation=createTexture("Bunny_2",10f);
             break;
          case 2:
             applyCollisionFilter(entity.getComponent(BodyComponent.class).body, Utilities.CATEGORY_PLAYER_THREE, Utilities.MASK_PLAYER_THREE,false);
@@ -211,6 +215,8 @@ public class Factory {
             entity.getComponent(IsPlayerComponent.class).isEnemy = true;
             entity.getComponent(IsPlayerComponent.class).health = 100;
             entity.add(engine.createComponent(EnemyStatsComponent.class));
+            entity.add(engine.createComponent(IsRabbitComponent.class));
+            entity.getComponent(TextureComponent.class).textureRegionAnimation=createTexture("Bunny_2",10f);
 
             break;
             default:
@@ -219,6 +225,8 @@ public class Factory {
                entity.getComponent(IsPlayerComponent.class).isEnemy = true;
                entity.getComponent(IsPlayerComponent.class).health = 100;
                entity.add(engine.createComponent(EnemyStatsComponent.class));
+               entity.add(engine.createComponent(IsRabbitComponent.class));
+               entity.getComponent(TextureComponent.class).textureRegionAnimation=createTexture("Bunny_2",10f);
 
                break;
       }
@@ -255,6 +263,8 @@ public class Factory {
       entity.getComponent(EnemyStatsComponent.class).target=players.get(0);
       entity.getComponent(EnemyStatsComponent.class).rof=MathUtils.random(0.5f,2f);
       entity.getComponent(IsPlayerComponent.class).isEnemy = true;
+      entity.add(engine.createComponent(IsRabbitComponent.class));
+      entity.getComponent(TextureComponent.class).textureRegionAnimation=createTexture("Bunny_2",10f);
 
       return entity;
    }
@@ -273,7 +283,7 @@ public class Factory {
       entity.add(engine.createComponent(TextureComponent.class));
       entity.add(engine.createComponent(IsBulletComponent.class));
       entity.getComponent(IsBulletComponent.class).playerNum = playerNum;
-      entity.getComponent(TextureComponent.class).textureRegionAnimation = createTexture("Player_1", 1);
+      entity.getComponent(TextureComponent.class).textureRegionAnimation = createTexture("Bullet_2", 1);
       entity.getComponent(TextureComponent.class).name="Player_1";
       entity.getComponent(BodyComponent.class).body = createBody("Circle", x, y, 1f,true);
       entity.getComponent(BodyComponent.class).body.setBullet(true);
@@ -378,7 +388,7 @@ public class Factory {
       engine.addEntityListener(new RenderingSystem(spriteBatch, camera));
       engine.addSystem(new PhysicsSystem(world));
       engine.addSystem(new RenderingSystem(spriteBatch, camera));
-      engine.addSystem(new PhysicsDebugSystem(world, camera));
+      //engine.addSystem(new PhysicsDebugSystem(world, camera));
       engine.addSystem(new PlayerControlSystem());
       engine.addSystem(new PlayerVelocitySystem());
       engine.addSystem(new EntityRemovingSystem(world,engine));
@@ -393,6 +403,7 @@ public class Factory {
       engine.addSystem(new ParticleEffectSystem(spriteBatch,camera));
       //engine.addSystem(new AISystem());
       engine.addSystem(new AimingReticleRenderingSystem(camera));
+      engine.addSystem(new RabbitSpriteSwitcher());
    }
 
    /**
@@ -444,7 +455,7 @@ public class Factory {
     */
    public void createEntities(int playerCount) {
       spawnWalls();
-      spawnPlayerBoundary();
+      //spawnPlayerBoundary();
 
 
       for(int i = 0; i < 4; i++){

@@ -6,245 +6,476 @@ filter: Nearest,Nearest
 repeat: none
 Bullet_0
   rotate: false
-  xy: 2, 31
+  xy: 2, 143
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 2
+Bullet_0
+  rotate: false
+  xy: 52, 209
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 0
 Bullet_0
   rotate: false
-  xy: 52, 97
+  xy: 1021, 1079
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 1
 Bullet_0
   rotate: false
-  xy: 52, 97
+  xy: 1021, 1079
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: 3
-Bullet_0
-  rotate: false
-  xy: 1021, 967
-  size: 32, 32
-  orig: 32, 32
-  offset: 0, 0
-  index: 2
 Bullet_1
   rotate: false
-  xy: 1712, 1248
+  xy: 1712, 1360
+  size: 197, 512
+  orig: 197, 512
+  offset: 0, 0
+  index: 0
+Bullet_1
+  rotate: false
+  xy: 2, 243
   size: 197, 512
   orig: 197, 512
   offset: 0, 0
   index: 1
 Bullet_1
   rotate: false
-  xy: 2, 131
+  xy: 201, 243
+  size: 197, 512
+  orig: 197, 512
+  offset: 0, 0
+  index: 2
+Bullet_1
+  rotate: false
+  xy: 424, 665
+  size: 197, 512
+  orig: 197, 512
+  offset: 0, 0
+  index: 3
+Bullet_1
+  rotate: false
+  xy: 623, 665
   size: 197, 512
   orig: 197, 512
   offset: 0, 0
   index: 4
 Bullet_1
   rotate: false
-  xy: 201, 131
+  xy: 822, 665
   size: 197, 512
   orig: 197, 512
   offset: 0, 0
   index: 5
-Bullet_1
+Bullet_2
   rotate: false
-  xy: 424, 553
-  size: 197, 512
-  orig: 197, 512
+  xy: 1911, 1686
+  size: 24, 24
+  orig: 24, 24
   offset: 0, 0
   index: 0
-Bullet_1
+Bunny_0
   rotate: false
-  xy: 623, 553
-  size: 197, 512
-  orig: 197, 512
-  offset: 0, 0
-  index: 3
-Bullet_1
-  rotate: false
-  xy: 822, 553
-  size: 197, 512
-  orig: 197, 512
+  xy: 1071, 1149
+  size: 33, 28
+  orig: 33, 28
   offset: 0, 0
   index: 2
+Bunny_0
+  rotate: false
+  xy: 1842, 1267
+  size: 29, 25
+  orig: 29, 25
+  offset: 0, 0
+  index: 3
+Bunny_0
+  rotate: false
+  xy: 1911, 1712
+  size: 26, 28
+  orig: 26, 28
+  offset: 0, 0
+  index: 1
+Bunny_0
+  rotate: false
+  xy: 86, 214
+  size: 25, 27
+  orig: 25, 27
+  offset: 0, 0
+  index: 0
+Bunny_0
+  rotate: false
+  xy: 1071, 1122
+  size: 26, 25
+  orig: 26, 25
+  offset: 0, 0
+  index: 4
+Bunny_0
+  rotate: false
+  xy: 113, 219
+  size: 27, 22
+  orig: 27, 22
+  offset: 0, 0
+  index: 5
+Bunny_0
+  rotate: false
+  xy: 1134, 1158
+  size: 28, 19
+  orig: 28, 19
+  offset: 0, 0
+  index: 7
+Bunny_0
+  rotate: false
+  xy: 1164, 1158
+  size: 28, 19
+  orig: 28, 19
+  offset: 0, 0
+  index: 6
+Bunny_1
+  rotate: false
+  xy: 1876, 1330
+  size: 33, 28
+  orig: 33, 28
+  offset: 0, 0
+  index: 2
+Bunny_1
+  rotate: false
+  xy: 1945, 1778
+  size: 26, 28
+  orig: 26, 28
+  offset: 0, 0
+  index: 1
+Bunny_1
+  rotate: false
+  xy: 1995, 1847
+  size: 29, 25
+  orig: 29, 25
+  offset: 0, 0
+  index: 3
+Bunny_1
+  rotate: false
+  xy: 1021, 1050
+  size: 25, 27
+  orig: 25, 27
+  offset: 0, 0
+  index: 0
+Bunny_1
+  rotate: false
+  xy: 1106, 1152
+  size: 26, 25
+  orig: 26, 25
+  offset: 0, 0
+  index: 4
+Bunny_1
+  rotate: false
+  xy: 1995, 1823
+  size: 27, 22
+  orig: 27, 22
+  offset: 0, 0
+  index: 5
+Bunny_1
+  rotate: false
+  xy: 2, 78
+  size: 28, 19
+  orig: 28, 19
+  offset: 0, 0
+  index: 6
+Bunny_1
+  rotate: false
+  xy: 142, 222
+  size: 28, 19
+  orig: 28, 19
+  offset: 0, 0
+  index: 7
+Bunny_2
+  rotate: false
+  xy: 400, 687
+  size: 19, 31
+  orig: 19, 31
+  offset: 0, 0
+  index: 2
+Bunny_2
+  rotate: false
+  xy: 1911, 1657
+  size: 19, 27
+  orig: 19, 27
+  offset: 0, 0
+  index: 1
+Bunny_2
+  rotate: false
+  xy: 2, 50
+  size: 19, 26
+  orig: 19, 26
+  offset: 0, 0
+  index: 4
+Bunny_2
+  rotate: false
+  xy: 2, 50
+  size: 19, 26
+  orig: 19, 26
+  offset: 0, 0
+  index: 0
+Bunny_2
+  rotate: false
+  xy: 86, 187
+  size: 19, 25
+  orig: 19, 25
+  offset: 0, 0
+  index: 3
+Bunny_2
+  rotate: false
+  xy: 1911, 1632
+  size: 19, 23
+  orig: 19, 23
+  offset: 0, 0
+  index: 6
+Bunny_2
+  rotate: false
+  xy: 2, 25
+  size: 19, 23
+  orig: 19, 23
+  offset: 0, 0
+  index: 7
+Bunny_2
+  rotate: false
+  xy: 400, 607
+  size: 19, 23
+  orig: 19, 23
+  offset: 0, 0
+  index: 5
+Bunny_3
+  rotate: false
+  xy: 400, 720
+  size: 19, 35
+  orig: 19, 35
+  offset: 0, 0
+  index: 2
+Bunny_3
+  rotate: false
+  xy: 1842, 1234
+  size: 19, 31
+  orig: 19, 31
+  offset: 0, 0
+  index: 1
+Bunny_3
+  rotate: false
+  xy: 1842, 1204
+  size: 19, 28
+  orig: 19, 28
+  offset: 0, 0
+  index: 4
+Bunny_3
+  rotate: false
+  xy: 1842, 1204
+  size: 19, 28
+  orig: 19, 28
+  offset: 0, 0
+  index: 0
+Bunny_3
+  rotate: false
+  xy: 400, 658
+  size: 19, 27
+  orig: 19, 27
+  offset: 0, 0
+  index: 3
+Bunny_3
+  rotate: false
+  xy: 1021, 993
+  size: 19, 26
+  orig: 19, 26
+  offset: 0, 0
+  index: 5
+Bunny_3
+  rotate: false
+  xy: 400, 632
+  size: 19, 24
+  orig: 19, 24
+  offset: 0, 0
+  index: 6
+Bunny_3
+  rotate: false
+  xy: 1021, 968
+  size: 19, 23
+  orig: 19, 23
+  offset: 0, 0
+  index: 7
 CandyCorn
   rotate: false
-  xy: 1712, 1086
+  xy: 1712, 1198
   size: 128, 160
   orig: 128, 160
   offset: 0, 0
   index: -1
 Circle
   rotate: false
-  xy: 2, 645
+  xy: 2, 757
   size: 420, 420
   orig: 420, 420
   offset: 0, 0
   index: -1
 Enemies_0
   rotate: false
-  xy: 1842, 1182
-  size: 32, 64
-  orig: 32, 64
-  offset: 0, 0
-  index: 1
-Enemies_0
-  rotate: false
-  xy: 1911, 1630
+  xy: 1842, 1294
   size: 32, 64
   orig: 32, 64
   offset: 0, 0
   index: 2
 Enemies_0
   rotate: false
-  xy: 1961, 1696
+  xy: 1911, 1742
+  size: 32, 64
+  orig: 32, 64
+  offset: 0, 0
+  index: 1
+Enemies_0
+  rotate: false
+  xy: 1961, 1808
   size: 32, 64
   orig: 32, 64
   offset: 0, 0
   index: 3
 Enemies_1
   rotate: false
-  xy: 1911, 1696
+  xy: 1911, 1808
+  size: 48, 64
+  orig: 48, 64
+  offset: 0, 0
+  index: 2
+Enemies_1
+  rotate: false
+  xy: 2, 177
   size: 48, 64
   orig: 48, 64
   offset: 0, 0
   index: 1
 Enemies_1
   rotate: false
-  xy: 2, 65
+  xy: 1021, 1113
   size: 48, 64
   orig: 48, 64
   offset: 0, 0
   index: 0
-Enemies_1
-  rotate: false
-  xy: 1021, 1001
-  size: 48, 64
-  orig: 48, 64
-  offset: 0, 0
-  index: 2
 Enemies_2
   rotate: false
-  xy: 2, 1067
+  xy: 2, 1179
   size: 1708, 693
   orig: 1708, 693
   offset: 0, 0
   index: 0
-Laser_0
+EnemyBullet_0
   rotate: false
-  xy: 36, 53
+  xy: 1712, 1186
   size: 10, 10
   orig: 10, 10
   offset: 0, 0
   index: 0
 Player_1
   rotate: false
-  xy: 1712, 1074
+  xy: 1712, 1186
   size: 10, 10
   orig: 10, 10
   offset: 0, 0
   index: 0
-EnemyBullet_0
+Laser_0
   rotate: false
-  xy: 1712, 1074
+  xy: 36, 165
   size: 10, 10
   orig: 10, 10
   offset: 0, 0
   index: 0
 Player_2
   rotate: false
-  xy: 1842, 1160
+  xy: 2, 121
   size: 32, 20
   orig: 32, 20
   offset: 0, 0
   index: 2
 Player_2
   rotate: false
-  xy: 1995, 1733
+  xy: 1973, 1779
   size: 20, 27
   orig: 20, 27
   offset: 0, 0
   index: 0
 Player_2
   rotate: false
-  xy: 1021, 944
+  xy: 1911, 1609
   size: 16, 21
   orig: 16, 21
   offset: 0, 0
   index: 3
 Player_3
   rotate: false
-  xy: 1911, 1608
+  xy: 2, 99
   size: 31, 20
   orig: 31, 20
   offset: 0, 0
   index: 1
 Player_3
   rotate: false
-  xy: 2, 2
+  xy: 1995, 1794
   size: 20, 27
   orig: 20, 27
   offset: 0, 0
   index: 0
 Player_3
   rotate: false
-  xy: 1842, 1137
+  xy: 1021, 945
   size: 16, 21
   orig: 16, 21
   offset: 0, 0
   index: 2
 Player_4
   rotate: false
-  xy: 1071, 1045
+  xy: 2026, 1845
+  size: 20, 27
+  orig: 20, 27
+  offset: 0, 0
+  index: 0
+Player_4
+  rotate: false
+  xy: 52, 187
   size: 32, 20
   orig: 32, 20
   offset: 0, 0
   index: 1
 Player_4
   rotate: false
-  xy: 52, 68
-  size: 20, 27
-  orig: 20, 27
-  offset: 0, 0
-  index: 0
-Player_4
-  rotate: false
-  xy: 1071, 1022
+  xy: 2, 2
   size: 16, 21
   orig: 16, 21
   offset: 0, 0
   index: 2
 Player_5
   rotate: false
-  xy: 1876, 1226
+  xy: 1876, 1308
   size: 31, 20
   orig: 31, 20
   offset: 0, 0
   index: 1
 Player_5
   rotate: false
-  xy: 400, 616
+  xy: 1021, 1021
   size: 20, 27
   orig: 20, 27
   offset: 0, 0
   index: 0
 Player_5
   rotate: false
-  xy: 86, 108
+  xy: 400, 584
   size: 16, 21
   orig: 16, 21
   offset: 0, 0
   index: 2
 Walls_0
   rotate: false
-  xy: 1945, 1670
+  xy: 1945, 1752
   size: 24, 24
   orig: 24, 24
   offset: 0, 0
