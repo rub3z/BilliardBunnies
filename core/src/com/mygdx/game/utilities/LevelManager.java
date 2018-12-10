@@ -72,10 +72,14 @@ public class LevelManager {
 
        for (int y = 0; y < tiles.length; y++) {
           for (int x = 0; x < tiles[0].length; x++) {
-               tiles[y][x].neighbors.put(Tile.UP,getTile(x,y+1));
-               tiles[y][x].neighbors.put(Tile.DOWN,getTile(x,y-1));
-               tiles[y][x].neighbors.put(Tile.RIGHT,getTile(x+1,y));
-               tiles[y][x].neighbors.put(Tile.LEFT,getTile(x-1,y));
+//               tiles[y][x].neighbors.put(Tile.UP,getTile(x,y+1));
+//               tiles[y][x].neighbors.put(Tile.DOWN,getTile(x,y-1));
+//               tiles[y][x].neighbors.put(Tile.RIGHT,getTile(x+1,y));
+//               tiles[y][x].neighbors.put(Tile.LEFT,getTile(x-1,y));
+             tiles[y][x].addNeighbor(1, getTile(x,y+1));
+             tiles[y][x].addNeighbor(2, getTile(x,y-1));
+             tiles[y][x].addNeighbor(3, getTile(x+1, y));
+             tiles[y][x].addNeighbor(4, getTile(x-1, y));
           }
        }
     }

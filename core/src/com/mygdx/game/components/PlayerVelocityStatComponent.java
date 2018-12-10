@@ -7,14 +7,14 @@ import com.badlogic.gdx.utils.Pool;
  * This component stores variables related to player's velocity.
  */
 public class PlayerVelocityStatComponent implements Component, Pool.Poolable {
-    public float movingSpeed = 30f;
+    public float movingSpeed = 20f;
 
     /**
      * Resets the object for reuse. Object references should be nulled and fields may be set to default values.
      */
     @Override
     public void reset() {
-        movingSpeed = 30f;
+        movingSpeed = 20f;
     }
 }
 

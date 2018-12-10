@@ -20,8 +20,8 @@ public class EnemyCollisionCallback  implements CollisionCallback, Pool.Poolable
       float scale=1;
        if(otherObject.getComponent(IsBulletComponent.class)!=null){
          if (randomNum < 10) {
-            thisObject.getComponent(EnemyStatsComponent.class).buffTimer = 10f;
-            thisObject.getComponent(EnemyStatsComponent.class).isBuffed = true;
+            //thisObject.getComponent(EnemyStatsComponent.class).buffTimer = 10f;
+            //thisObject.getComponent(EnemyStatsComponent.class).isBuffed = true;
          }
          randomNum = rand.nextInt(100);
        }
