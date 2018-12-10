@@ -196,26 +196,26 @@ public class Factory {
             applyCollisionFilter(entity.getComponent(BodyComponent.class).body, Utilities.CATEGORY_PLAYER_ONE, Utilities.MASK_PLAYER_ONE,false);
             Utilities.MASK_SEED= (short) (Utilities.MASK_SEED|Utilities.CATEGORY_PLAYER_ONE);
             entity.getComponent(IsPlayerComponent.class).isEnemy = false;
-            entity.getComponent(IsPlayerComponent.class).health = 1000;
+            entity.getComponent(IsPlayerComponent.class).health = 10;
             break;
          case 1:
             applyCollisionFilter(entity.getComponent(BodyComponent.class).body, Utilities.CATEGORY_PLAYER_TWO, Utilities.MASK_PLAYER_TWO,false);
             Utilities.MASK_SEED= (short) (Utilities.MASK_SEED|Utilities.CATEGORY_BULLET_TWO);
             entity.getComponent(IsPlayerComponent.class).isEnemy = true;
-            entity.getComponent(IsPlayerComponent.class).health = 100000;
+            entity.getComponent(IsPlayerComponent.class).health = 100;
             break;
          case 2:
             applyCollisionFilter(entity.getComponent(BodyComponent.class).body, Utilities.CATEGORY_PLAYER_THREE, Utilities.MASK_PLAYER_THREE,false);
             Utilities.MASK_SEED= (short) (Utilities.MASK_SEED|Utilities.CATEGORY_PLAYER_THREE);
             entity.getComponent(IsPlayerComponent.class).isEnemy = true;
-            entity.getComponent(IsPlayerComponent.class).health = 100000;
+            entity.getComponent(IsPlayerComponent.class).health = 100;
 
             break;
             default:
                applyCollisionFilter(entity.getComponent(BodyComponent.class).body, Utilities.CATEGORY_PLAYER_FOUR, Utilities.MASK_PLAYER_FOUR,false);
                Utilities.MASK_SEED= (short) (Utilities.MASK_SEED|Utilities.CATEGORY_PLAYER_FOUR);
                entity.getComponent(IsPlayerComponent.class).isEnemy = true;
-               entity.getComponent(IsPlayerComponent.class).health = 100000;
+               entity.getComponent(IsPlayerComponent.class).health = 100;
 
                break;
       }

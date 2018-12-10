@@ -26,7 +26,7 @@ public class GameScreen extends ScreenAdapter {
    SpriteBatch batch;
    public IngameOverlay ui;
    long timer = 0;
-   public int score0, score1, score2, score3 = 0;
+   public int score0, score1, score2, score3 = 10;
    int numPlayers;
    Texture background;
    /**
@@ -51,6 +51,7 @@ public class GameScreen extends ScreenAdapter {
       //background = new Texture("GameScreen/sexyBackground.png");
       batch = Factory.getFactory().getSpriteBatch();
       counter++;
+      score0 = 10;
 //GameScreen/Gfx/fourthScreen.jpg
    }
 

@@ -30,9 +30,9 @@ public class EnemyCollisionCallback  implements CollisionCallback, Pool.Poolable
    private void updateScore(int playerNum) {
       switch (playerNum){
          case 0:
-            GameScreen.getGameScreen().score0 += 10f;
-            GameScreen.getGameScreen().ui
-                    .updateScore(0, GameScreen.getGameScreen().score0);
+//            GameScreen.getGameScreen().score0 += 10f;
+//            GameScreen.getGameScreen().ui
+//                    .updateScore(0, GameScreen.getGameScreen().score0);
             return;
          case 1:
             GameScreen.getGameScreen().score1 += 10f;

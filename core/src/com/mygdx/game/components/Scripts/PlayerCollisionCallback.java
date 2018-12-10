@@ -16,7 +16,7 @@ public class PlayerCollisionCallback implements CollisionCallback, Pool.Poolable
    public void run(Entity thisObject, Entity otherObject) {
       if(otherObject.getComponent(IsEnemyComponent.class)!=null){
          if(thisObject.getComponent(IsPlayerComponent.class).health > 0){
-            thisObject.getComponent(IsPlayerComponent.class).health -= 100;
+            thisObject.getComponent(IsPlayerComponent.class).health -= 10;
             System.out.println("health:" + thisObject.getComponent(IsPlayerComponent.class).health);
          }else{
             thisObject.add(Factory.getFactory().getEngine().createComponent(NeedToRemoveComponent.class));
@@ -28,8 +28,9 @@ public class PlayerCollisionCallback implements CollisionCallback, Pool.Poolable
          if(thisObject.getComponent(IsPlayerComponent.class).isEnemy) {
             thisObject.getComponent(IsPlayerComponent.class).isFrenzied = 10f;
          }
-         else if(thisObject.getComponent(IsPlayerComponent.class).health > 0){
-            thisObject.getComponent(IsPlayerComponent.class).health -= 100;
+         else if(!thisObject.getComponent(IsPlayerComponent.class).isEnemy ){
+            thisObject.getComponent(IsPlayerComponent.class).health -= 1;
+            updateHealthCounter();
             System.out.println("health:" + thisObject.getComponent(IsPlayerComponent.class).health);
          }else{
             thisObject.add(Factory.getFactory().getEngine().createComponent(NeedToRemoveComponent.class));
@@ -38,6 +39,13 @@ public class PlayerCollisionCallback implements CollisionCallback, Pool.Poolable
       }
 
    }
+
+   private void updateHealthCounter() {
+      GameScreen.getGameScreen().score0--;
+      GameScreen.getGameScreen().ui.updateScore(0, GameScreen.getGameScreen().score0);
+      return;
+   }
+
 
    /**
     * Resets the object for reuse. Object references should be nulled and fields may be set to default values.
