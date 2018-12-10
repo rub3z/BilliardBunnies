@@ -191,7 +191,6 @@ public class Factory {
       entity.getComponent(TransformComponent.class).scale.x = 1f;
       entity.getComponent(TransformComponent.class).scale.y = 1f;
       entity.getComponent(BodyComponent.class).body.setUserData(entity);
-      entity.add(engine.createComponent(IsRabbitComponent.class));
       switch (playerNum){
          case 0:
             applyCollisionFilter(entity.getComponent(BodyComponent.class).body, Utilities.CATEGORY_PLAYER_ONE, Utilities.MASK_PLAYER_ONE,false);
@@ -205,7 +204,6 @@ public class Factory {
             entity.getComponent(IsPlayerComponent.class).isEnemy = true;
             entity.getComponent(IsPlayerComponent.class).health = 100;
             entity.add(engine.createComponent(EnemyStatsComponent.class));
-            entity.add(engine.createComponent(IsRabbitComponent.class));
             entity.add(engine.createComponent(IsRabbitComponent.class));
             entity.getComponent(TextureComponent.class).textureRegionAnimation=createTexture("Bunny_2",10f);
             break;
