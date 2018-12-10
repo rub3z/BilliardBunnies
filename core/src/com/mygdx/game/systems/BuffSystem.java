@@ -49,8 +49,8 @@ public class BuffSystem extends IntervalSystem {
          }
          else{
             esc.buffType = 0;
-            pvs.movingSpeed = 20f;
-            bvs.rof = 1f;
+            pvs.movingSpeed = pvs.movingSpeedDefault;
+            bvs.rof = bvs.rofDefault;
          }
       }
    }
