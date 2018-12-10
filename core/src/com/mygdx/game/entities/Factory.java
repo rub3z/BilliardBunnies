@@ -208,8 +208,10 @@ public class Factory {
 //            Utilities.MASK_SEED= (short) (Utilities.MASK_SEED|Utilities.CATEGORY_PLAYER_ONE);
             entity.getComponent(IsPlayerComponent.class).isEnemy = false;
             entity.getComponent(IsPlayerComponent.class).health = 10;
-            entity.getComponent(PlayerVelocityStatComponent.class).movingSpeed = 25f;
-            break;
+            entity.getComponent(PlayerVelocityStatComponent.class).movingSpeed = 27f;
+             entity.getComponent(PlayerVelocityStatComponent.class).movingSpeedDefault = 27f;
+
+             break;
          case 1:
             applyCollisionFilter(entity.getComponent(BodyComponent.class).body, Utilities.CATEGORY_PLAYER_TWO, Utilities.MASK_PLAYER_TWO,false);
 //            Utilities.MASK_SEED= (short) (Utilities.MASK_SEED|Utilities.CATEGORY_BULLET_TWO);
@@ -219,8 +221,9 @@ public class Factory {
             entity.add(engine.createComponent(IsRabbitComponent.class));
             entity.getComponent(TextureComponent.class).textureRegionAnimation=createTexture("Bunny_2",10f);
             entity.getComponent(TextureComponent.class).name="Bunny_2";
-            entity.getComponent(PlayerVelocityStatComponent.class).movingSpeed = 7f;
-            break;
+            entity.getComponent(PlayerVelocityStatComponent.class).movingSpeed = 10f;
+             entity.getComponent(PlayerVelocityStatComponent.class).movingSpeedDefault = 10f;
+             break;
          case 2:
             applyCollisionFilter(entity.getComponent(BodyComponent.class).body, Utilities.CATEGORY_PLAYER_THREE, Utilities.MASK_PLAYER_THREE,false);
 //            Utilities.MASK_SEED= (short) (Utilities.MASK_SEED|Utilities.CATEGORY_PLAYER_THREE);
@@ -230,8 +233,10 @@ public class Factory {
             entity.add(engine.createComponent(IsRabbitComponent.class));
             entity.getComponent(TextureComponent.class).textureRegionAnimation=createTexture("Bunny_2",10f);
             entity.getComponent(TextureComponent.class).name="Bunny_2";
-            entity.getComponent(PlayerVelocityStatComponent.class).movingSpeed = 7f;
-            break;
+            entity.getComponent(PlayerVelocityStatComponent.class).movingSpeed = 10f;
+             entity.getComponent(PlayerVelocityStatComponent.class).movingSpeedDefault = 10f;
+
+             break;
          case 3:
             applyCollisionFilter(entity.getComponent(BodyComponent.class).body, Utilities.CATEGORY_PLAYER_FOUR, Utilities.MASK_PLAYER_FOUR,false);
 //               Utilities.MASK_SEED= (short) (Utilities.MASK_SEED|Utilities.CATEGORY_PLAYER_FOUR);
@@ -241,8 +246,10 @@ public class Factory {
             entity.add(engine.createComponent(IsRabbitComponent.class));
             entity.getComponent(TextureComponent.class).textureRegionAnimation=createTexture("Bunny_2",10f);
             entity.getComponent(TextureComponent.class).name="Bunny_2";
-            entity.getComponent(PlayerVelocityStatComponent.class).movingSpeed = 7f;
-            break;
+            entity.getComponent(PlayerVelocityStatComponent.class).movingSpeed = 10f;
+             entity.getComponent(PlayerVelocityStatComponent.class).movingSpeedDefault = 10f;
+
+             break;
       }
       entity.getComponent(SteeringComponent.class).body=entity.getComponent(BodyComponent.class).body;
       return entity;
