@@ -11,6 +11,7 @@ import com.mygdx.game.components.BodyComponent;
 import com.mygdx.game.components.EnemyStatsComponent;
 import com.mygdx.game.components.IsEnemyComponent;
 import com.mygdx.game.utilities.LevelManager;
+import com.mygdx.game.utilities.Tile;
 import com.mygdx.game.utilities.Utilities;
 
 public class AISystem extends IntervalSystem{
@@ -18,12 +19,14 @@ public class AISystem extends IntervalSystem{
    private ComponentMapper<EnemyStatsComponent> escm;
    private ComponentMapper<BodyComponent> bcm;
    private ComponentMapper<IsEnemyComponent> em;
+   private float xDist;
+   private float yDist;
+
 
    public AISystem() {
       super(Utilities.MAX_STEP_TIME);
       escm=ComponentMapper.getFor(EnemyStatsComponent.class);
       bcm=ComponentMapper.getFor(BodyComponent.class);
-
    }
 
    public void addedToEngine(Engine engine) {
@@ -35,16 +38,33 @@ public class AISystem extends IntervalSystem{
       for(Entity entity: entities) {
          EnemyStatsComponent es = escm.get(entity);
          BodyComponent bc = bcm.get(entity);
-         float xDist;
-         float yDist;
-         LevelManager.getManager().getTile(bc.body.getPosition().x, bc.body.getPosition().y).neighbors.get(1);
-         xDist = playerPosition(es).x - bc.body.getPosition().x;
-         yDist = playerPosition(es).y - bc.body.getPosition().y;
-         if (Math.abs(xDist) > Math.abs(yDist)) {
+         es.currentTile =
+          LevelManager.getManager().getTile(bc.body.getPosition().x, bc.body.getPosition().y);
+         if(es.previousTile == null || (es.currentTile != es.previousTile)) {
+            //System.out.println("trying to move");
+            xDist = playerPosition(es).x - bc.body.getPosition().x;
+            yDist = playerPosition(es).y - bc.body.getPosition().y;
+            if (Math.abs(xDist) > Math.abs(yDist)) {
+               //prefer left
+               if(xDist < 0) {
+                  setVelocity(es, bc, 1);
+               }
+               //prefer right
+               else {
+                  setVelocity(es, bc, 2);
+               }
+            }
+            else {
+               //prefer up
+               if (yDist > 0) {
+                  setVelocity(es, bc, 3);
+               }
+               //prefer down
+               else {
+                  setVelocity(es, bc, 4);
+               }
 
-         }
-         else {
-
+            }
          }
 //         if (es.timer >= 3f) {
 //            xDist = playerPosition(es).x - bc.body.getPosition().x;
@@ -84,5 +104,64 @@ public class AISystem extends IntervalSystem{
 
    protected Vector2 playerPosition(EnemyStatsComponent es) {
       return es.target.getComponent(BodyComponent.class).body.getPosition();
+   }
+
+   protected void setVelocity(EnemyStatsComponent es, BodyComponent bc, int prefer) {
+      if(es.currentTile.neighbors.get(prefer).getType()
+       == LevelManager.Type.EMPTY_SPACE) {
+         switch(prefer) {
+            case 1:
+               System.out.println("attempt left");
+               bc.body.setLinearVelocity(-es.speed, 0);
+               es.otherDirection = 2;
+               break;
+            case 2:
+               System.out.println("attempt right");
+               bc.body.setLinearVelocity(es.speed, 0);
+               es.otherDirection = 1;
+               break;
+            case 3:
+               System.out.println("attempt up");
+               bc.body.setLinearVelocity(0, es.speed);
+               es.otherDirection = 4;
+               break;
+            case 4:
+               System.out.println("attempt down");
+               bc.body.setLinearVelocity(0, -es.speed);
+               es.otherDirection = 3;
+               break;
+            default:
+               System.out.println("movement error");
+               break;
+         }
+      }
+      else {
+         for(int i = 1; i < 5; i++) {
+            if(es.currentTile.neighbors.get(i).getType()
+             == LevelManager.Type.EMPTY_SPACE) {
+               switch(i) {
+                  case 1:
+                     bc.body.setLinearVelocity(-es.speed, 0);
+                     es.otherDirection = 2;
+                     break;
+                  case 2:
+                     bc.body.setLinearVelocity(es.speed, 0);
+                     es.otherDirection = 1;
+                     break;
+                  case 3:
+                     bc.body.setLinearVelocity(0, es.speed);
+                     es.otherDirection = 4;
+                     break;
+                  case 4:
+                     bc.body.setLinearVelocity(0, -es.speed);
+                     es.otherDirection = 3;
+                     break;
+                  default:
+                     System.out.println("movement error");
+                     break;
+               }
+            }
+         }
+      }
    }
 }
