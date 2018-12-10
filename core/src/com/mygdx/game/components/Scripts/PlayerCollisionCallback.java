@@ -19,12 +19,9 @@ public class PlayerCollisionCallback implements CollisionCallback, Pool.Poolable
 
    @Override
    public void run(Entity thisObject, Entity otherObject) {
-      if(otherObject.getComponent(IsEnemyComponent.class)!=null){
-         if(thisObject.getComponent(IsPlayerComponent.class).health > 0){
-            thisObject.getComponent(IsPlayerComponent.class).health -= 10;
-            System.out.println("health:" + thisObject.getComponent(IsPlayerComponent.class).health);
-         }else{
-            thisObject.add(Factory.getFactory().getEngine().createComponent(NeedToRemoveComponent.class));
+      if(otherObject.getComponent(EnemyStatsComponent.class)!=null){
+         if(thisObject.getComponent(IsHeroComponent.class)!=null){
+             thisObject.getComponent(IsPlayerComponent.class).health=0;
          }
        
       }

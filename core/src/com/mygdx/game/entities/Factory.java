@@ -188,8 +188,8 @@ public class Factory {
       entity.getComponent(TextureComponent.class).textureRegionAnimation = createTexture( player, 5f);
       entity.getComponent(TextureComponent.class).name=player;
       entity.getComponent(BodyComponent.class).body = createBody("Circle", posx, posy, 1.5f,false);
-      entity.getComponent(TransformComponent.class).scale.x = 1f;
-      entity.getComponent(TransformComponent.class).scale.y = 1f;
+      entity.getComponent(TransformComponent.class).scale.x = 2f;
+      entity.getComponent(TransformComponent.class).scale.y = 2f;
       entity.getComponent(BodyComponent.class).body.setUserData(entity);
       switch (playerNum){
          case 0:
@@ -206,6 +206,7 @@ public class Factory {
             entity.add(engine.createComponent(EnemyStatsComponent.class));
             entity.add(engine.createComponent(IsRabbitComponent.class));
             entity.getComponent(TextureComponent.class).textureRegionAnimation=createTexture("Bunny_2",10f);
+             entity.getComponent(TextureComponent.class).name="Bunny_2";
             break;
          case 2:
             applyCollisionFilter(entity.getComponent(BodyComponent.class).body, Utilities.CATEGORY_PLAYER_THREE, Utilities.MASK_PLAYER_THREE,false);
@@ -215,6 +216,7 @@ public class Factory {
             entity.add(engine.createComponent(EnemyStatsComponent.class));
             entity.add(engine.createComponent(IsRabbitComponent.class));
             entity.getComponent(TextureComponent.class).textureRegionAnimation=createTexture("Bunny_2",10f);
+             entity.getComponent(TextureComponent.class).name="Bunny_2";
 
             break;
             default:
@@ -225,7 +227,7 @@ public class Factory {
                entity.add(engine.createComponent(EnemyStatsComponent.class));
                entity.add(engine.createComponent(IsRabbitComponent.class));
                entity.getComponent(TextureComponent.class).textureRegionAnimation=createTexture("Bunny_2",10f);
-
+                entity.getComponent(TextureComponent.class).name="Bunny_2";
                break;
       }
       entity.getComponent(SteeringComponent.class).body=entity.getComponent(BodyComponent.class).body;
@@ -251,8 +253,8 @@ public class Factory {
       entity.getComponent(TextureComponent.class).textureRegionAnimation = createTexture( player, 5f);
       entity.getComponent(TextureComponent.class).name=player;
       entity.getComponent(BodyComponent.class).body = createBody("Circle", posx, posy, 1.45f,false);
-      entity.getComponent(TransformComponent.class).scale.x = 1f;
-      entity.getComponent(TransformComponent.class).scale.y = 1f;
+      entity.getComponent(TransformComponent.class).scale.x = 2f;
+      entity.getComponent(TransformComponent.class).scale.y = 2f;
       entity.getComponent(BodyComponent.class).body.setUserData(entity);
       applyCollisionFilter(entity.getComponent(BodyComponent.class).body, Utilities.CATEGORY_PLAYER_FOUR, Utilities.MASK_PLAYER_FOUR,false);
       entity.getComponent(SteeringComponent.class).body=entity.getComponent(BodyComponent.class).body;
@@ -263,6 +265,7 @@ public class Factory {
       entity.getComponent(IsPlayerComponent.class).isEnemy = true;
       entity.add(engine.createComponent(IsRabbitComponent.class));
       entity.getComponent(TextureComponent.class).textureRegionAnimation=createTexture("Bunny_2",10f);
+       entity.getComponent(TextureComponent.class).name="Bunny_2";
 
       return entity;
    }
@@ -282,7 +285,7 @@ public class Factory {
       entity.add(engine.createComponent(IsBulletComponent.class));
       entity.getComponent(IsBulletComponent.class).playerNum = playerNum;
       entity.getComponent(TextureComponent.class).textureRegionAnimation = createTexture("Bullet_2", 1);
-      entity.getComponent(TextureComponent.class).name="Player_1";
+      entity.getComponent(TextureComponent.class).name="Bullet_2";
       entity.getComponent(BodyComponent.class).body = createBody("Circle", x, y, 1f,true);
       entity.getComponent(BodyComponent.class).body.setBullet(true);
       entity.getComponent(TransformComponent.class).scale.x = 0.5f;
@@ -386,7 +389,7 @@ public class Factory {
       engine.addEntityListener(new RenderingSystem(spriteBatch, camera));
       engine.addSystem(new PhysicsSystem(world));
       engine.addSystem(new RenderingSystem(spriteBatch, camera));
-      //engine.addSystem(new PhysicsDebugSystem(world, camera));
+      engine.addSystem(new PhysicsDebugSystem(world, camera));
       engine.addSystem(new PlayerControlSystem());
       engine.addSystem(new PlayerVelocitySystem());
       engine.addSystem(new EntityRemovingSystem(world,engine));
@@ -453,7 +456,7 @@ public class Factory {
     */
    public void createEntities(int playerCount) {
       spawnWalls();
-      //spawnPlayerBoundary();
+      spawnPlayerBoundary();
 
 
       for(int i = 0; i < 4; i++){
@@ -814,14 +817,14 @@ public class Factory {
       entity.add(engine.createComponent(TransformComponent.class));
       entity.add(engine.createComponent(BodyComponent.class));
       entity.add(engine.createComponent(TextureComponent.class));
-      entity.getComponent(TextureComponent.class).textureRegionAnimation = createTexture("Player_1", 1);
-      entity.getComponent(TextureComponent.class).name="Player_1";
+      entity.getComponent(TextureComponent.class).textureRegionAnimation = createTexture("Seed_0", 1);
+      entity.getComponent(TextureComponent.class).name="Seed_0";
       entity.getComponent(BodyComponent.class).body = createBody("Circle", x, y, 1f,true);
       entity.getComponent(BodyComponent.class).body.setBullet(true);
-      entity.getComponent(TransformComponent.class).scale.x = 0.5f;
-      entity.getComponent(TransformComponent.class).scale.y = 0.5f;
+      entity.getComponent(TransformComponent.class).scale.x = 1f;
+      entity.getComponent(TransformComponent.class).scale.y = 1f;
       entity.getComponent(BodyComponent.class).body.setUserData(entity);
-
+        engine.addEntity(entity);
       return entity;
    }
 }
