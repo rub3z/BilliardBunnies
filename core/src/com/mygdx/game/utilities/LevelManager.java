@@ -16,12 +16,17 @@ public class LevelManager {
     private float tileScale; //How big is the tile size is.
     private Tile [][] tiles; //Tiles container.
     private boolean isCenter;
+    private Array<Tile>quad1,quad2,quad3,quad4;
 
     /**
      * Private constructor.
      */
     private LevelManager() {
         mazeGenerator = new MazeGenerator();
+        quad1=new Array<Tile>();
+        quad2=new Array<Tile>();
+        quad3=new Array<Tile>();
+        quad4=new Array<Tile>();
     }
 
     /**
@@ -49,6 +54,8 @@ public class LevelManager {
      */
     public void generateLevel(int columnNumber, int rowNumber, int cellWidth, int cellHeight, float tileScale, boolean isCenter, boolean loadPrebuild) {
         mazeData = mazeGenerator.generateMaze(rowNumber, columnNumber, cellWidth, cellHeight, loadPrebuild);
+
+
         this.tileScale = tileScale;
         this.isCenter = isCenter;
         tiles=new Tile[mazeData.length][mazeData[0].length];
@@ -63,11 +70,15 @@ public class LevelManager {
                         type = Type.PLAYER_WALL;
                         break;
                     default:
+
                         type = Type.EMPTY_SPACE;
                         break;
                 }
                 tiles[y][x]=new Tile((x * tileScale) + getHorizontalShift(), (y * tileScale) + getVerticalShift(), type);
             }
+
+            //generate
+
         }
 
        for (int y = 0; y < tiles.length; y++) {
@@ -80,6 +91,38 @@ public class LevelManager {
              tiles[y][x].addNeighbor(2, getTile(x,y-1));
              tiles[y][x].addNeighbor(3, getTile(x+1, y));
              tiles[y][x].addNeighbor(4, getTile(x-1, y));
+          }
+       }
+
+
+       for (int y = tiles.length/2; y < tiles.length; y++) {
+          for (int x = tiles[0].length/2; x < tiles[0].length; x++) {
+             if(tiles[y][x].getType()==Type.EMPTY_SPACE){
+                quad1.add(tiles[y][x]);
+             }
+
+          }
+       }
+
+       for (int y = tiles.length/2; y < tiles.length; y++) {
+          for (int x = 0; x < tiles[0].length/2; x++) {
+             if(tiles[y][x].getType()==Type.EMPTY_SPACE){
+                quad2.add(tiles[y][x]);
+             }
+          }
+       }
+       for (int y = 0; y < tiles.length/2; y++) {
+          for (int x = 0; x < tiles[0].length/2; x++) {
+             if(tiles[y][x].getType()==Type.EMPTY_SPACE){
+                quad3.add(tiles[y][x]);
+             }
+          }
+       }
+       for (int y = 0; y < tiles.length/2; y++) {
+          for (int x = tiles[0].length/2; x < tiles[0].length; x++) {
+             if(tiles[y][x].getType()==Type.EMPTY_SPACE){
+                quad4.add(tiles[y][x]);
+             }
           }
        }
     }
@@ -246,6 +289,24 @@ public class LevelManager {
     public enum Type {
         WALL, EMPTY_SPACE, PLAYER_WALL
     }
+
+    public Tile getARandomEmptyTileInQuadrantOne(){
+       return quad1.get(MathUtils.random(quad1.size-1));
+    }
+
+   public Tile getARandomEmptyTileInQuadrantTwo(){
+      return quad2.get(MathUtils.random(quad2.size-1));
+   }
+
+   public Tile getARandomEmptyTileInQuadrantThree(){
+      return quad3.get(MathUtils.random(quad3.size-1));
+   }
+   public Tile getARandomEmptyTileInQuadrantFour(){
+      return quad4.get(MathUtils.random(quad4.size-1));
+   }
+   public Tile getCenter(){
+       return quad1.first();
+   }
 
     public float getHorizontalShift() {
         return isCenter ? ((Utilities.FRUSTUM_WIDTH / 2) - ((mazeData[0].length * tileScale) / 2)) + 0.9501f : 0f;
