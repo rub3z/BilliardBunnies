@@ -171,7 +171,7 @@ public class Factory {
     *
     * @return a player.
     */
-   public Entity createPlayer(String player, float posx, float posy, int playerNum) {
+   public Entity createPlayer(String player, float posx, float posy, int playerNum, int playerCount) {
       Entity entity = engine.createEntity();
       entity.add(engine.createComponent(IsHeroComponent.class));
       entity.add(engine.createComponent(MovementComponent.class));
@@ -191,12 +191,24 @@ public class Factory {
       entity.getComponent(TransformComponent.class).scale.x = 2f;
       entity.getComponent(TransformComponent.class).scale.y = 2f;
       entity.getComponent(BodyComponent.class).body.setUserData(entity);
+      float changeRof = 0.5f;
+      switch (playerCount) {
+         case 2:
+            changeRof = 0.75f; break;
+         case 3:
+            changeRof = 1f; break;
+         case 4:
+            changeRof = 1.25f; break;
+         default: break;
+      }
+      entity.getComponent(BulletVelocityStatComponent.class).rof = changeRof;
       switch (playerNum){
          case 0:
             applyCollisionFilter(entity.getComponent(BodyComponent.class).body, Utilities.CATEGORY_PLAYER_ONE, Utilities.MASK_PLAYER_ONE,false);
 //            Utilities.MASK_SEED= (short) (Utilities.MASK_SEED|Utilities.CATEGORY_PLAYER_ONE);
             entity.getComponent(IsPlayerComponent.class).isEnemy = false;
             entity.getComponent(IsPlayerComponent.class).health = 10;
+            entity.getComponent(PlayerVelocityStatComponent.class).movingSpeed = 25f;
             break;
          case 1:
             applyCollisionFilter(entity.getComponent(BodyComponent.class).body, Utilities.CATEGORY_PLAYER_TWO, Utilities.MASK_PLAYER_TWO,false);
@@ -206,7 +218,8 @@ public class Factory {
             entity.add(engine.createComponent(EnemyStatsComponent.class));
             entity.add(engine.createComponent(IsRabbitComponent.class));
             entity.getComponent(TextureComponent.class).textureRegionAnimation=createTexture("Bunny_2",10f);
-             entity.getComponent(TextureComponent.class).name="Bunny_2";
+            entity.getComponent(TextureComponent.class).name="Bunny_2";
+            entity.getComponent(PlayerVelocityStatComponent.class).movingSpeed = 7f;
             break;
          case 2:
             applyCollisionFilter(entity.getComponent(BodyComponent.class).body, Utilities.CATEGORY_PLAYER_THREE, Utilities.MASK_PLAYER_THREE,false);
@@ -216,19 +229,20 @@ public class Factory {
             entity.add(engine.createComponent(EnemyStatsComponent.class));
             entity.add(engine.createComponent(IsRabbitComponent.class));
             entity.getComponent(TextureComponent.class).textureRegionAnimation=createTexture("Bunny_2",10f);
-             entity.getComponent(TextureComponent.class).name="Bunny_2";
-
+            entity.getComponent(TextureComponent.class).name="Bunny_2";
+            entity.getComponent(PlayerVelocityStatComponent.class).movingSpeed = 7f;
             break;
-            default:
-               applyCollisionFilter(entity.getComponent(BodyComponent.class).body, Utilities.CATEGORY_PLAYER_FOUR, Utilities.MASK_PLAYER_FOUR,false);
+         case 3:
+            applyCollisionFilter(entity.getComponent(BodyComponent.class).body, Utilities.CATEGORY_PLAYER_FOUR, Utilities.MASK_PLAYER_FOUR,false);
 //               Utilities.MASK_SEED= (short) (Utilities.MASK_SEED|Utilities.CATEGORY_PLAYER_FOUR);
-               entity.getComponent(IsPlayerComponent.class).isEnemy = true;
-               entity.getComponent(IsPlayerComponent.class).health = 100;
-               entity.add(engine.createComponent(EnemyStatsComponent.class));
-               entity.add(engine.createComponent(IsRabbitComponent.class));
-               entity.getComponent(TextureComponent.class).textureRegionAnimation=createTexture("Bunny_2",10f);
-                entity.getComponent(TextureComponent.class).name="Bunny_2";
-               break;
+            entity.getComponent(IsPlayerComponent.class).isEnemy = true;
+            entity.getComponent(IsPlayerComponent.class).health = 100;
+            entity.add(engine.createComponent(EnemyStatsComponent.class));
+            entity.add(engine.createComponent(IsRabbitComponent.class));
+            entity.getComponent(TextureComponent.class).textureRegionAnimation=createTexture("Bunny_2",10f);
+            entity.getComponent(TextureComponent.class).name="Bunny_2";
+            entity.getComponent(PlayerVelocityStatComponent.class).movingSpeed = 7f;
+            break;
       }
       entity.getComponent(SteeringComponent.class).body=entity.getComponent(BodyComponent.class).body;
       return entity;
@@ -484,7 +498,7 @@ public class Factory {
          int num = 2+i;
          String s ="Player_"+num;
          if(i < playerCount)
-            engine.addEntity(createPlayer(s, x, y, i));
+            engine.addEntity(createPlayer(s, x, y, i, playerCount));
 //         else{
 //            engine.addEntity(createPlayerEnemy(s, x, y, i));
 //         }
