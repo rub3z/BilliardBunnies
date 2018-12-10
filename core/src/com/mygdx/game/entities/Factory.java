@@ -485,9 +485,9 @@ public class Factory {
          String s ="Player_"+num;
          if(i < playerCount)
             engine.addEntity(createPlayer(s, x, y, i));
-         else{
-            engine.addEntity(createPlayerEnemy(s, x, y, i));
-         }
+//         else{
+//            engine.addEntity(createPlayerEnemy(s, x, y, i));
+//         }
 
       }
 

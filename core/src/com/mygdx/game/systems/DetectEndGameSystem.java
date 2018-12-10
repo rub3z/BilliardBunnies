@@ -7,6 +7,7 @@ import com.badlogic.ashley.systems.IntervalSystem;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.mygdx.game.components.IsHeroComponent;
 import com.mygdx.game.components.IsPlayerComponent;
+import com.mygdx.game.components.IsSeedComponent;
 import com.mygdx.game.screens.GameScreen;
 import com.mygdx.game.utilities.Utilities;
 
@@ -16,6 +17,7 @@ import com.mygdx.game.utilities.Utilities;
 public class DetectEndGameSystem extends IntervalSystem {
 
    ImmutableArray<Entity> entities;
+   ImmutableArray<Entity> seeds;
    public DetectEndGameSystem(){
       super(Utilities.MAX_STEP_TIME);
    }
@@ -24,6 +26,7 @@ public class DetectEndGameSystem extends IntervalSystem {
    public void addedToEngine(Engine engine) {
       super.addedToEngine(engine);
       entities=engine.getEntitiesFor(Family.all(IsHeroComponent.class).get());
+      seeds = engine.getEntitiesFor(Family.all(IsSeedComponent.class).get());
    }
 
    /**
@@ -32,6 +35,9 @@ public class DetectEndGameSystem extends IntervalSystem {
    @Override
    protected void updateInterval() {
       if(entities.get(0).getComponent(IsPlayerComponent.class).health <= 0 ){
+         GameScreen.getGameScreen().endGame();
+      }
+      if (seeds.size() == 0) {
          GameScreen.getGameScreen().endGame();
       }
    }
