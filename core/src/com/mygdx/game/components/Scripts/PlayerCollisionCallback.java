@@ -7,10 +7,15 @@ import com.mygdx.game.entities.Factory;
 import com.mygdx.game.screens.GameScreen;
 import com.mygdx.game.utilities.ParticleEffectManager;
 
+import java.util.Random;
+
 /**
  * A collision callback for a player.
  */
 public class PlayerCollisionCallback implements CollisionCallback, Pool.Poolable {
+
+   Random rand = new Random();
+   int randomNum;
 
    @Override
    public void run(Entity thisObject, Entity otherObject) {
@@ -23,10 +28,19 @@ public class PlayerCollisionCallback implements CollisionCallback, Pool.Poolable
          }
        
       }
-
       if(otherObject.getComponent(IsBulletComponent.class)!=null){
-         if(thisObject.getComponent(IsPlayerComponent.class).isEnemy) {
-            thisObject.getComponent(IsPlayerComponent.class).isFrenzied = 10f;
+         if(thisObject.getComponent(EnemyStatsComponent.class) != null) {
+            if(thisObject.getComponent(EnemyStatsComponent.class).buffType == 0) {
+               randomNum = rand.nextInt(100);
+               if (randomNum < 10) {
+                  thisObject.getComponent(EnemyStatsComponent.class).buffType = 1;
+                  thisObject.getComponent(EnemyStatsComponent.class).buffTimer = 5f;
+               }
+               else if(randomNum < 60) {
+                  thisObject.getComponent(EnemyStatsComponent.class).buffType = 2;
+                  thisObject.getComponent(EnemyStatsComponent.class).buffTimer = 1f;
+               }
+            }
          }
          else if(!thisObject.getComponent(IsPlayerComponent.class).isEnemy ){
             thisObject.getComponent(IsPlayerComponent.class).health -= 1;

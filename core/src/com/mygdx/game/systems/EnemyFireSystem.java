@@ -43,8 +43,8 @@ public class EnemyFireSystem extends IntervalSystem {
       for(Entity entity: entities){
          EnemyStatsComponent es=escm.get(entity);
          BodyComponent bc=bcm.get(entity);
-         es.timer+=Utilities.MAX_STEP_TIME;
-         if(es.shoot==true && es.timer>=es.rof){
+         es.fireTimer+=Utilities.MAX_STEP_TIME;
+         if(es.shoot==true && es.fireTimer>=es.rof){
             Entity bullet =Factory.getFactory().createEnemyBullet(bc.body.getPosition().x, bc.body.getPosition().y,es.bulletType);
             ComponentMapper<IsPlayerComponent> isPlayerComponentComponentMapper=ComponentMapper.getFor(IsPlayerComponent.class);
             if(es.aimedAtTarget=true && es.target!=null){
@@ -67,7 +67,7 @@ public class EnemyFireSystem extends IntervalSystem {
             }else{
                bullet.getComponent(BodyComponent.class).body.setLinearVelocity(0f,-es.speed);
             }
-            es.timer=0;
+            es.fireTimer=0;
          }
       }
    }

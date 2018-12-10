@@ -38,7 +38,7 @@ public class AISystem extends IntervalSystem{
       for(Entity entity: entities) {
          EnemyStatsComponent es = escm.get(entity);
          BodyComponent bc = bcm.get(entity);
-         es.timer += Utilities.MAX_STEP_TIME;
+         es.fireTimer += Utilities.MAX_STEP_TIME;
 //         es.currentTile =
 //          LevelManager.getManager().getTile(bc.body.getPosition().x, bc.body.getPosition().y);
 //         es.timer += 0.1f;
@@ -69,7 +69,7 @@ public class AISystem extends IntervalSystem{
 //
 //            es.timer = 0;
 //         }
-         if (es.timer >= 3f) {
+         if (es.fireTimer >= 3f) {
             xDist = playerPosition(es).x - bc.body.getPosition().x;
             yDist = playerPosition(es).y - bc.body.getPosition().y;
             if (playerPosition(es).x < bc.body.getPosition().x) {
@@ -100,7 +100,7 @@ public class AISystem extends IntervalSystem{
                      bc.body.setLinearVelocity(0,es.speed);
                }
             }
-            es.timer = 0;
+            es.fireTimer = 0;
          }
       }
    }
