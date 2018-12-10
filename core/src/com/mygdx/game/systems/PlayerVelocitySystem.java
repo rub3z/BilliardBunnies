@@ -46,14 +46,14 @@ public class PlayerVelocitySystem extends IntervalSystem {
          bC.body.setLinearVelocity(
             Math.abs(mC.moveX) > 0.2 ? mC.moveX * pVC.movingSpeed / Math.abs(mC.moveX) : 0,
             Math.abs(mC.moveY) > 0.2 ? mC.moveY * pVC.movingSpeed / Math.abs(mC.moveY): 0);
-         if(bC.body.getPosition().x > Utilities.FRUSTUM_WIDTH)
-            bC.body.setTransform(bC.body.getPosition().x % Utilities.FRUSTUM_WIDTH,
+         if(bC.body.getPosition().x > Utilities.FRUSTUM_WIDTH - 14)
+            bC.body.setTransform(bC.body.getPosition().x % Utilities.FRUSTUM_WIDTH + 14,
                                  bC.body.getPosition().y, 0);
          if(bC.body.getPosition().y > Utilities.FRUSTUM_HEIGHT)
             bC.body.setTransform(bC.body.getPosition().x,
              bC.body.getPosition().y % Utilities.FRUSTUM_HEIGHT, 0);
-         if(bC.body.getPosition().x < 0)
-            bC.body.setTransform(bC.body.getPosition().x + Utilities.FRUSTUM_WIDTH,
+         if(bC.body.getPosition().x < 14)
+            bC.body.setTransform(bC.body.getPosition().x + Utilities.FRUSTUM_WIDTH - 28,
              bC.body.getPosition().y, 0);
          if(bC.body.getPosition().y < 0)
             bC.body.setTransform(bC.body.getPosition().x,

@@ -52,14 +52,14 @@ public class BulletVelocitySystem extends IntervalSystem {
              (mC.shootY / (float) Math.sqrt(mC.shootX * mC.shootX + mC.shootY * mC.shootY)) * bvc.movingSpeed);
             bvc.timer = 0;
          }
-         if(bC.body.getPosition().x > Utilities.FRUSTUM_WIDTH)
-            bC.body.setTransform(bC.body.getPosition().x % Utilities.FRUSTUM_WIDTH,
+         if(bC.body.getPosition().x > Utilities.FRUSTUM_WIDTH - 14)
+            bC.body.setTransform(bC.body.getPosition().x % Utilities.FRUSTUM_WIDTH + 14,
              bC.body.getPosition().y, 0);
          if(bC.body.getPosition().y > Utilities.FRUSTUM_HEIGHT)
             bC.body.setTransform(bC.body.getPosition().x,
              bC.body.getPosition().y % Utilities.FRUSTUM_HEIGHT, 0);
-         if(bC.body.getPosition().x < 0)
-            bC.body.setTransform(bC.body.getPosition().x + Utilities.FRUSTUM_WIDTH,
+         if(bC.body.getPosition().x < 14)
+            bC.body.setTransform(bC.body.getPosition().x + Utilities.FRUSTUM_WIDTH - 28,
              bC.body.getPosition().y, 0);
          if(bC.body.getPosition().y < 0)
             bC.body.setTransform(bC.body.getPosition().x,
