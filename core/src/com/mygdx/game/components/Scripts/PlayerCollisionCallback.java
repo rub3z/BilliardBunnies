@@ -49,6 +49,11 @@ public class PlayerCollisionCallback implements CollisionCallback, Pool.Poolable
          otherObject.add(Factory.getFactory().getEngine().createComponent(NeedToRemoveComponent.class));
       }
 
+      if(otherObject.getComponent(IsSeedComponent.class)!=null){
+          System.out.println("Hitting seed");
+          otherObject.add(Factory.getFactory().getEngine().createComponent(NeedToRemoveComponent.class));
+      }
+
    }
 
    private void updateHealthCounter() {

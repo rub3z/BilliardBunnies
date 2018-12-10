@@ -194,13 +194,13 @@ public class Factory {
       switch (playerNum){
          case 0:
             applyCollisionFilter(entity.getComponent(BodyComponent.class).body, Utilities.CATEGORY_PLAYER_ONE, Utilities.MASK_PLAYER_ONE,false);
-            Utilities.MASK_SEED= (short) (Utilities.MASK_SEED|Utilities.CATEGORY_PLAYER_ONE);
+//            Utilities.MASK_SEED= (short) (Utilities.MASK_SEED|Utilities.CATEGORY_PLAYER_ONE);
             entity.getComponent(IsPlayerComponent.class).isEnemy = false;
             entity.getComponent(IsPlayerComponent.class).health = 10;
             break;
          case 1:
             applyCollisionFilter(entity.getComponent(BodyComponent.class).body, Utilities.CATEGORY_PLAYER_TWO, Utilities.MASK_PLAYER_TWO,false);
-            Utilities.MASK_SEED= (short) (Utilities.MASK_SEED|Utilities.CATEGORY_BULLET_TWO);
+//            Utilities.MASK_SEED= (short) (Utilities.MASK_SEED|Utilities.CATEGORY_BULLET_TWO);
             entity.getComponent(IsPlayerComponent.class).isEnemy = true;
             entity.getComponent(IsPlayerComponent.class).health = 100;
             entity.add(engine.createComponent(EnemyStatsComponent.class));
@@ -210,7 +210,7 @@ public class Factory {
             break;
          case 2:
             applyCollisionFilter(entity.getComponent(BodyComponent.class).body, Utilities.CATEGORY_PLAYER_THREE, Utilities.MASK_PLAYER_THREE,false);
-            Utilities.MASK_SEED= (short) (Utilities.MASK_SEED|Utilities.CATEGORY_PLAYER_THREE);
+//            Utilities.MASK_SEED= (short) (Utilities.MASK_SEED|Utilities.CATEGORY_PLAYER_THREE);
             entity.getComponent(IsPlayerComponent.class).isEnemy = true;
             entity.getComponent(IsPlayerComponent.class).health = 100;
             entity.add(engine.createComponent(EnemyStatsComponent.class));
@@ -221,7 +221,7 @@ public class Factory {
             break;
             default:
                applyCollisionFilter(entity.getComponent(BodyComponent.class).body, Utilities.CATEGORY_PLAYER_FOUR, Utilities.MASK_PLAYER_FOUR,false);
-               Utilities.MASK_SEED= (short) (Utilities.MASK_SEED|Utilities.CATEGORY_PLAYER_FOUR);
+//               Utilities.MASK_SEED= (short) (Utilities.MASK_SEED|Utilities.CATEGORY_PLAYER_FOUR);
                entity.getComponent(IsPlayerComponent.class).isEnemy = true;
                entity.getComponent(IsPlayerComponent.class).health = 100;
                entity.add(engine.createComponent(EnemyStatsComponent.class));
@@ -389,7 +389,7 @@ public class Factory {
       engine.addEntityListener(new RenderingSystem(spriteBatch, camera));
       engine.addSystem(new PhysicsSystem(world));
       engine.addSystem(new RenderingSystem(spriteBatch, camera));
-      engine.addSystem(new PhysicsDebugSystem(world, camera));
+      //engine.addSystem(new PhysicsDebugSystem(world, camera));
       engine.addSystem(new PlayerControlSystem());
       engine.addSystem(new PlayerVelocitySystem());
       engine.addSystem(new EntityRemovingSystem(world,engine));
@@ -820,10 +820,12 @@ public class Factory {
       entity.getComponent(TextureComponent.class).textureRegionAnimation = createTexture("Seed_0", 1);
       entity.getComponent(TextureComponent.class).name="Seed_0";
       entity.getComponent(BodyComponent.class).body = createBody("Circle", x, y, 1f,true);
+      applyCollisionFilter(entity.getComponent(BodyComponent.class).body,Utilities.CATEGORY_SEED,Utilities.MASK_SEED,true);
       entity.getComponent(BodyComponent.class).body.setBullet(true);
       entity.getComponent(TransformComponent.class).scale.x = 1f;
       entity.getComponent(TransformComponent.class).scale.y = 1f;
       entity.getComponent(BodyComponent.class).body.setUserData(entity);
+      entity.add(engine.createComponent(IsSeedComponent.class));
         engine.addEntity(entity);
       return entity;
    }
